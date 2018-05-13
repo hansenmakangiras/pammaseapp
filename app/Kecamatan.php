@@ -2,12 +2,17 @@
 
 namespace App;
 
+use App\Data;
 use Illuminate\Database\Eloquent\Model;
 
 class Kecamatan extends Model
 {
     protected $table = "km_kecamatan";
     public $timestamps=false;
+
+    public function data(){
+        return $this->belongsTo(Data::class,'kecamatan');
+    }
 
     public static function getkec($id){
         $getkec = Kecamatan::where('id', $id)->where('status', 1)->get();

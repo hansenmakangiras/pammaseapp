@@ -9,6 +9,10 @@ class Kelurahan extends Model
     protected $table = "km_kelurahan";
     public $timestamps = false;
 
+    public function data(){
+        return $this->belongsTo(Data::class,'kecamatan_id','id_kelurahan');
+    }
+
     public static function getkel($id){
         $getkel = Kelurahan::where('id_kelurahan', $id)->where('status', 1)->get();
         if($getkel->isEmpty()){
