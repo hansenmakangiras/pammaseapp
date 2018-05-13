@@ -20,8 +20,8 @@ class AppController extends Controller
     public function index()
     {
         $chart = new AppChart;
-        $countkk = Data::all()->count();
-        $countall = Anggota::all()->count();
+        $countkk = Data::where('status',1)->count();
+        $countall = Anggota::where('status',1)->count();
 
         $kecamatan = Kecamatan::where('kota_id', '7313')->where('status',1)->get();
         //$kotaid = Data::where('kecamatan',$_GET['kotaid'])->first();

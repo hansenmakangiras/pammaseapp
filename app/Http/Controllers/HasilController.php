@@ -23,13 +23,9 @@ class HasilController extends Controller
         $countall = Anggota::all()->count();
 
         $kecamatan = Kecamatan::where('kota_id', '7313')->where('status',1)->get();
-        //$kotaid = Data::where('kecamatan',$_GET['kotaid'])->first();
-        //$datakel = Anggota::where('anggotaid',$kotaid)->count();
-
         $kec = [];
         $idkec = [];
         $datakec=[];
-        $datakel=[];
         foreach ($kecamatan as $value){
             $kec[] = $value->name;
             $idkec[] = $value->id;
