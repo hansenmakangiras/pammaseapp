@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Data;
 use App\Anggota;
-use App\Kelurahan;
-use App\Kecamatan;
 use App\Charts\AppChart;
+use App\Data;
+use App\Kecamatan;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
@@ -31,13 +29,11 @@ class AppController extends Controller
         foreach ($kecamatan as $value){
             $kec[] = $value->name;
             $idkec[] = $value->id;
-            $dataw[] = Data::where('kecamatan',$value->id)->where('status',1)->with(['anggota','kelurahan','kecamatan'])->get();
-//            $datakec = $dataw->anggota()->count();
+            $datakec[] = Data::where('kecamatan',$value->id)->where('status',1)->with(['anggota','kelurahan','kecamatan'])->count();
         }
 
         $a = DB::table('km_kecamatan')->wherein('kota_id',$idkec)->where('status','=',1)->get()->toArray();
         $datakel = Anggota::where('anggotaid',$kecamatan)->count();
-        dd($dataw);
         $chart->labels($kec)->dataset('Total', 'bar', $datakec)
             ->backgroundColor('#39CCCC');
 
@@ -53,6 +49,49 @@ class AppController extends Controller
     {
         $chart = new AppChart();
         return view('welcome',compact('chart'));
+    }
+    public function getListKecamatan()
+    {
+        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status',1)->get();
+        return $kecamatan;
+    }
+    public function getJsonKecamatan(){
+        $listKec = DB::table('km_kecamatan')
+            ->select('name')
+            ->where('kota_id','7313')
+            ->where('status',1)
+            ->get()->toArray();
+        $lst = [];
+
+        foreach ($listKec as $item) {
+            $lst[] = $item->name;
+        }
+        //dd($lst);
+
+        $kecamatan = DB::table('km_kecamatan')
+            ->select('id')
+            ->where('kota_id','7313')
+            ->where('status',1)
+            ->get()->toArray();
+
+        $kec =[];
+        $count=[];
+
+        foreach ($kecamatan as $item) {
+            $kec[] = $item->id;
+            $count[] = DB::table('data')
+                ->select('kecamatan')
+                ->whereIn('kecamatan', $kec)
+                ->count();
+        }
+
+//        $count[] = DB::table('data')
+//            ->select('kecamatan')
+//            ->whereIn('kecamatan', $kec)
+//            ->count();
+
+        $json = ['kecamatan'=>$lst,'dataset'=>$count];
+        return json_encode($json);
     }
 
 }

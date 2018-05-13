@@ -15,6 +15,7 @@
 //    return view('welcome');
 //});
 Route::get('/', 'AppController@index')->name('home');
+Route::get('/getJsonKecamatan', 'AppController@getJsonKecamatan')->name('getJson');
 Route::resource('data','DataController');
 Route::resource('hasil','HasilController');
 Route::get('/data/kelurahan/{idkec}','DataController@getJsonKelurahan');
