@@ -50,7 +50,7 @@ class HasilController extends Controller
 //            ->options([
 //                'borderColor' =>'#ff0000'
 //            ]);
-        return view('hasil.kecamatan',['chart'=>$chart,'countkk'=>$countkk,'countall'=>$countall]);
+        return view('hasil.wilayah',['chart'=>$chart,'countkk'=>$countkk,'countall'=>$countall]);
     }
 
     /**

@@ -92,7 +92,8 @@ class DataController extends Controller
     {
         $validatedData = $request->validate([
             'nokk' => 'required|unique:data|max:20',
-            'namakk' => 'required|unique:data|max:20',
+            'namakk' => 'required|string|max:150',
+            'anggotaid'=>'max:20',
             'body' => 'required',
         ]);
 

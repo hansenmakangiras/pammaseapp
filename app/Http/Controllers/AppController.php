@@ -43,7 +43,14 @@ class AppController extends Controller
 //        dd($a);
 //        dd($datakec);
         $datakel = Anggota::where('anggotaid',$datakec)->count();
-        $chart->labels($kec)->dataset('Total', 'bar', $datakec);
+        $chart->labels($kec)->dataset('Total', 'bar', $datakec)
+            ->color('#39CCCC')
+            ->options([
+                'scaleOverride '=>true,
+                'scaleSteps' => 10,
+                'scaleStepWidth' => 50,
+                'scaleStartValue' => 0
+            ]);
 //        $chart->labels($kec)->dataset('Total', 'bar', $datakel);
 
 

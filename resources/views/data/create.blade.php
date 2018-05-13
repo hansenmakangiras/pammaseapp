@@ -1,9 +1,8 @@
 @extends('layout.app')
 
-@section('title', 'Page Title')
+@section(config("app.name"),'Page Title')
 
 @section('content-header')
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
             Input Data
@@ -21,9 +20,6 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-10">
-                {{--@if(count($errors > 0))--}}
-
-                {{--@endif--}}
                 @if(isset($ret['err']) && $ret['err'] == 0)
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -39,11 +35,11 @@
                 @endif
                 <!-- general form elements -->
                 <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Data Kartu Keluarga</h3>
+                    </div>
+                    <!-- /.box-header -->
 
-                {{--<div class="box-header with-border">--}}
-                {{--<h3 class="box-title">Quick Example</h3>--}}
-                {{--</div>--}}
-                <!-- /.box-header -->
                     <!-- form start -->
                     {!! Form::open(['route' => 'data.store','method'=>'POST']) !!}
                         @include('data.form')
@@ -62,12 +58,10 @@
             </div>
         </div>
         <!-- /.row (main row) -->
-
     </section>
     <!-- /.content -->
 @endsection
 @push('scriptInput')
-    <!-- page script -->
     <script>
         $(function () {
             let kelurahan = $("#kelurahan");
