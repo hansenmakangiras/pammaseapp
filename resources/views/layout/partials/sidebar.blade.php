@@ -42,7 +42,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li {{ Request::is('hasil') ? "active" : "" }}><a href="{{ route('hasil.index') }}"><i class="fa fa-circle-o"></i>Wilayah</a></li>
-{{--                    <li><a href="{{ route('hasil.create') }}"><i class="fa fa-circle-o"></i>Kelurahan</a></li>--}}
+                    {{--<li><a href="{{ route('hasil.create') }}"><i class="fa fa-circle-o"></i>Kelurahan</a></li>--}}
                 </ul>
             </li>
         </ul>
