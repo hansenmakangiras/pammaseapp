@@ -90,6 +90,12 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'nokk' => 'required|unique:data|max:20',
+            'namakk' => 'required|unique:data|max:20',
+            'body' => 'required',
+        ]);
+
 
         $error = 0;
         $pesan = "";
@@ -113,6 +119,9 @@ class DataController extends Controller
         $datakk->status = 1;
 
         $out = $this->gabung($anggota, $umur);
+        $out = array_map('array_filter', $out);
+        $out = array_filter($out);
+//        dd($out);
         $check = Anggota::where('anggotaid','=',Input::get('nokk'))->exists();
 
         foreach ($out as $item) {
@@ -121,6 +130,7 @@ class DataController extends Controller
                 $dataanggota->anggotaid = $input['nokk'];
                 $dataanggota->nama = $item['nama'];
                 $dataanggota->umur = $item['umur'];
+                $dataanggota->status = 1;
                 $dataanggota->save();
             }
         }

@@ -4,13 +4,15 @@
         <div class="col-xs-3">
             <div class="form-group">
                 <label for="nokk">No. Kartu Keluarga</label>
-                <input type="text" name="nokk" class="form-control" id="nokk" tabindex="1" autofocus required/>
+                <input type="text" name="nokk" class="form-control" id="nokk"
+                       placeholder="Masukkan Nomor Kartu Keluarga" tabindex="1" autofocus required/>
             </div>
         </div>
         <div class="col-xs-9">
             <div class="form-group">
                 <label for="namakk">Nama Kartu Keluarga</label>
-                <input type="text" class="form-control" id="namakk" name="namakk" tabindex="2"/>
+                <input type="text" class="form-control" id="namakk" name="namakk"
+                       placeholder="Masukkan Nama Kepala Keluarga" tabindex="2"/>
             </div>
         </div>
     </div>
@@ -20,13 +22,15 @@
                 <div class="col-xs-9">
                     <div class="form-group">
                         <label for="namaanggota1">Anggota Keluarga 1</label>
-                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1" tabindex="3"/>
+                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
+                               placeholder="Nama Anggota Keluarga" tabindex="3"/>
                     </div>
                 </div>
                 <div class="col-xs-3">
                     <div class="form-group">
                         <label for="umur1">Umur</label>
-                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1" tabindex="4"/>
+                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1"
+                               placeholder="Umur" tabindex="4"/>
                     </div>
                 </div>
             </div>
@@ -35,13 +39,15 @@
                 <div class="col-xs-9">
                     <div class="form-group">
                         <label for="namaanggota2">Anggota Keluarga 2</label>
-                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota2" tabindex="5"/>
+                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota2"
+                               placeholder="Nama Anggota Keluarga 2" tabindex="5"/>
                     </div>
                 </div>
                 <div class="col-xs-3">
                     <div class="form-group">
                         <label for="umur2">Umur 2</label>
-                        <input type="text" name="anggota[umur][]" class="form-control" id="umur2" tabindex="6"/>
+                        <input type="text" name="anggota[umur][]" class="form-control" id="umur2"
+                               placeholder="Umur" tabindex="6"/>
                     </div>
                 </div>
             </div>
@@ -49,13 +55,15 @@
                 <div class="col-xs-9">
                     <div class="form-group">
                         <label for="namaanggota1">Anggota Keluarga 3</label>
-                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1" tabindex="7"/>
+                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
+                               placeholder="Nama Anggota Keluarga" tabindex="7"/>
                     </div>
                 </div>
                 <div class="col-xs-3">
                     <div class="form-group">
                         <label for="umur1">Umur 3</label>
-                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1" tabindex="8"/>
+                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1"
+                               placeholder="Umur" tabindex="8"/>
                     </div>
                 </div>
             </div>
@@ -63,13 +71,15 @@
                 <div class="col-xs-9">
                     <div class="form-group">
                         <label for="namaanggota1">Anggota Keluarga 4</label>
-                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1" tabindex="9"/>
+                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
+                               placeholder="Nama Anggota Keluarga" tabindex="9"/>
                     </div>
                 </div>
                 <div class="col-xs-3">
                     <div class="form-group">
                         <label for="umur1">Umur 4</label>
-                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1" tabindex="10"/>
+                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1"
+                               placeholder="Umur" tabindex="10"/>
                     </div>
                 </div>
             </div>
@@ -79,13 +89,15 @@
                 <div class="col-xs-9">
                     <div class="form-group">
                         <label for="namaanggota1">Anggota Keluarga 5</label>
-                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1" tabindex="11"/>
+                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
+                               placeholder="Nama Anggota Keluarga" tabindex="11"/>
                     </div>
                 </div>
                 <div class="col-xs-3">
                     <div class="form-group">
                         <label for="umur1">Umur 5</label>
-                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1" tabindex="12"/>
+                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1"
+                               placeholder="Umur" tabindex="12"/>
                     </div>
                 </div>
             </div>
@@ -93,13 +105,15 @@
                 <div class="col-xs-9">
                     <div class="form-group">
                         <label for="namaanggota1">Anggota Keluarga 6</label>
-                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1" tabindex="13"/>
+                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
+                               placeholder="Nama Anggota Keluarga" tabindex="13"/>
                     </div>
                 </div>
                 <div class="col-xs-3">
                     <div class="form-group">
                         <label for="umur1">Umur 6</label>
-                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1" tabindex="14"/>
+                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1"
+                               placeholder="Umur" tabindex="14"/>
                     </div>
                 </div>
             </div>
@@ -107,13 +121,15 @@
                 <div class="col-xs-9">
                     <div class="form-group">
                         <label for="namaanggota1">Anggota Keluarga 7</label>
-                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1" tabindex="15"/>
+                        <input type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
+                               placeholder="Nama Anggota Keluarga" tabindex="15"/>
                     </div>
                 </div>
                 <div class="col-xs-3">
                     <div class="form-group">
                         <label for="umur1">Umur 7</label>
-                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1" tabindex="16"/>
+                        <input type="text" name="anggota[umur][]" class="form-control" id="umur1"
+                               placeholder="Umur" tabindex="16"/>
                     </div>
                 </div>
             </div>
@@ -123,13 +139,15 @@
         <div class="col-xs-8">
             <div class="form-group">
                 <label for="alamat">Alamat</label>
-                <input type="text" name="alamat" class="form-control" id="alamat" tabindex="17">
+                <input type="text" name="alamat" class="form-control" id="alamat"
+                       placeholder="Alamat" tabindex="17">
             </div>
         </div>
         <div class="col-xs-4">
             <div class="form-group">
                 <label for="notps">No. TPS</label>
-                <input type="text" name="notps" class="form-control" id="notps" tabindex="18">
+                <input type="text" name="notps" class="form-control" id="notps"
+                       placeholder="No TPS" tabindex="18">
             </div>
         </div>
     </div>
@@ -165,13 +183,15 @@
         <div class="col-xs-8">
             <div class="form-group">
                 <label for="pekerjaan">Pekerjaan</label>
-                <input type="text" name="pekerjaan" class="form-control" id="pekerjaan" tabindex="21">
+                <input type="text" name="pekerjaan" class="form-control" id="pekerjaan"
+                       placeholder="Pekerjaan" tabindex="21">
             </div>
         </div>
         <div class="col-xs-4">
             <div class="form-group">
                 <label for="notelp">No. Telp/HP</label>
-                <input type="text" name="notelp" class="form-control" id="notelp" tabindex="22">
+                <input type="text" name="notelp" class="form-control" id="notelp"
+                       placeholder="No. Telp/HP" tabindex="22">
             </div>
         </div>
     </div>
