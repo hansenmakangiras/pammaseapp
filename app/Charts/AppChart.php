@@ -15,5 +15,6 @@ class AppChart extends Chart
     {
         parent::__construct();
         $this->displayLegend(false);
+        $this->formatOptions(true);
     }
 }

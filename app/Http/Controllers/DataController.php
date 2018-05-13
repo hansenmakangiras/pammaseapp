@@ -94,7 +94,7 @@ class DataController extends Controller
             'nokk' => 'required|unique:data|max:20',
             'namakk' => 'required|string|max:150',
             'anggotaid'=>'max:20',
-            'body' => 'required',
+            'umur' =>'number|max:2'
         ]);
 
 
