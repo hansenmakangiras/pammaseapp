@@ -40,33 +40,23 @@ class AppController extends Controller
         return view('home',['chart'=>$chart,'countkk'=>$countkk,'countall'=>$countall]);
     }
 
-    /**
-     * Show a sample chart.
-     *
-     * @return Response
-     */
-    public function chart()
-    {
-        $chart = new AppChart();
-        return view('welcome',compact('chart'));
-    }
     public function getListKecamatan()
     {
         $kecamatan = Kecamatan::where('kota_id', '7313')->where('status',1)->get();
         return $kecamatan;
     }
+
     public function getJsonKecamatan(){
+
+        $lst = [];
+        $kec =[];
+        $count=[];
+
         $listKec = DB::table('km_kecamatan')
-            ->select('name')
+            ->select(['name','id'])
             ->where('kota_id','7313')
             ->where('status',1)
             ->get()->toArray();
-        $lst = [];
-
-        foreach ($listKec as $item) {
-            $lst[] = $item->name;
-        }
-        //dd($lst);
 
         $kecamatan = DB::table('km_kecamatan')
             ->select('id')
@@ -74,21 +64,18 @@ class AppController extends Controller
             ->where('status',1)
             ->get()->toArray();
 
-        $kec =[];
-        $count=[];
-
-        foreach ($kecamatan as $item) {
-            $kec[] = $item->id;
-            $count[] = DB::table('data')
-                ->select('kecamatan')
-                ->whereIn('kecamatan', $kec)
-                ->count();
+        foreach ($listKec as $value) {
+            $lst[] = $value->name;
+            foreach ($kecamatan as $item) {
+                $kec[] = $item->id;
+                if($value->id == $item->id){
+                    $count[] = DB::table('data')
+                        ->where('kecamatan',$item->id)
+                        ->count();
+                }
+            }
         }
-
-//        $count[] = DB::table('data')
-//            ->select('kecamatan')
-//            ->whereIn('kecamatan', $kec)
-//            ->count();
+//        dd($count);
 
         $json = ['kecamatan'=>$lst,'dataset'=>$count];
         return json_encode($json);
