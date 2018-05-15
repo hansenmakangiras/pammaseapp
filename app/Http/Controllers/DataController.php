@@ -214,7 +214,7 @@ class DataController extends Controller
 
         //$kecamatan = Kecamatan::where('kota_id', '7313')->where('status',1)->get();
         $kelurahan = $this->getAllKelurahan();
-
+//        dd($data->toArray());
         return view('data.edit',compact('data','kecamatan','kelurahan','anggota','kec','kel','id'));
     }
 
