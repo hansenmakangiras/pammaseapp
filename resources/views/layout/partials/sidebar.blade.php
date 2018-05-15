@@ -34,6 +34,7 @@
             <!-- Optionally, you can add icons to the links -->
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             <li><a href="{{ route('data.index') }}"><i class="fa fa-database"></i> <span>Data KK</span></a></li>
+            <li><a href="{{ route('formulir.index') }}"><i class="fa fa-paper-plane"></i> <span>Data Formulir</span></a></li>
             <li class="treeview">
                 <a href="#"><i class="fa fa-pie-chart"></i> <span>Data Hasil</span>
                     <span class="pull-right-container">

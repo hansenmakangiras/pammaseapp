@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Anggota;
 use App\Data;
-use App\Wilayah;
 use App\Kecamatan;
 use App\Kelurahan;
 use Illuminate\Http\Request;
@@ -355,5 +354,9 @@ class DataController extends Controller
         }
 
         return view('data.create', ['kecamatan'=>$kecamatan,'kelurahan'=>$kelurahan]);
+    }
+
+    public function formulir(){
+        return view('data.formulir');
     }
 }

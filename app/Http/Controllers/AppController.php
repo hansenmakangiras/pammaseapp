@@ -18,6 +18,7 @@ class AppController extends Controller
     public function index()
     {
         $chart = new AppChart;
+        $chart2 = new AppChart;
         $countkk = Data::where('status',1)->count();
         $countall = Anggota::where('status',1)->count();
 
@@ -32,12 +33,12 @@ class AppController extends Controller
             $datakec[] = Data::where('kecamatan',$value->id)->where('status',1)->with(['anggota','kelurahan','kecamatan'])->count();
         }
 
-        $a = DB::table('km_kecamatan')->wherein('kota_id',$idkec)->where('status','=',1)->get()->toArray();
-        $datakel = Anggota::where('anggotaid',$kecamatan)->count();
-        $chart->labels($kec)->dataset('Total', 'bar', $datakec)
+        $chart->labels($kec)->dataset('Data KK', 'bar', $datakec)
             ->backgroundColor('#39CCCC');
+        $chart2->labels($kec)->dataset('Formulir', 'pie', $datakec);
+//            ->backgroundColor('#f39c12');
 
-        return view('home',['chart'=>$chart,'countkk'=>$countkk,'countall'=>$countall]);
+        return view('home',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall]);
     }
 
     public function getListKecamatan()
@@ -77,8 +78,8 @@ class AppController extends Controller
         }
 //        dd($count);
 
-        $json = ['kecamatan'=>$lst,'dataset'=>$count];
-        return json_encode($json);
+        $arr = ['kecamatan'=>$lst,'dataset'=>$count];
+        return json_encode($arr);
     }
 
 }
