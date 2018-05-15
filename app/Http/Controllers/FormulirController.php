@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Data;
+use App\Formulir;
 use Illuminate\Http\Request;
 
 class FormulirController extends Controller
@@ -14,7 +14,7 @@ class FormulirController extends Controller
      */
     public function index()
     {
-        $data = Data::where('status',1)->get();
+        $data = Formulir::where('status',1)->get();
         return view('formulir.index', compact('data'));
     }
 

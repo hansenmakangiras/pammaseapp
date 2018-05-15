@@ -42,7 +42,9 @@ class DataController extends Controller
     {
         $out = [];
         foreach ($data1 as $key => $item) {
+           $item = isset($item) ? $item : null;
             foreach ($data2 as $ik => $val) {
+                $val = isset($val) ? $val : null;
                 if($key === $ik){
                     $out[] = ['nama'=>$item,'umur'=>$val];
                 }
@@ -50,7 +52,7 @@ class DataController extends Controller
             }
         }
 
-        return array_filter($out);
+        return $out;
 
     }
 
@@ -123,15 +125,15 @@ class DataController extends Controller
         $out = $this->gabung($anggota, $umur);
         $out = array_map('array_filter', $out);
         $out = array_filter($out);
-//        dd($out);
+
         $check = Anggota::where('anggotaid','=',Input::get('nokk'))->exists();
 
         foreach ($out as $item) {
             if(!$check){
                 $dataanggota = new Anggota();
                 $dataanggota->anggotaid = $input['nokk'];
-                $dataanggota->nama = $item['nama'];
-                $dataanggota->umur = $item['umur'];
+                $dataanggota->nama = isset($item['nama']) ? $item['nama'] : null;
+                $dataanggota->umur = isset($item['umur']) ? $item['umur'] : null;
                 $dataanggota->status = 1;
                 $dataanggota->save();
             }
