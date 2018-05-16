@@ -21,6 +21,14 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
+                @if (session('pesan'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-check"></i> Sukses!</h4>
+                        {{ session('pesan') }}
+                    </div>
+                @endif
+
                 <div class="box">
                     <div class="box-header with-border">
                         <a class="btn btn-primary" href="{{ route('data.create') }}"> Tambah</a>
@@ -35,39 +43,44 @@
                                 <th>Alamat</th>
                                 <th>Kecamatan</th>
                                 <th>Kelurahan</th>
+                                <th width="5%">Anggota</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($data as $value)
-                            <tr>
-                                <td>{{ $value->nokk }}</td>
-                                <td>{{ $value->namakk }}</td>
-                                <td>{{ $value->alamat }}</td>
-                                <td>{{ $value->kecamatan }}</td>
-                                <td>{{ $value->kelurahan }}</td>
-                                <td>
-                                    <a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-binoculars"></i> View</a>
-                                    <a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
+                                {{--@dd($value->anggota->count())--}}
+                                <tr>
+                                    <td><a href="{{ route('data.show',['id'=>$value->id]) }}">{{ $value->nokk }}</a></td>
+                                    <td>{{ $value->namakk }}</td>
+                                    <td>{{ $value->alamat }}</td>
+                                    <td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
+                                    <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
+                                    <td class="text-center">{{ $value->anggota->count() }}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>
+                                        <a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
 
-                                    {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->id],'style'=>'display:inline']) !!}
-                                    <button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
-                                    {!! Form::close() !!}
-                                </td>
+                                        {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->id],'style'=>'display:inline']) !!}
+                                        <button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
+                                        {!! Form::close() !!}
+                                    </td>
 
-                            </tr>
+                                </tr>
                             @endforeach
 
                             </tbody>
-                            {{--<tfoot>--}}
-                            {{--<tr>--}}
-                                {{--<th>Rendering engine</th>--}}
-                                {{--<th>Browser</th>--}}
-                                {{--<th>Platform(s)</th>--}}
-                                {{--<th>Engine version</th>--}}
-                                {{--<th>CSS grade</th>--}}
-                            {{--</tr>--}}
-                            {{--</tfoot>--}}
+                            <tfoot>
+                            <tr>
+                                <th>No KK</th>
+                                <th>Nama Kepala Keluarga</th>
+                                <th>Alamat</th>
+                                <th>Kecamatan</th>
+                                <th>Kelurahan</th>
+                                <th width="5%">Anggota</th>
+                                <th>Aksi</th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <!-- /.box-body -->
@@ -89,15 +102,59 @@
     <!-- page script -->
     <script>
         $(function () {
-            // $('#example1').DataTable();
+            // let dt = $('#example1').DataTable();
             $('#datatable').DataTable({
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
                 'info': true,
-                'autoWidth': false
+                'autoWidth': true,
+                // "columns": [
+                //     {
+                //         "class":          "details-control",
+                //         "orderable":      false,
+                //         "data":           null,
+                //         "defaultContent": ""
+                //     },
+                //     { "data": "first_name" },
+                //     { "data": "last_name" },
+                //     { "data": "position" },
+                //     { "data": "office" }
+                // ],
             });
+            // Array to track the ids of the details displayed rows
+            // let detailRows = [];
+            //
+            // $('#datatable tbody').on( 'click', 'tr td.details-control', function () {
+            //     let tr = $(this).closest('tr');
+            //     let row = dt.row( tr );
+            //     let idx = $.inArray( tr.attr('id'), detailRows );
+            //
+            //     if ( row.child.isShown() ) {
+            //         tr.removeClass( 'details' );
+            //         row.child.hide();
+            //
+            //         // Remove from the 'open' array
+            //         detailRows.splice( idx, 1 );
+            //     }
+            //     else {
+            //         tr.addClass( 'details' );
+            //         row.child( format( row.data() ) ).show();
+            //
+            //         // Add to the 'open' array
+            //         if ( idx === -1 ) {
+            //             detailRows.push( tr.attr('id') );
+            //         }
+            //     }
+            // } );
+
+            // On each draw, loop over the `detailRows` array and show any child rows
+            // dt.on( 'draw', function () {
+            //     $.each( detailRows, function ( i, id ) {
+            //         $('#'+id+' td.details-control').trigger( 'click' );
+            //     } );
+            // } );
         });
     </script>
 @endpush

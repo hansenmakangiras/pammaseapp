@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Data;
-use App\Anggota;
-use App\Kelurahan;
-use App\Kecamatan;
 use App\Charts\AppChart;
+use App\Models\Anggota;
+use App\Models\Data;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 
 class HasilController extends Controller

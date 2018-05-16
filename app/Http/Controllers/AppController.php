@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Anggota;
 use App\Charts\AppChart;
-use App\Data;
-use App\Kecamatan;
+use App\Models\Anggota;
+use App\Models\Data;
+use App\Models\Kecamatan;
 use Illuminate\Support\Facades\DB;
 
 class AppController extends Controller

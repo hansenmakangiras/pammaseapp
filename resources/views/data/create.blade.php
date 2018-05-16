@@ -31,19 +31,32 @@
                         </ul>
                     </div>
                 @endif
-                @if(isset($ret['err']) && $ret['err'] == 0)
+                @if (session('Success'))
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-check"></i> Sukses !!!</h4>
-                        {{ $ret['pesan'] }}
+                        <h4><i class="icon fa fa-check"></i> Sukses!</h4>
+                        {{ session('Success') }}
                     </div>
-                @elseif(isset($ret['err']) && $ret['err'] == 1)
+                @elseif(session('Error'))
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-ban"></i> Gagal !!!</h4>
-                        {{ $ret['pesan'] }}
+                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                        {{ session('Error') }}
                     </div>
                 @endif
+                {{--@if(isset($ret['err']) && $ret['err'] == 0)--}}
+                    {{--<div class="alert alert-success alert-dismissible">--}}
+                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
+                        {{--<h4><i class="icon fa fa-check"></i> Sukses !!!</h4>--}}
+                        {{--{{ $ret['pesan'] }}--}}
+                    {{--</div>--}}
+                {{--@elseif(isset($ret['err']) && $ret['err'] == 1)--}}
+                    {{--<div class="alert alert-danger alert-dismissible">--}}
+                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
+                        {{--<h4><i class="icon fa fa-ban"></i> Gagal !!!</h4>--}}
+                        {{--{{ $ret['pesan'] }}--}}
+                    {{--</div>--}}
+                {{--@endif--}}
                 <!-- general form elements -->
                 <div class="box box-solid">
                     <div class="box-header with-border">

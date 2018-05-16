@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Formulir;
+use App\Models\Formulir;
 use Illuminate\Http\Request;
 
 class FormulirController extends Controller

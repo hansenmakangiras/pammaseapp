@@ -1,8 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Data;
 use Illuminate\Database\Eloquent\Model;
 
 class Kecamatan extends Model
