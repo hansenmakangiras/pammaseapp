@@ -172,9 +172,8 @@ class DataController extends Controller
         $kec = Kecamatan::where('id', $data->kecamatan)->where('status', 1)->first();
         $kel = Kelurahan::where('id_kelurahan', $data->kelurahan)->where('status', 1)->get();
         $anggota = Anggota::where('anggotaid', $data->anggotaid)->where('status', 1)->get();
-        $kecamatan = $this->getListKecamatan();
-
-        $kelurahan = $this->getAllKelurahan();
+        $kecamatan = AppHelper::getListKecamatan();
+        $kelurahan = AppHelper::getAllKelurahan();
 
         return view('data.edit', compact('data', 'kecamatan', 'kelurahan', 'anggota', 'kec', 'kel', 'id'));
     }

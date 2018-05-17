@@ -5,7 +5,7 @@
 @section('content-header')
     <section class="content-header">
         <h1>
-            Input Data
+            Edit Data
             <small>Formulir Pengambilan Kartu</small>
         </h1>
         <ol class="breadcrumb">
@@ -43,8 +43,8 @@
                         <h4><i class="icon fa fa-ban"></i> Error!</h4>
                         {{ session('Error') }}
                     </div>
-                @endif
-                <!-- general form elements -->
+            @endif
+            <!-- general form elements -->
                 <div class="box box-solid">
                     <div class="box-header with-border">
                         <h3 class="box-title">Data Formulir</h3>
@@ -52,8 +52,8 @@
                     <!-- /.box-header -->
 
                     <!-- form start -->
-                    {!! Form::open(['route' => 'formulir.store','method'=>'POST']) !!}
-                    @include('formulir.form')
+                    {!! Form::model([$data,$kecamatan,$id,$kelurahan], ['method' => 'PATCH','route' => ['formulir.update', $data->id]]) !!}
+                    @include('formulir.form-edit')
                     {!! Form::close() !!}
 
                 </div>

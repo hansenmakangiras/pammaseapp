@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Common\AppHelper;
 use App\Models\Formulir;
 use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -92,7 +93,11 @@ class FormulirController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Formulir::find($id);
+        $kecamatan = Kecamatan::pluck('name','id')->toArray();
+        $kelurahan = Kelurahan::pluck('name','id_kelurahan')->toArray();
+//        $kecamatan = AppHelper::getListKecamatan();
+        return view('formulir.edit', compact('data', 'kecamatan','id','kelurahan'));
     }
 
     /**
@@ -104,7 +109,16 @@ class FormulirController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Formulir::find($id);
+        $data->nokk = $request->nokk;
+        $data->nama = $request->namakk;
+        $data->notelp = $request->notelp;
+        $data->jumlah = $request->jumlah;
+        $data->kelurahan = $request->kelurahan;
+        $data->kecamatan = $request->kecamatan;
+        $data->save();
+        return redirect()->route('formulir.edit',$id)->with('Success','Data formulir telah diupdate');
+
     }
 
     /**
@@ -115,7 +129,10 @@ class FormulirController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Formulir::find($id)->delete();
+
+        return redirect()->route('formulir.index')
+            ->with('pesan', 'Data berhasil di hapus');
     }
 
     public function getKelurahan($kode)

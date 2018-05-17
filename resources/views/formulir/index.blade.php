@@ -21,6 +21,13 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
+                @if (session('pesan'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-check"></i> Sukses!</h4>
+                        {{ session('pesan') }}
+                    </div>
+                @endif
                 <div class="box">
                     <div class="box-header with-border">
                         <a class="btn btn-primary" href="{{ route('formulir.create') }}"> Tambah</a>
@@ -46,14 +53,14 @@
                                 <td>{{ $value->nama}}</td>
                                 <td>{{ $value->notelp }}</td>
                                 <td>{{ $value->jumlah}}</td>
-                                <td>{{ $value->kelurahan }}</td>
-                                <td>{{ $value->kecamatan }}</td>
+                                <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
+                                <td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
                                 <td>
                                     <a class="btn btn-xs btn-primary" href="{{ route('formulir.show',['id'=>$value->id]) }}"><i class="fa fa-binoculars"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('formulir.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
 
                                     {!! Form::open(['method' => 'DELETE','route' => ['formulir.destroy', $value->id],'style'=>'display:inline']) !!}
-                                    <button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
+                                    <button type="submit" class="btn btn-xs btn-danger" href="{{ route('formulir.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
                                     {!! Form::close() !!}
                                 </td>
 
