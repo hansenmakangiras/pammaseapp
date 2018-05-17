@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Common\AppHelper;
 use App\Models\Formulir;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
+use Validator;
 
 class FormulirController extends Controller
 {
@@ -27,9 +29,12 @@ class FormulirController extends Controller
     public function create()
     {
         $kecamatan = AppHelper::getListKecamatan();
+        $kec = Kecamatan::pluck('name','id')->toArray();
+//        $kel = Kelurahan::pluck('name','kecamatan_id')->toArray();
+//        dd($kel);
         $kelurahan = AppHelper::getAllKelurahan();
 
-        return view('formulir.create', compact('kecamatan', 'kelurahan'));
+        return view('formulir.create', compact('kecamatan', 'kelurahan','kec'));
     }
 
     /**
@@ -40,7 +45,32 @@ class FormulirController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nokk' => 'required|unique:formulir|max:20',
+            'namakk' => 'required|string|max:150',
+            'notelp' => 'max:20',
+            'jumlah' => 'numeric',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->route('formulir.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $formulir = new Formulir();
+        $formulir->nokk = $request->nokk;
+        $formulir->nama = $request->namakk;
+        $formulir->notelp = $request->notelp;
+        $formulir->jumlah = $request->jumlah;
+        $formulir->kelurahan = $request->kelurahan;
+        $formulir->kecamatan = $request->kecamatan;
+        $formulir->save();
+
+        return redirect()->route('formulir.create')->with('Success','Data Formulir telah tersimpan');
+
     }
 
     /**
@@ -86,5 +116,10 @@ class FormulirController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getKelurahan($kode)
+    {
+        return AppHelper::getJsonKelurahan($kode);
     }
 }

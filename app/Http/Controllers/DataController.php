@@ -22,10 +22,8 @@ class DataController extends Controller
         $data = Data::latest()->where('status', 1)->with(['anggota'])->get();
         $trashed = AppHelper::getTrashedData();
 
-        return view('data.index', compact('data','trashed'));
-//        $data = Data::latest()->paginate(10);
-//        return view('data.index', compact('data'))
-//            ->with('i', (\request()->input('page',1)-1)*10);
+        return view('data.index', compact('data','trashed'))
+            ->with('i', (\request()->input('page',1)-1)*10);
     }
 
     /**
@@ -162,26 +160,6 @@ class DataController extends Controller
         return view('data.view', compact('anggota', 'data', 'kec', 'kel'));
     }
 
-//    public function getAllKelurahan()
-//    {
-//        if (empty($_GET['kec'])) {
-//            if (empty($_GET['kel'])) {
-//                $kelurahan = Kelurahan::where('kecamatan_id', 'xdx')->get();
-//            } else {
-//                $getkel = Kelurahan::where('id_kelurahan', $_GET['kel'])->where('status', 1)->first();
-//                $kelurahan = Kelurahan::where('kecamatan_id', $getkel['kecamatan_id'])->where('status', 1)->get();
-//            }
-//        } else {
-//            if (empty($_GET['kel'])) {
-//                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
-//            } else {
-//                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
-//            }
-//        }
-//
-//        return $kelurahan;
-//    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -298,20 +276,6 @@ class DataController extends Controller
         return view('data.hasil');
     }
 
-//    public function getListKecamatan()
-//    {
-//        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->get();
-//
-//        return $kecamatan;
-//    }
-//
-//    public function getListKelurahan($kec)
-//    {
-//        $data = Kelurahan::where('kecamatan_id', $kec)->where('status', 1)->get();
-//
-//        return $data;
-//    }
-//
     public function getJsonKelurahan($idkec)
     {
         return AppHelper::getJsonKelurahan($idkec);

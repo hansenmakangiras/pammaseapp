@@ -73,4 +73,15 @@ class AppHelper
 
         return $kelurahan;
     }
+    static function getKelurahan($kode)
+    {
+        if(isset($kode)){
+            $kelurahan = Kelurahan::where('kecamatan_id', $kode)->where('status', 1)->get()->toArray();
+//            $kelurahan = DB::table('kelurahan')
+//                ->where('kecamatan_id','=',$kode)
+//                ->first()->toArray();
+        }
+
+        return $kelurahan;
+    }
 }

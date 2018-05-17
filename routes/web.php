@@ -20,3 +20,4 @@ Route::resource('data','DataController');
 Route::resource('hasil','HasilController');
 Route::resource('formulir','FormulirController');
 Route::get('/data/kelurahan/{idkec}','DataController@getJsonKelurahan');
+Route::get('/json/kelurahan/{idkec}','FormulirController@getKelurahan');

@@ -81,7 +81,7 @@
                 kelurahan.append('<option value="">Kelurahan</option>');
                 $.ajax({
                     type: 'GET',
-                    url: '/data/kelurahan/' + $(this).val(),
+                    url: '/json/kelurahan/' + $(this).val(),
                     success: function (data) {
                         msg = $.parseJSON(data);
                         $.each(msg, function (i, v) {
