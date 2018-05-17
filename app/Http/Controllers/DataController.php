@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Common\AppHelper;
 use App\Models\Anggota;
 use App\Models\Data;
 use App\Models\Kecamatan;
@@ -19,8 +20,9 @@ class DataController extends Controller
     public function index()
     {
         $data = Data::latest()->where('status', 1)->with(['anggota'])->get();
+        $trashed = AppHelper::getTrashedData();
 
-        return view('data.index', compact('data'));
+        return view('data.index', compact('data','trashed'));
 //        $data = Data::latest()->paginate(10);
 //        return view('data.index', compact('data'))
 //            ->with('i', (\request()->input('page',1)-1)*10);
@@ -286,11 +288,13 @@ class DataController extends Controller
     {
         Data::where('anggotaid', $id)
             ->where('status', 1)
-            ->update(['status' => 0]);
+            ->delete();
+//            ->update(['status' => 0]);
 
         Anggota::where('anggotaid',$id)
             ->where('status',1)
-            ->update(['status' => 0]);
+            ->delete();
+//            ->update(['status' => 0]);
 
         return redirect()->route('data.index')
             ->with('pesan', 'Data berhasil di hapus');
