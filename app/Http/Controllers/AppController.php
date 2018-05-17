@@ -6,6 +6,7 @@ use App\Charts\AppChart;
 use App\Models\Anggota;
 use App\Models\Data;
 use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use Illuminate\Support\Facades\DB;
 
 class AppController extends Controller
@@ -22,20 +23,26 @@ class AppController extends Controller
         $countkk = Data::where('status',1)->count();
         $countall = Anggota::where('status',1)->count();
 
-        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status',1)->get();
-
+        $kecamatan = Kecamatan::where('kota_id', '7313')->with(['data','kelurahan'])->where('status',1)->get();
+        //$kelurahan = Kelurahan::where('id',$kecamatan->id)->where('status',1)->get();
+        //dd($kecamatan);
         $kec = [];
+        $kel = [];
         $idkec = [];
         $datakec=[];
-        foreach ($kecamatan as $value){
+        $datakel =[];
+        $count = [];
+        $v = [];
+        foreach ($kecamatan as $key => $value){
             $kec[] = $value->name;
-            $idkec[] = $value->id;
-            $datakec[] = Data::where('kecamatan',$value->id)->where('status',1)->with(['anggota','kelurahan','kecamatan'])->count();
+            $idkec[$value->name] = Kelurahan::where('kecamatan_id',$value->id)->where('status',1)->get();
+            $datakec[] = Data::where('kecamatan',$value->id)->with(['kelurahan'])->where('status',1)->count();
+            $kelurahan[$value->id] = Kelurahan::where('kecamatan_id',$value->id)->with(['kecamatan'])->where('status',1)->get();
         }
 
         $chart->labels($kec)->dataset('Data KK', 'bar', $datakec)
             ->backgroundColor('#39CCCC');
-        $chart2->labels($kec)->dataset('Formulir', 'pie', $datakec);
+        $chart2->labels($kel)->dataset('Formulir', 'pie', $datakel);
 //            ->backgroundColor('#f39c12');
 
         return view('home',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall]);
@@ -56,6 +63,41 @@ class AppController extends Controller
         $listKec = DB::table('km_kecamatan')
             ->select(['name','id'])
             ->where('kota_id','7313')
+            ->where('status',1)
+            ->get()->toArray();
+
+        $kecamatan = DB::table('km_kecamatan')
+            ->select('id')
+            ->where('kota_id','7313')
+            ->where('status',1)
+            ->get()->toArray();
+
+        foreach ($listKec as $value) {
+            $lst[] = $value->name;
+            foreach ($kecamatan as $item) {
+                $kec[] = $item->id;
+                if($value->id == $item->id){
+                    $count[] = DB::table('data')
+                        ->where('kecamatan',$item->id)
+                        ->count();
+                }
+            }
+        }
+//        dd($count);
+
+        $arr = ['kecamatan'=>$lst,'dataset'=>$count];
+        return json_encode($arr);
+    }
+
+    public function getJsonKelurahan(){
+
+        $lst = [];
+        $kec =[];
+        $count=[];
+
+        $listKec = DB::table('km_kelurahan')
+            ->select(['name','id_kelurahan'])
+            ->where('kecamatan_id','7313')
             ->where('status',1)
             ->get()->toArray();
 

@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kecamatan extends Model
 {
-    protected $table = "km_kecamatan";
+    protected $table = "kecamatan";
     public $timestamps=false;
 
     public function data(){
         return $this->belongsTo(Data::class,'kecamatan');
+    }
+    public function kelurahan(){
+        return $this->hasMany(Kelurahan::class,'kecamatan_id');
     }
 
     public static function getkec($id){
