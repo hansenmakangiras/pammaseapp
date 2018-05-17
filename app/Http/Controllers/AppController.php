@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Charts\AppChart;
 use App\Models\Anggota;
 use App\Models\Data;
+use App\Models\Formulir;
 use App\Models\Kecamatan;
-use App\Models\Kelurahan;
 use Illuminate\Support\Facades\DB;
 
 class AppController extends Controller
@@ -23,6 +23,7 @@ class AppController extends Controller
         $chart2 = new AppChart;
         $countkk = Data::where('status',1)->count();
         $countall = Anggota::where('status',1)->count();
+        $countformulir = Formulir::all()->count();
 
         // ambil data kecamatan dalam database
         $kecamatan = Kecamatan::where('kota_id', '7313')->with(['data','kelurahan'])->where('status',1)->get();
@@ -39,7 +40,12 @@ class AppController extends Controller
             $kec[] = $value->name;
             $idkec[$value->id] = $value->kelurahan()->where('status',1)->get();
             $datakec[] = Data::where('kecamatan',$value->id)->with(['kelurahan'])->where('status',1)->count();
-            $kelurahan[$value->id] = Kelurahan::where('kecamatan_id',$value->id)->with(['kecamatan'])->where('status',1)->get();
+//            $formulir[] = Formulir::where('kecamatan',$value->id)->count();
+            $formulir = Formulir::where('kecamatan',$value->id)->get();
+            foreach ( $formulir as $item) {
+                $countform[] = $item->jumlah;
+                $total = $item->jumlah += $item->jumlah;
+            }
         }
 
         // looping data kelurahan
@@ -54,11 +60,11 @@ class AppController extends Controller
         // set data dan label untuk render chart
         $chart->labels($kec)->dataset('Data KK', 'bar', $datakec)
             ->backgroundColor('#39CCCC');
-        $chart2->labels($kel)->dataset('Formulir', 'pie', $datakel)
-            ->backgroundColor('#f39c12');
+        $chart2->labels($kec)->dataset('Formulir', 'pie', $countform);
+//            ->backgroundColor('#f39c12');
 
         // tampilkan / render data chart pada view, serta mengeset variabel data
-        return view('home',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall]);
+        return view('home',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall,'countformulir'=>$total]);
     }
 
     public function getListKecamatan()

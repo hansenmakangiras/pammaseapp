@@ -53,9 +53,9 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>20.000<sup style="font-size: 20px">Lbr</sup></h3>
+                        <h3>30.000<sup style="font-size: 20px">Lbr</sup></h3>
 
-                        <p>Jumlah Formulir</p>
+                        <p>Total Formulir</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -67,9 +67,9 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">Lbr</sup></h3>
+                        <h3>{{ $countformulir }}<sup style="font-size: 20px">Lbr</sup></h3>
 
-                        <p>Formulir Tercetak</p>
+                        <p>Formulir Keluar</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -90,29 +90,40 @@
                     <div class="box-body">
                         <div class="chart">
                             {{--<canvas id="barChart" style="height:250px"></canvas>--}}
-                            {{--{!! $chart->container() !!}--}}
+                            {!! $chart->container() !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Grafik Formulir Keluar Per Kecamatan</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            {{--<canvas id="barChart" style="height:250px"></canvas>--}}
+                            {!! $chart2->container() !!}
                         </div>
                     </div>
                 </div>
                 <!-- Custom tabs (Charts with tabs)-->
-                <div class="nav-tabs-custom">
-                    <!-- Tabs within a box -->
-                    <ul class="nav nav-tabs pull-right">
-                        <li><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                        <li class="active"><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-                        <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
-                    </ul>
-                    <div class="tab-content no-padding">
-                        <!-- Morris chart - Sales -->
-                        <div class="chart tab-pane" id="revenue-chart" style="position: relative; height: 300px;">
-                            {!! $chart2->container() !!}
-                        </div>
-                        <div class="chart tab-pane active" id="sales-chart" style="position: relative; height: 300px;">
-                            {!! $chart->container() !!}
+                {{--<div class="nav-tabs-custom">--}}
+                    {{--<!-- Tabs within a box -->--}}
+                    {{--<ul class="nav nav-tabs pull-right">--}}
+                        {{--<li><a href="#revenue-chart" data-toggle="tab">Area</a></li>--}}
+                        {{--<li class="active"><a href="#sales-chart" data-toggle="tab">Donut</a></li>--}}
+                        {{--<li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>--}}
+                    {{--</ul>--}}
+                    {{--<div class="tab-content no-padding">--}}
+                        {{--<!-- Morris chart - Sales -->--}}
+                        {{--<div class="chart tab-pane" id="revenue-chart" style="position: relative; height: 300px;">--}}
+                            {{--{!! $chart2->container() !!}--}}
+                        {{--</div>--}}
+                        {{--<div class="chart tab-pane active" id="sales-chart" style="position: relative; height: 300px;">--}}
+                            {{--{!! $chart->container() !!}--}}
 
-                        </div>
-                    </div>
-                </div>
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <!-- /.nav-tabs-custom -->
                 {{--<div class="box box-info">--}}
                     {{--<div class="box-header with-border">--}}
