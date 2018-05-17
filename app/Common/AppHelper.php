@@ -30,4 +30,47 @@ class AppHelper
     static function getTrashedAnggota(){
         return Anggota::onlyTrashed()->get();
     }
+    static function getListKecamatan()
+    {
+        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->get();
+
+        return $kecamatan;
+    }
+
+    static function getListKelurahan($kode)
+    {
+        $data = Kelurahan::where('kecamatan_id', $kode)->where('status', 1)->get();
+
+        return $data;
+    }
+
+    static function getJsonKelurahan($idkec)
+    {
+        $kelurahan = Kelurahan::where('kecamatan_id', $idkec)->where('status', 1)->get();
+        return json_encode($kelurahan);
+    }
+
+    static function getJsonKecamatan()
+    {
+        return json_encode(AppHelper::getListKecamatan());
+    }
+    static function getAllKelurahan()
+    {
+        if (empty($_GET['kec'])) {
+            if (empty($_GET['kel'])) {
+                $kelurahan = Kelurahan::where('kecamatan_id', 'xdx')->get();
+            } else {
+                $getkel = Kelurahan::where('id_kelurahan', $_GET['kel'])->where('status', 1)->first();
+                $kelurahan = Kelurahan::where('kecamatan_id', $getkel['kecamatan_id'])->where('status', 1)->get();
+            }
+        } else {
+            if (empty($_GET['kel'])) {
+                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
+            } else {
+                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
+            }
+        }
+
+        return $kelurahan;
+    }
 }

@@ -6,12 +6,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Data
+            Formulir
             <small>Kartu Keluarga</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Data</li>
+            <li class="active">Formulir</li>
         </ol>
     </section>
 @endsection
@@ -23,34 +23,36 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <a class="btn btn-primary" href="{{ route('data.create') }}"> Tambah</a>
+                        <a class="btn btn-primary" href="{{ route('formulir.create') }}"> Tambah</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="datatable" class="table table-bordered table-striped table-responsive">
+                        <table id="dt-formulir" class="table table-bordered table-striped table-responsive">
                             <thead>
                             <tr>
                                 <th>No KK</th>
-                                <th>Nama Kepala Keluarga</th>
-                                <th>Alamat</th>
-                                <th>Kecamatan</th>
+                                <th>Nama Pengambil</th>
+                                <th>No Telp</th>
+                                <th>Jumlah</th>
                                 <th>Kelurahan</th>
+                                <th>Kecamatan</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($data as $value)
+                            @foreach($formulir as $value)
                             <tr>
-                                <td>{{ $value->nokk }}</td>
-                                <td>{{ $value->namakk }}</td>
-                                <td>{{ $value->alamat }}</td>
-                                <td>{{ $value->kecamatan }}</td>
+                                <td>{{ $value->nokk}}</td>
+                                <td>{{ $value->nama}}</td>
+                                <td>{{ $value->notelp }}</td>
+                                <td>{{ $value->jumlah}}</td>
                                 <td>{{ $value->kelurahan }}</td>
+                                <td>{{ $value->kecamatan }}</td>
                                 <td>
-                                    <a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-binoculars"></i> View</a>
-                                    {{--<a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>--}}
+                                    <a class="btn btn-xs btn-primary" href="{{ route('formulir.show',['id'=>$value->id]) }}"><i class="fa fa-binoculars"></i> View</a>
+                                    <a class="btn btn-xs btn-warning" href="{{ route('formulir.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
 
-                                    {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->id],'style'=>'display:inline']) !!}
+                                    {!! Form::open(['method' => 'DELETE','route' => ['formulir.destroy', $value->id],'style'=>'display:inline']) !!}
                                     <button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
                                     {!! Form::close() !!}
                                 </td>
@@ -90,7 +92,7 @@
     <script>
         $(function () {
             // $('#example1').DataTable();
-            $('#datatable').DataTable({
+            $('#dt-formulir').DataTable({
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,

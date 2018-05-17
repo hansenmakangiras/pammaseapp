@@ -35,8 +35,8 @@ class DataController extends Controller
      */
     public function create()
     {
-        $kecamatan = $this->getListKecamatan();
-        $kelurahan = $this->getAllKelurahan();
+        $kecamatan = AppHelper::getListKecamatan();
+        $kelurahan = AppHelper::getAllKelurahan();
 
         return view('data.create', compact('kecamatan', 'kelurahan'));
     }
@@ -95,8 +95,8 @@ class DataController extends Controller
     public function store(Request $request)
     {
         $datakk = new Data();
-        $kecamatan = $this->getListKecamatan();
-        $kelurahan = $this->getAllKelurahan();
+        $kecamatan = AppHelper::getListKecamatan();
+        $kelurahan = AppHelper::getAllKelurahan();
 
         $validatedData = $request->validate([
             'nokk' => 'required|unique:data|max:20',
@@ -128,27 +128,15 @@ class DataController extends Controller
             $out = array_map('array_filter', $out);
             $out = array_filter($out);
 
-            //$check = Anggota::where('anggotaid', '=', Input::get('nokk'))->exists();
-
             foreach ($out as $item) {
-                //if (!$check) {
                     $dataanggota = new Anggota();
                     $dataanggota->anggotaid = $input['nokk'];
                     $dataanggota->nama = isset($item['nama']) ? $item['nama'] : null;
                     $dataanggota->umur = isset($item['umur']) ? $item['umur'] : null;
                     $dataanggota->status = 1;
                     $dataanggota->save();
-                //}
             }
 
-//            $checknokk = Data::where('nokk', '=', Input::get('nokk'))->exists();
-//
-//            if ($checknokk) {
-//                return back()->withInput();
-//            }else{
-//
-//                return redirect()->route('data.create')->with('Success','Data berhasil disimpan');
-//            }
             return redirect()->route('data.create')->with('Success','Data berhasil disimpan');
         }
 
@@ -174,25 +162,25 @@ class DataController extends Controller
         return view('data.view', compact('anggota', 'data', 'kec', 'kel'));
     }
 
-    public function getAllKelurahan()
-    {
-        if (empty($_GET['kec'])) {
-            if (empty($_GET['kel'])) {
-                $kelurahan = Kelurahan::where('kecamatan_id', 'xdx')->get();
-            } else {
-                $getkel = Kelurahan::where('id_kelurahan', $_GET['kel'])->where('status', 1)->first();
-                $kelurahan = Kelurahan::where('kecamatan_id', $getkel['kecamatan_id'])->where('status', 1)->get();
-            }
-        } else {
-            if (empty($_GET['kel'])) {
-                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
-            } else {
-                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
-            }
-        }
-
-        return $kelurahan;
-    }
+//    public function getAllKelurahan()
+//    {
+//        if (empty($_GET['kec'])) {
+//            if (empty($_GET['kel'])) {
+//                $kelurahan = Kelurahan::where('kecamatan_id', 'xdx')->get();
+//            } else {
+//                $getkel = Kelurahan::where('id_kelurahan', $_GET['kel'])->where('status', 1)->first();
+//                $kelurahan = Kelurahan::where('kecamatan_id', $getkel['kecamatan_id'])->where('status', 1)->get();
+//            }
+//        } else {
+//            if (empty($_GET['kel'])) {
+//                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
+//            } else {
+//                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
+//            }
+//        }
+//
+//        return $kelurahan;
+//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -310,40 +298,28 @@ class DataController extends Controller
         return view('data.hasil');
     }
 
-    public function getListKecamatan()
-    {
-        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->get();
-
-        return $kecamatan;
-    }
-
-    public function getListKelurahan($kec)
-    {
-        $data = Kelurahan::where('kecamatan_id', $kec)->where('status', 1)->get();
-
-        return $data;
-    }
-
-//    public function getListKelurahan(Request $request)
+//    public function getListKecamatan()
 //    {
-//        $req = $request->get('id');
-//         if($req)
-////            $data = Wilayah::where('kecamatan','=',$req)->get();
-//            $kelurahan = Kelurahan::where('kecamatan_id', $getkel['kecamatan_id'])->where('status', 1)->get();
+//        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->get();
 //
-//        return response()->json($kelurahan);
+//        return $kecamatan;
 //    }
-
+//
+//    public function getListKelurahan($kec)
+//    {
+//        $data = Kelurahan::where('kecamatan_id', $kec)->where('status', 1)->get();
+//
+//        return $data;
+//    }
+//
     public function getJsonKelurahan($idkec)
     {
-        $kelurahan = Kelurahan::where('kecamatan_id', $idkec)->where('status', 1)->get();
-
-        return json_encode($kelurahan);
+        return AppHelper::getJsonKelurahan($idkec);
     }
 
     public function getJsonKecamatan()
     {
-        return json_encode($this->getListKecamatan());
+        return AppHelper::getJsonKecamatan();
     }
 
     public function wilayah()

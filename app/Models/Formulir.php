@@ -10,9 +10,9 @@ class Formulir extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $table="data";
-//    public $timestamps=false;
+    protected $table="formulir";
+
     protected $fillable =[
-        'nokk','namakk','anggotaid','alamat','notps','kelurahan','kecamatan','pekerjaan','notelp'
+        'nokk','nama','notelp','jumlah','kelurahan','kecamatan'
     ];
 }

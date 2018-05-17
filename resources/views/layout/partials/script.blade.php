@@ -13,6 +13,8 @@
 @stack('scriptDashboard')
 @stack('scriptInput')
 @stack('scriptEdit')
+@stack('scriptInputFormulir')
+
 <!-- Slimscroll -->
 <script src="{{ asset('admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- FastClick -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Common\AppHelper;
 use App\Models\Formulir;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,8 @@ class FormulirController extends Controller
      */
     public function index()
     {
-        $data = Formulir::where('status',1)->get();
-        return view('formulir.index', compact('data'));
+        $formulir = Formulir::latest()->get();
+        return view('formulir.index', compact('formulir'));
     }
 
     /**
@@ -25,7 +26,10 @@ class FormulirController extends Controller
      */
     public function create()
     {
-        //
+        $kecamatan = AppHelper::getListKecamatan();
+        $kelurahan = AppHelper::getAllKelurahan();
+
+        return view('formulir.create', compact('kecamatan', 'kelurahan'));
     }
 
     /**
