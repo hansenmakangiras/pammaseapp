@@ -7,10 +7,8 @@
  */
 
 namespace App\Common;
-use App\Anggota;
-use App\Data;
-use App\Kecamatan;
-use App\Kelurahan;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 
 class AppHelper
 {
