@@ -90,21 +90,41 @@
                     <div class="box-body">
                         <div class="chart">
                             {{--<canvas id="barChart" style="height:250px"></canvas>--}}
-                            {!! $chart->container() !!}
+                            {{--{!! $chart->container() !!}--}}
                         </div>
                     </div>
                 </div>
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Grafik Formulir Keluar Per Kecamatan</h3>
-                    </div>
-                    <div class="box-body">
-                        <div class="chart">
-                            {{--<canvas id="areaChart" style="height:250px"></canvas>--}}
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="nav-tabs-custom">
+                    <!-- Tabs within a box -->
+                    <ul class="nav nav-tabs pull-right">
+                        <li><a href="#revenue-chart" data-toggle="tab">Area</a></li>
+                        <li class="active"><a href="#sales-chart" data-toggle="tab">Donut</a></li>
+                        <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+                    </ul>
+                    <div class="tab-content no-padding">
+                        <!-- Morris chart - Sales -->
+                        <div class="chart tab-pane" id="revenue-chart" style="position: relative; height: 300px;">
                             {!! $chart2->container() !!}
                         </div>
+                        <div class="chart tab-pane active" id="sales-chart" style="position: relative; height: 300px;">
+                            {!! $chart->container() !!}
+
+                        </div>
                     </div>
                 </div>
+                <!-- /.nav-tabs-custom -->
+                {{--<div class="box box-info">--}}
+                    {{--<div class="box-header with-border">--}}
+                        {{--<h3 class="box-title">Grafik Formulir Keluar Per Kecamatan</h3>--}}
+                    {{--</div>--}}
+                    {{--<div class="box-body">--}}
+                        {{--<div class="chart">--}}
+                            {{--<canvas id="areaChart" style="height:250px"></canvas>--}}
+                            {{--{!! $chart2->container() !!}--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </section>
         </div>
     </section>

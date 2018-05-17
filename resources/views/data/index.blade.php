@@ -28,10 +28,10 @@
                         {{ session('pesan') }}
                     </div>
                 @endif
-
                 <div class="box">
                     <div class="box-header with-border">
-                        <a class="btn btn-primary" href="{{ route('data.create') }}"> Tambah</a>
+                        <a class="btn btn-primary" href="{{ route('data.create') }}"> Tambah KK</a>
+                        <a class="btn btn-primary" href="{{ route('data.create') }}"> Tambah Anggota</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

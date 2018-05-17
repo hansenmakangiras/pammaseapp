@@ -18,7 +18,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = Data::where('status', 1)->with(['anggota'])->get();
+        $data = Data::latest()->where('status', 1)->with(['anggota'])->get();
 
         return view('data.index', compact('data'));
 //        $data = Data::latest()->paginate(10);

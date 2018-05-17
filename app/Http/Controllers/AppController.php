@@ -18,33 +18,46 @@ class AppController extends Controller
      */
     public function index()
     {
+        // chart instance
         $chart = new AppChart;
         $chart2 = new AppChart;
         $countkk = Data::where('status',1)->count();
         $countall = Anggota::where('status',1)->count();
 
+        // ambil data kecamatan dalam database
         $kecamatan = Kecamatan::where('kota_id', '7313')->with(['data','kelurahan'])->where('status',1)->get();
-        //$kelurahan = Kelurahan::where('id',$kecamatan->id)->where('status',1)->get();
-        //dd($kecamatan);
+
+        // variabel data
         $kec = [];
         $kel = [];
         $idkec = [];
         $datakec=[];
         $datakel =[];
-        $count = [];
-        $v = [];
+
+        // looping data kecamatan
         foreach ($kecamatan as $key => $value){
             $kec[] = $value->name;
-            $idkec[$value->name] = Kelurahan::where('kecamatan_id',$value->id)->where('status',1)->get();
+            $idkec[$value->id] = $value->kelurahan()->where('status',1)->get();
             $datakec[] = Data::where('kecamatan',$value->id)->with(['kelurahan'])->where('status',1)->count();
             $kelurahan[$value->id] = Kelurahan::where('kecamatan_id',$value->id)->with(['kecamatan'])->where('status',1)->get();
         }
 
+        // looping data kelurahan
+        foreach ($idkec as $item) {
+            $v = $item;
+                foreach ($v as $l) {
+                    $kel[] = $l->name;
+                    $datakel[] = Data::where('kelurahan',$l->id_kelurahan)->where('status',1)->count();
+                }
+        }
+
+        // set data dan label untuk render chart
         $chart->labels($kec)->dataset('Data KK', 'bar', $datakec)
             ->backgroundColor('#39CCCC');
-        $chart2->labels($kel)->dataset('Formulir', 'pie', $datakel);
-//            ->backgroundColor('#f39c12');
+        $chart2->labels($kel)->dataset('Formulir', 'pie', $datakel)
+            ->backgroundColor('#f39c12');
 
+        // tampilkan / render data chart pada view, serta mengeset variabel data
         return view('home',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall]);
     }
 
