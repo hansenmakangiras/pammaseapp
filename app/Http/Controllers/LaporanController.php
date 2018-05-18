@@ -71,7 +71,7 @@ class LaporanController extends Controller
             ->backgroundColor('#f56954');
 
         // tampilkan / render data chart pada view, serta mengeset variabel data
-        return view('hasil.wilayah',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall,'countformulir'=>$total]);
+        return view('laporan.wilayah',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall,'countformulir'=>$total]);
     }
 
     /**
@@ -94,7 +94,7 @@ class LaporanController extends Controller
             $datakec[] = Data::where('kecamatan',$value->id)->where('status',1)->count();
         }
         $chart->labels($kec)->dataset('Total', 'bar', $datakec);
-        return view('hasil.kelurahan',['chart'=>$chart,'countkk'=>$countkk,'countall'=>$countall]);
+        return view('laporan.kelurahan',['chart'=>$chart,'countkk'=>$countkk,'countall'=>$countall]);
     }
 
     /**
