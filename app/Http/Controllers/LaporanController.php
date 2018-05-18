@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Charts\AppChart;
+use App\Common\AppHelper;
 use App\Models\Anggota;
 use App\Models\Data;
 use App\Models\Formulir;
@@ -18,6 +19,10 @@ class LaporanController extends Controller
      */
     public function index()
     {
+        $allKec = AppHelper::getListKecamatan();
+        $listKec = Kecamatan::pluck('name','id')->toArray();
+        $allKel = AppHelper::getAllKelurahan();
+
         // chart instance
         $chart = new AppChart;
         $chart2 = new AppChart;
@@ -71,7 +76,7 @@ class LaporanController extends Controller
             ->backgroundColor('#f56954');
 
         // tampilkan / render data chart pada view, serta mengeset variabel data
-        return view('laporan.wilayah',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall,'countformulir'=>$total]);
+        return view('laporan.wilayah',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall,'countformulir'=>$total,'allKec'=>$allKec,'allkel'=>$allKel,'listKec'=>$listKec]);
     }
 
     /**
@@ -151,5 +156,9 @@ class LaporanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function wilayah(Request $request){
+        dd($request->all);
     }
 }

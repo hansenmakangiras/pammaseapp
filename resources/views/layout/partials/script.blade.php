@@ -16,6 +16,7 @@
 @stack('scriptInput')
 @stack('scriptEdit')
 @stack('scriptInputFormulir')
+@stack('scriptWilayah')
 
 <!-- Slimscroll -->
 <script src="{{ asset('admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>

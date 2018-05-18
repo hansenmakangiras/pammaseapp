@@ -21,3 +21,4 @@ Route::resource('laporan','LaporanController');
 Route::resource('formulir','FormulirController');
 Route::get('/data/kelurahan/{idkec}','DataController@getJsonKelurahan');
 Route::get('/json/kelurahan/{idkec}','FormulirController@getKelurahan');
+Route::post('/laporan/wilayah','LaporanController@wilayah')->name('laporan.wilayah');
