@@ -82,7 +82,8 @@ class FormulirController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Formulir::find($id);
+        return view('formulir.view', compact('data','id'));
     }
 
     /**

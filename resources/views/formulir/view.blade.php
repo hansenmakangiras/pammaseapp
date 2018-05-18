@@ -6,12 +6,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Lihat Data
-            <small>No KK : {{ $data->nokk }}</small>
+            Lihat Formulir
+            <small>No : {{ $id }}</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Data</li>
+            <li><a href="{{ route('formulir.index') }}"><i class="fa fa-dashboard"></i> Formulir</a></li>
+            <li class="active">View</li>
         </ol>
     </section>
 @endsection
@@ -21,43 +22,83 @@
     <section class="content">
         <div class="row">
             <div class="col-md-8">
-                <div class="box box-solid">
+                <!-- About Me Box -->
+                <div class="box box-primary">
                     <div class="box-header with-border">
-                        <i class="fa fa-user"></i>
-                        <h3 class="box-title">Data Anggota Keluarga - {{ $data->namakk }}</h3>
-                        <div class="box-tools">
-                            <a class="btn btn-sm btn-danger" href="{{ route('data.index') }}"> Kembali</a>
-                        </div>
+                        <h3 class="box-title">About Me</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <table class="table">
-                            <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Nama</th>
-                                <th>Alamat</th>
-                                <th>Umur</th>
-                                <th>Kecamatan</th>
-                                <th >Kelurahan</th>
-                                <th style="width: 60px">No TPS</th>
-                            </tr>
-                            @foreach($anggota as $value)
-                            <tr>
-                                <td>{{ $value->id }}</td>
-                                <td>{{ $value->nama }}</td>
-                                <td>{{ $data->alamat }}</td>
-                                <td>{{ $value->umur }}</td>
-                                <td>{{ $kec->name }}</td>
-                                <td>{{ $kel->name }}</td>
-                                <td class="text-center"><span class="badge bg-yellow">{{ $data->notps }}</span></td>
-                            </tr>
-                            @endforeach
-                        </table>
+                    <div class="box-body">
+                            <strong><i class="fa fa-book margin-r-5"></i> No KK</strong>
+
+                            <p class="text-muted">
+                                {{ $data->nokk }}
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-user margin-r-5"></i> Nama Pengambil</strong>
+
+                            <p class="text-muted">{{ $data->nama }}</p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-pencil margin-r-5"></i> Informasi</strong>
+
+                            <p>
+                                <span class="label label-danger">Jumlah : {{ $data->jumlah }}</span>
+                                <span class="label label-success">Kecamatan : {{ \App\Common\AppHelper::getKelurahanName($data->kelurahan) }}</span>
+                                <span class="label label-info">Desa/Kelurahan : {{ \App\Common\AppHelper::getKecamatanName($data->kecamatan) }}</span>
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+
+
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
             </div>
+            {{--<div class="col-md-8">--}}
+                {{--<div class="box box-solid">--}}
+                    {{--<div class="box-header with-border">--}}
+                        {{--<i class="fa fa-user"></i>--}}
+                        {{--<h3 class="box-title">Data Formulir - {{ $id }}</h3>--}}
+                        {{--<div class="box-tools">--}}
+                            {{--<a class="btn btn-sm btn-danger" href="{{ route('formulir.index') }}"> Kembali</a>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<!-- /.box-header -->--}}
+                    {{--<div class="box-body no-padding">--}}
+                        {{--<table class="table">--}}
+                            {{--<tr>--}}
+                                {{--<th style="width: 10px">#</th>--}}
+                                {{--<th>No KK</th>--}}
+                                {{--<th>Nama Pengambil</th>--}}
+                                {{--<th>No Telp</th>--}}
+                                {{--<th>Jumlah</th>--}}
+                                {{--<th>Kelurahan</th>--}}
+                                {{--<th>Kecamatan</th>--}}
+                            {{--</tr>--}}
+                            {{--<tr>--}}
+                                {{--<td>{{ $data->nokk}}</td>--}}
+                                {{--<td>{{ $data->nama}}</td>--}}
+                                {{--<td>{{ $data->notelp }}</td>--}}
+                                {{--<td class="text-center"><span class="label label-danger">{{ $data->jumlah }}</span></td>--}}
+                                {{--<td>{{ \App\Common\AppHelper::getKelurahanName($data->kelurahan) }}</td>--}}
+                                {{--<td>{{ \App\Common\AppHelper::getKecamatanName($data->kecamatan) }}</td>--}}
+
+                            {{--</tr>--}}
+                        {{--</table>--}}
+                    {{--</div>--}}
+                    {{--<!-- /.box-body -->--}}
+                {{--</div>--}}
+                {{--<!-- /.box -->--}}
+            {{--</div>--}}
             <!-- /.col -->
         </div>
         <!-- /.row (main row) -->
@@ -73,7 +114,6 @@
     <!-- page script -->
     <script>
         $(function () {
-            // $('#example1').DataTable();
             $('#datatable').DataTable({
                 'paging': true,
                 'lengthChange': true,
