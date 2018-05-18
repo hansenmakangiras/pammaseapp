@@ -9,7 +9,7 @@ use App\Models\Formulir;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 
-class HasilController extends Controller
+class LaporanController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -17,7 +17,7 @@
 Route::get('/', 'AppController@index')->name('home');
 Route::get('/getJsonKecamatan', 'AppController@getJsonKecamatan')->name('getJson');
 Route::resource('data','DataController');
-Route::resource('hasil','HasilController');
+Route::resource('laporan','LaporanController');
 Route::resource('formulir','FormulirController');
 Route::get('/data/kelurahan/{idkec}','DataController@getJsonKelurahan');
 Route::get('/json/kelurahan/{idkec}','FormulirController@getKelurahan');
