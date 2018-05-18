@@ -56,7 +56,7 @@
                                 <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
                                 <td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
                                 <td>
-                                    <a class="btn btn-xs btn-primary" href="{{ route('formulir.show',['id'=>$value->id]) }}"><i class="fa fa-binoculars"></i> View</a>
+                                    <a class="btn btn-xs btn-primary" href="{{ route('formulir.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('formulir.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
 
                                     {!! Form::open(['method' => 'DELETE','route' => ['formulir.destroy', $value->id],'style'=>'display:inline']) !!}
@@ -98,7 +98,6 @@
     <!-- page script -->
     <script>
         $(function () {
-            // $('#example1').DataTable();
             $('#dt-formulir').DataTable({
                 'paging': true,
                 'lengthChange': true,

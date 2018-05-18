@@ -75,10 +75,14 @@
 @push('scriptInputFormulir')
     <script>
         $(function () {
+            $(document).ajaxStart(function () {
+                Pace.restart()
+            });
+
             let kelurahan = $("#kelurahan");
             $('#kecamatan').on('change', function () {
                 kelurahan.empty();
-                kelurahan.append('<option value="">Kelurahan</option>');
+                kelurahan.append('<option value="">Semua Kelurahan</option>');
                 $.ajax({
                     type: 'GET',
                     url: '/json/kelurahan/' + $(this).val(),

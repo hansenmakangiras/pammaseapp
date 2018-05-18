@@ -27,7 +27,8 @@
 <link rel="stylesheet" href="{{ asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-
+<!-- Pace style -->
+<link rel="stylesheet" href="{{ asset('admin/plugins/pace/pace.min.css') }}">
 <link rel="icon" href="{{ asset('favicons.png') }}">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

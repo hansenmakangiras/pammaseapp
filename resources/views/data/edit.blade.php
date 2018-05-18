@@ -106,6 +106,9 @@
     <!-- page script -->
     <script>
         $(function () {
+            $(document).ajaxStart(function () {
+                Pace.restart()
+            });
             $('#kecamatan').on('change', function () {
                 // $('#kelurahan').empty();
                 // $('#kelurahan').append('<option value="">Kelurahan</option>');

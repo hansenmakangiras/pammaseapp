@@ -135,5 +135,12 @@
 @push('scriptDashboard')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" charset=utf-8></script>
     <script src="{{ asset('admin/dist/js/pages/custom-dashboard.js') }}"></script>
+    <script>
+        $(function () {
+            $(document).ajaxStart(function () {
+                Pace.restart()
+            });
+        })
+    </script>
     {!! $chart->script() !!}
 @endpush

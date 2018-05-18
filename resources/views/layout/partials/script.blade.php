@@ -9,6 +9,8 @@
 
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- PACE -->
+<script src="{{ asset('admin/bower_components/PACE/pace.min.js') }}"></script>
 <!-- Load Script From Dashboard File -->
 @stack('scriptDashboard')
 @stack('scriptInput')

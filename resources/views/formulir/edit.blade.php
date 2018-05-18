@@ -75,6 +75,9 @@
 @push('scriptInputFormulir')
     <script>
         $(function () {
+            $(document).ajaxStart(function () {
+                Pace.restart()
+            });
             let kelurahan = $("#kelurahan");
             $('#kecamatan').on('change', function () {
                 kelurahan.empty();

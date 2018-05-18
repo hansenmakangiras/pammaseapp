@@ -40,13 +40,13 @@ class AppController extends Controller
             $kec[] = $value->name;
             $idkec[$value->id] = $value->kelurahan()->where('status',1)->get();
             $datakec[] = Data::where('kecamatan',$value->id)->with(['kelurahan'])->where('status',1)->count();
-//            $formulir[] = Formulir::where('kecamatan',$value->id)->count();
             $formulir = Formulir::where('kecamatan',$value->id)->get();
             foreach ( $formulir as $item) {
                 $countform[] = $item->jumlah;
-                $total = $item->jumlah += $item->jumlah;
             }
         }
+
+        $total = array_sum($countform);
 
         // looping data kelurahan
         foreach ($idkec as $item) {

@@ -36,13 +36,13 @@
             <li><a href="{{ route('data.index') }}"><i class="fa fa-database"></i> <span>Data KK</span></a></li>
             <li><a href="{{ route('formulir.index') }}"><i class="fa fa-paper-plane"></i> <span>Data Formulir</span></a></li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-pie-chart"></i> <span>Data Hasil</span>
+                <a href="#"><i class="fa fa-pie-chart"></i> <span>Laporan</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li {{ Request::is('hasil') ? "active" : "" }}><a href="{{ route('hasil.index') }}"><i class="fa fa-circle-o"></i>Wilayah</a></li>
+                    <li><a href="{{ route('hasil.index') }}"><i class="fa fa-circle-o"></i>Wilayah</a></li>
                     {{--<li><a href="{{ route('hasil.create') }}"><i class="fa fa-circle-o"></i>Kelurahan</a></li>--}}
                 </ul>
             </li>

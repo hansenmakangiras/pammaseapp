@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Charts\AppChart;
 use App\Models\Anggota;
 use App\Models\Data;
+use App\Models\Formulir;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 
@@ -17,24 +18,60 @@ class HasilController extends Controller
      */
     public function index()
     {
+        // chart instance
         $chart = new AppChart;
-        $countkk = Data::all()->count();
-        $countall = Anggota::all()->count();
+        $chart2 = new AppChart;
+        $countkk = Data::where('status',1)->count();
+        $countall = Anggota::where('status',1)->count();
+        $countformulir = Formulir::all()->count();
 
-        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status',1)->get();
+        // ambil data kecamatan dalam database
+        $kecamatan = Kecamatan::where('kota_id', '7313')->with(['data','kelurahan'])->where('status',1)->get();
+
+        // variabel data
         $kec = [];
+        $kel = [];
         $idkec = [];
         $datakec=[];
-        foreach ($kecamatan as $value){
+        $datakel =[];
+
+        // looping data kecamatan
+        foreach ($kecamatan as $key => $value){
             $kec[] = $value->name;
-            $idkec[] = $value->id;
-            $datakec[] = Data::where('kecamatan',$value->id)->where('status',1)->count();
+            $idkec[$value->id] = $value->kelurahan()->where('status',1)->get();
+            $datakec[] = Data::where('kecamatan',$value->id)->with(['kelurahan'])->where('status',1)->count();
+//            $formulir[] = Formulir::where('kecamatan',$value->id)->count();
+            $formulir = Formulir::where('kecamatan',$value->id)->get();
+            foreach ( $formulir as $item) {
+                $countform[] = $item->jumlah;
+                $total = $item->jumlah += $item->jumlah;
+            }
         }
 
-        $chart->labels($kec)->dataset('Total', 'line', $datakec)
+        // looping data kelurahan
+        foreach ($idkec as $item) {
+            $v = $item;
+            foreach ($v as $l) {
+                $kel[] = $l->name;
+                $datakel[] = Data::where('kelurahan',$l->id_kelurahan)->where('status',1)->count();
+            }
+        }
+
+        // set data dan label untuk render chart
+//        $chart->labels($kec)
+//            ->dataset('Formulir', 'bar', $countform);
+        $chart->labels($kec)
+            ->dataset('Data KK', 'bar', $datakec)
             ->backgroundColor('#39CCCC');
 
-        return view('home',['chart'=>$chart,'countkk'=>$countkk,'countall'=>$countall]);
+        $chart2->labels($kec)
+            ->minimalist(false)
+            ->displayLegend(false)
+            ->dataset('Formulir', 'bar', $countform)
+            ->backgroundColor('#f56954');
+
+        // tampilkan / render data chart pada view, serta mengeset variabel data
+        return view('hasil.wilayah',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall,'countformulir'=>$total]);
     }
 
     /**
