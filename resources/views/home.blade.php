@@ -94,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box box-info">
+                <div class="box box-danger">
                     <div class="box-header with-border">
                         <h3 class="box-title">Grafik Formulir Keluar Per Kecamatan</h3>
                     </div>
