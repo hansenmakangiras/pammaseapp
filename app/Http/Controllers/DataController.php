@@ -168,37 +168,39 @@ class DataController extends Controller
      */
     public function edit($id)
     {
-        $data = Data::with(['anggota'])->find($id);
+        $data = Data::with(['anggota'])->where('anggotaid',$id)->first();
         $kec = Kecamatan::where('id', $data->kecamatan)->where('status', 1)->first();
         $kel = Kelurahan::where('id_kelurahan', $data->kelurahan)->where('status', 1)->get();
-        $anggota = Anggota::where('anggotaid', $data->anggotaid)->where('status', 1)->get();
+//        $anggota = Anggota::where('anggotaid', $data->anggotaid)->where('status', 1)->get();
+        $anggota = $data->anggota()->get();
         $kecamatan = AppHelper::getListKecamatan();
         $kelurahan = AppHelper::getAllKelurahan();
 
-        return view('data.edit', compact('data', 'kecamatan', 'kelurahan', 'anggota', 'kec', 'kel', 'id'));
+        return view('data.edit',['id'=>$id,'data'=>$data,'kecamatan'=>$kecamatan,'kelurahan'=>$kelurahan,'anggota'=>$anggota,'kec'=>$kec,'kel'=>$kel]);
     }
 
     public function updateAnggota($nokk, $out)
     {
 
-        foreach ($out as $item) {
-            $dataanggota = new Anggota();
-            $dataanggota->anggotaid = $nokk;
-            $dataanggota->nama = $item['nama'];
-            $dataanggota->umur = $item['umur'];
-            $dataanggota->status = 1;
-            $dataanggota->save();
+        if(is_array($out)){
+            foreach ($out as $item) {
+                $dataanggota = new Anggota();
+                $dataanggota->anggotaid = $nokk;
+                $dataanggota->nama = $item['nama'];
+                $dataanggota->umur = $item['umur'];
+                $dataanggota->status = 1;
+                $dataanggota->save();
+            }
+            return true;
         }
-
-        //dd($dataanggota);
-        return true;
+        return false;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  string $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -206,14 +208,13 @@ class DataController extends Controller
         $input = $request->all();
         $anggota = $input['anggota']['nama'];
         $umur = $input['anggota']['umur'];
-        $nokk = $input['nokk'];
-
-        $data = Data::find($id);
+        $data = Data::with(['anggota'])->where('nokk',$id)->where('status',1)->first();
+//        dd($data);
         if ($data) {
-            $data->nokk = $nokk;
+            $data->nokk = $request->nokk;
             $data->namakk = $request->namakk;
             $data->alamat = $request->alamat;
-            $data->anggotaid = $request->anggotaid;
+            $data->anggotaid = $id;
             $data->notps = $request->notps;
             $data->kecamatan = $request->kecamatan;
             $data->kelurahan = $request->kelurahan;
@@ -223,26 +224,25 @@ class DataController extends Controller
             $out = $this->gabung($anggota, $umur);
             $out = array_map('array_filter', $out);
             $out = array_filter($out);
-//            dd($out);
+            $dataanggota = Anggota::where('anggotaid',$id)->where('status',1)->get();
+
             foreach ($out as $item) {
-                //dd($nokk);
-//                $dataanggota = Anggota::where('anggotaid',$nokk)->where('status',1);
-//                $dataanggota->anggotaid = $input['nokk'];
-//                $dataanggota->nama = isset($item['nama']) ? $item['nama'] : null;
-//                $dataanggota->umur = isset($item['umur']) ? $item['umur'] : null;
-//                $dataanggota->status = 1;
-//                $dataanggota->save();
-                Anggota::where('anggotaid',$nokk)
+                $dataanggota = Anggota::where('anggotaid',$id)
                     ->where('status',1)
                     ->update([
-                    'anggotaid' =>$nokk,
+                    'anggotaid' =>$id,
                     'nama' => isset($item['nama']) ? $item['nama'] : null,
                     'umur' =>isset($item['umur']) ? $item['umur'] : null,
                     'status' =>1
                 ]);
             }
-            $data->save();
-            return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
+
+            if($dataanggota){
+                $data->save();
+                return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
+            }
+
+            return redirect()->route('data.edit',$id)->with('Error','Data Gagal disimpan');
         }
 
         return redirect()->route('data.edit',$id);

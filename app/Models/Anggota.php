@@ -10,6 +10,13 @@ class Anggota extends Model
     use SoftDeletes;
 
     /**
+     * All of the relationships to be touched.
+     *
+     * @var array
+     */
+    protected $touches = ['data'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array

@@ -102,7 +102,7 @@
                                     <div class="row">
                                         <div class="col-xs-9">
                                             <div class="form-group">
-                                                <label for="namaanggota1">Anggota Keluarga 1</label>
+                                                <label for="namaanggota1">Anggota Keluarga</label>
                                                 <input value="{{$value->nama}}" type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
                                                        placeholder="Nama Anggota Keluarga" tabindex="3"/>
                                             </div>

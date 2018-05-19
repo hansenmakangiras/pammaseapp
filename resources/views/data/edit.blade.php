@@ -21,6 +21,17 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-10">
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-ban"></i> Kesalahan !!!</h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @if (session('Success'))
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -42,7 +53,8 @@
                     </div>
                 <!-- /.box-header -->
                     <!-- form start -->
-                    {!! Form::model([$data,$kec,$anggota,$kel,$kecamatan,$kelurahan,$id], ['method' => 'PATCH','route' => ['data.update', $data->id]]) !!}
+
+                    {!! Form::model([$data,$kec,$anggota,$kel,$kecamatan,$kelurahan,$id], ['method' => 'PUT','route' => ['data.update', $id]]) !!}
 {{--                        @include('data.form-edit')--}}
                         @include('data.form-tab')
                     {!! Form::close() !!}

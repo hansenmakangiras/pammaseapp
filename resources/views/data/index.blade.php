@@ -59,7 +59,7 @@
                                     <td class="text-center">{{ $value->anggota->count() }}</td>
                                     <td>
                                         <a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>
-                                        <a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
+                                        <a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->anggotaid]) }}"><i class="fa fa-edit"></i> Edit</a>
 
                                         {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->anggotaid],'style'=>'display:inline']) !!}
                                         <button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
