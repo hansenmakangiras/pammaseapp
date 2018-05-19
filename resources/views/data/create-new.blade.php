@@ -21,20 +21,28 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-10">
-                {{--@if(count($errors > 0))--}}
-
-                {{--@endif--}}
-                @if(isset($ret['err']) && $ret['err'] == 0)
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-ban"></i> Kesalahan !!!</h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('Success'))
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-check"></i> Pesan!</h4>
-                        {{ $ret['pesan'] }}
+                        <h4><i class="icon fa fa-check"></i> Sukses!</h4>
+                        {{ session('Success') }}
                     </div>
-                @elseif(isset($ret['err']) && $ret['err'] == 1)
+                @elseif(session('Error'))
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-ban"></i> Gagal!</h4>
-                        {{ $ret['pesan'] }}
+                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                        {{ session('Error') }}
                     </div>
                 @endif
                 <!-- general form elements -->

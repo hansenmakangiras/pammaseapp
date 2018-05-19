@@ -99,21 +99,17 @@ class DataController extends Controller
         $validatedData = $request->validate([
             'nokk' => 'required|unique:data|max:20',
             'namakk' => 'required|string|max:150',
-            'anggotaid' => 'unique:anggota|max:20',
-            'umur' => 'number|max:2',
             'kecamatan' => 'required',
             'kelurahan' => 'required',
         ]);
 
         if($validatedData){
             $input = $request->all();
-            //$anggota = $input['anggota']['nama'];
-            //$umur = $input['anggota']['umur'];
 
             $datakk->nokk = $input['nokk'];
             $datakk->namakk = $input['namakk'];
             $datakk->alamat = $input['alamat'];
-            //$datakk->anggotaid = $input['nokk'];
+            $datakk->anggotaid = $input['nokk'];
             $datakk->notps = $input['notps'];
             $datakk->kecamatan = $input['kecamatan'];
             $datakk->kelurahan = $input['kelurahan'];
@@ -121,19 +117,6 @@ class DataController extends Controller
             $datakk->notelp = $input['notelp'];
             $datakk->status = 1;
             $datakk->save();
-
-//            $out = $this->gabung($anggota, $umur);
-//            $out = array_map('array_filter', $out);
-//            $out = array_filter($out);
-
-//            foreach ($out as $item) {
-//                    $dataanggota = new Anggota();
-//                    $dataanggota->anggotaid = $input['nokk'];
-//                    $dataanggota->nama = isset($item['nama']) ? $item['nama'] : null;
-//                    $dataanggota->umur = isset($item['umur']) ? $item['umur'] : null;
-//                    $dataanggota->status = 1;
-//                    $dataanggota->save();
-//            }
 
             return redirect()->route('data.create')->with('Success','Data berhasil disimpan');
         }
