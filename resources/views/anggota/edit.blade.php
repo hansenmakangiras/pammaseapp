@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Edit Data
+            Edit Data Anggota
             <small>Kartu Keluarga</small>
         </h1>
         <ol class="breadcrumb">
@@ -49,14 +49,14 @@
                 <div class="box box-solid">
 
                     <div class="box-header with-border">
-                        <h3 class="box-title">Data Kartu Keluarga</h3>
+                        <h3 class="box-title">Data Anggota dengan No.KK : <strong>[{{ $data->anggotaid }} - {{ $nokk[$data->anggotaid] }}]</strong></h3>
                     </div>
                 <!-- /.box-header -->
                     <!-- form start -->
 
-                    {!! Form::model([$data,$kec,$anggota,$kel,$kecamatan,$kelurahan,$id], ['method' => 'PUT','route' => ['data.update', $id]]) !!}
+                    {!! Form::model([$data,$nokk,$id], ['method' => 'PUT','route' => ['anggota.update', $id]]) !!}
 {{--                        @include('data.form-edit')--}}
-                        @include('data.form-tab')
+                        @include('anggota.form-edit')
                     {!! Form::close() !!}
 
                 </div>
@@ -96,7 +96,7 @@
             <div class="col-xs-2">
                 <div class="box with-border">
                     <div class="box-body">
-                        <a href="{{ route('data.index') }}" class="btn btn-primary btn-block">Lihat Data</a>
+                        <a href="{{ route('anggota.index') }}" class="btn btn-primary btn-block">Lihat Data</a>
                         {{--<button class="btn btn-primary btn-block">Tambah</button>--}}
                     </div>
                 </div>

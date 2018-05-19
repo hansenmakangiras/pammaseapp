@@ -24,12 +24,20 @@ class AppHelper
         $name = $kelurahan->name;
         return $name;
     }
+
     static function getTrashedData(){
         return Data::onlyTrashed()->get();
     }
+
     static function getTrashedAnggota(){
         return Anggota::onlyTrashed()->get();
     }
+
+    static function getAktif($kode){
+        $kode = (int)($kode);
+        return (isset($kode) && $kode == 1) ? "Aktif" : "Non Aktif";
+    }
+
     static function getListKecamatan()
     {
         $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->get();

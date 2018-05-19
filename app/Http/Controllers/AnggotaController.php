@@ -69,7 +69,9 @@ class AnggotaController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Anggota::where('anggotaid',$id)->get();
+
+        return view('anggota.view', compact('data','id'));
     }
 
     /**
@@ -80,7 +82,10 @@ class AnggotaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $nokk = Data::where('status',1)->pluck('namakk','nokk')->toArray();
+        $data = Anggota::findOrFail($id);
+        return view('anggota.edit', compact('data','nokk','id'));
+
     }
 
     /**
@@ -92,7 +97,12 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Anggota::findOrFail($id);
+//        $data->anggotaid = $request->nokk;
+        $data->nama = $request->nama;
+        $data->umur = $request->umur;
+        $data->save();
+        return redirect()->route('anggota.edit',$id)->with('Success','Data anggota berhasil diupdate');
     }
 
     /**
@@ -103,6 +113,9 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Anggota::find($id)->delete();
+
+        return redirect()->route('anggota.index')
+            ->with('pesan', 'Data berhasil di hapus');
     }
 }

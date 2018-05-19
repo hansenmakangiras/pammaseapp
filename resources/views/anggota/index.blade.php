@@ -40,8 +40,8 @@
                                 <th>No KK</th>
                                 <th>Nama Anggota</th>
                                 <th>Umur</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
+                                <th width="5%">Status</th>
+                                <th width="20%">Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -51,10 +51,10 @@
                                     <td><a href="{{ route('data.show',['id'=>$value->anggotaid]) }}">{{ $value->anggotaid }}</a></td>
                                     <td>{{ $value->nama }}</td>
                                     <td>{{ $value->umur }}</td>
-                                    <td class="text-center">{{ $value->status }}</td>
+                                    <td class="text-center"><span class="label label-success">{{ \App\Common\AppHelper::getAktif($value->status) }}</span></td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" href="{{ route('anggota.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>
-                                        <a class="btn btn-xs btn-warning" href="{{ route('anggota.edit',['id'=>$value->anggotaid]) }}"><i class="fa fa-edit"></i> Edit</a>
+                                        <a class="btn btn-xs btn-primary" href="{{ route('anggota.show',['id'=>$value->anggotaid]) }}"><i class="fa fa-eye"></i> View</a>
+                                        <a class="btn btn-xs btn-warning" href="{{ route('anggota.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
 
                                         {!! Form::open(['method' => 'DELETE','route' => ['anggota.destroy', $value->id],'style'=>'display:inline']) !!}
                                         <button type="submit" class="btn btn-xs btn-danger" href="{{ route('anggota.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
