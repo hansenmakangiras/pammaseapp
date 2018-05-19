@@ -65,8 +65,8 @@
                     <!-- /.box-header -->
 
                     <!-- form start -->
-                    {!! Form::open(['route' => 'data.store','method'=>'POST']) !!}
-                        @include('data.form')
+                    {!! Form::open(['route' => 'anggota.store','method'=>'POST']) !!}
+                        @include('anggota.form-create')
                     {!! Form::close() !!}
 
                 </div>
@@ -76,7 +76,7 @@
             <div class="col-xs-2">
                 <div class="box box-solid">
                     <div class="box-body">
-                        <a href="{{ route('data.index') }}" class="btn btn-primary btn-block">Lihat Data</a>
+                        <a href="{{ route('anggota.index') }}" class="btn btn-primary btn-block">Lihat Data</a>
                     </div>
                 </div>
             </div>
@@ -91,21 +91,21 @@
             $(document).ajaxStart(function () {
                 Pace.restart()
             });
-            let kelurahan = $("#kelurahan");
-            $('#kecamatan').on('change', function () {
-                kelurahan.empty();
-                kelurahan.append('<option value="">Kelurahan</option>');
-                $.ajax({
-                    type: 'GET',
-                    url: '/data/kelurahan/' + $(this).val(),
-                    success: function (data) {
-                        msg = $.parseJSON(data);
-                        $.each(msg, function (i, v) {
-                            $('#kelurahan').append('<option value="' + v.id_kelurahan + '">' + v.name + '</option>');
-                        });
-                    }
-                });
-            });
+            // let kelurahan = $("#kelurahan");
+            // $('#nokk').on('change', function () {
+            //     kelurahan.empty();
+            //     kelurahan.append('<option value="">Kelurahan</option>');
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: '/data/kelurahan/' + $(this).val(),
+            //         success: function (data) {
+            //             msg = $.parseJSON(data);
+            //             $.each(msg, function (i, v) {
+            //                 $('#kelurahan').append('<option value="' + v.id_kelurahan + '">' + v.name + '</option>');
+            //             });
+            //         }
+            //     });
+            // });
         })
     </script>
 @endpush

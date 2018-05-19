@@ -154,7 +154,7 @@ class DataController extends Controller
      */
     public function show($id)
     {
-        $data = Data::where('id', $id)->first();
+        $data = Data::where('nokk', $id)->first();
         $kec = Kecamatan::where('id', $data->kecamatan)->first();
         $kel = Kelurahan::where('id_kelurahan', $data->kelurahan)->first();
 

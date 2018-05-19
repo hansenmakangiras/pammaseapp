@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Common\AppHelper;
+use App\Models\Anggota;
+use App\Models\Data;
 use Illuminate\Http\Request;
 
 class AnggotaController extends Controller
@@ -13,7 +16,11 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        //
+        $data = Anggota::latest()->where('status', 1)->with(['data'])->get();
+        $trashed = AppHelper::getTrashedData();
+
+        return view('anggota.index', compact('data','trashed'))
+            ->with('i', (\request()->input('page',1)-1)*10);
     }
 
     /**
@@ -23,7 +30,8 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-        //
+        $nokk = Data::where('status',1)->pluck('namakk','nokk')->toArray();
+        return view('anggota.create',compact('nokk'));
     }
 
     /**
@@ -34,7 +42,23 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nokk' => 'required|max:20',
+            'nama' => 'required|string|max:150',
+            'umur' => 'numeric',
+        ]);
+
+        if($validatedData){
+            $anggota = new Anggota();
+            $anggota->anggotaid = $request->nokk;
+            $anggota->nama = $request->nama;
+            $anggota->umur = $request->umur;
+            $anggota->status =1;
+            $anggota->save();
+            return redirect()->route('anggota.create')->with('Success', 'Anggota berhasil ditambahkan');
+        }
+
+        return redirect()->route('anggota.create')->with('Error', 'Anggota Keluarga Gagal ditambahkan');
     }
 
     /**

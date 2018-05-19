@@ -6,12 +6,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Data
+            Data Anggota
             <small>Kartu Keluarga</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Data</li>
+            <li class="active">Anggota</li>
         </ol>
     </section>
 @endsection
@@ -30,8 +30,7 @@
                 @endif
                 <div class="box">
                     <div class="box-header with-border">
-                        <a class="btn btn-primary" href="{{ route('data.create') }}"> Tambah KK</a>
-                        <a class="btn btn-primary" href="{{ route('data.create') }}"> Tambah Anggota</a>
+                        <a class="btn btn-primary" href="{{ route('anggota.create') }}"> Tambah Anggota</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -39,11 +38,9 @@
                             <thead>
                             <tr>
                                 <th>No KK</th>
-                                <th>Nama Kepala Keluarga</th>
-                                <th>Alamat</th>
-                                <th>Kecamatan</th>
-                                <th>Kelurahan</th>
-                                <th width="5%">Anggota</th>
+                                <th>Nama Anggota</th>
+                                <th>Umur</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
@@ -51,18 +48,16 @@
                             @foreach($data as $value)
                                 {{--@dd($value->anggota->count())--}}
                                 <tr>
-                                    <td><a href="{{ route('data.show',['id'=>$value->id]) }}">{{ $value->nokk }}</a></td>
-                                    <td>{{ $value->namakk }}</td>
-                                    <td>{{ $value->alamat }}</td>
-                                    <td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
-                                    <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
-                                    <td class="text-center">{{ $value->anggota->count() }}</td>
+                                    <td><a href="{{ route('data.show',['id'=>$value->anggotaid]) }}">{{ $value->anggotaid }}</a></td>
+                                    <td>{{ $value->nama }}</td>
+                                    <td>{{ $value->umur }}</td>
+                                    <td class="text-center">{{ $value->status }}</td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>
-                                        <a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->anggotaid]) }}"><i class="fa fa-edit"></i> Edit</a>
+                                        <a class="btn btn-xs btn-primary" href="{{ route('anggota.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>
+                                        <a class="btn btn-xs btn-warning" href="{{ route('anggota.edit',['id'=>$value->anggotaid]) }}"><i class="fa fa-edit"></i> Edit</a>
 
-                                        {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->anggotaid],'style'=>'display:inline']) !!}
-                                        <button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
+                                        {!! Form::open(['method' => 'DELETE','route' => ['anggota.destroy', $value->id],'style'=>'display:inline']) !!}
+                                        <button type="submit" class="btn btn-xs btn-danger" href="{{ route('anggota.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
                                         {!! Form::close() !!}
                                     </td>
 
@@ -99,51 +94,8 @@
                 'ordering': true,
                 'info': true,
                 'autoWidth': true,
-                // "columns": [
-                //     {
-                //         "class":          "details-control",
-                //         "orderable":      false,
-                //         "data":           null,
-                //         "defaultContent": ""
-                //     },
-                //     { "data": "first_name" },
-                //     { "data": "last_name" },
-                //     { "data": "position" },
-                //     { "data": "office" }
-                // ],
             });
-            // Array to track the ids of the details displayed rows
-            // let detailRows = [];
-            //
-            // $('#datatable tbody').on( 'click', 'tr td.details-control', function () {
-            //     let tr = $(this).closest('tr');
-            //     let row = dt.row( tr );
-            //     let idx = $.inArray( tr.attr('id'), detailRows );
-            //
-            //     if ( row.child.isShown() ) {
-            //         tr.removeClass( 'details' );
-            //         row.child.hide();
-            //
-            //         // Remove from the 'open' array
-            //         detailRows.splice( idx, 1 );
-            //     }
-            //     else {
-            //         tr.addClass( 'details' );
-            //         row.child( format( row.data() ) ).show();
-            //
-            //         // Add to the 'open' array
-            //         if ( idx === -1 ) {
-            //             detailRows.push( tr.attr('id') );
-            //         }
-            //     }
-            // } );
 
-            // On each draw, loop over the `detailRows` array and show any child rows
-            // dt.on( 'draw', function () {
-            //     $.each( detailRows, function ( i, id ) {
-            //         $('#'+id+' td.details-control').trigger( 'click' );
-            //     } );
-            // } );
         });
     </script>
 @endpush
