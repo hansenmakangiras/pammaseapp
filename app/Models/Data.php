@@ -18,7 +18,7 @@ class Data extends Model
     protected $table="data";
 //    public $timestamps=false;
     protected $fillable =[
-        'nokk','namakk','anggotaid','alamat','notps','kelurahan','kecamatan','pekerjaan','notelp'
+        'nokk','namakk','alamat','notps','kelurahan','kecamatan','pekerjaan','notelp'
     ];
 
     public function anggota(){

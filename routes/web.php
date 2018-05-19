@@ -19,6 +19,7 @@ Route::get('/getJsonKecamatan', 'AppController@getJsonKecamatan')->name('getJson
 Route::resource('data','DataController');
 Route::get('/laporan','LaporanController@index')->name('laporan.index');
 Route::resource('formulir','FormulirController');
+Route::resource('anggota','AnggotaController');
 Route::get('/data/kelurahan/{idkec}','DataController@getJsonKelurahan');
 Route::get('/json/kelurahan/{idkec}','FormulirController@getKelurahan');
 Route::post('/laporan/wilayah','LaporanController@wilayah')->name('laporan.wilayah');

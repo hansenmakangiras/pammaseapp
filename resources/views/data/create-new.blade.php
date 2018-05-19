@@ -45,9 +45,8 @@
                 {{--</div>--}}
                 <!-- /.box-header -->
                     <!-- form start -->
-                    {!! Form::open(['route' => 'data.store','method'=>'POST']) !!}
-                        @include('data.form')
-                    {!! Form::close() !!}
+                    @include('data.form')
+
 
                 </div>
                 <!-- /.box -->
