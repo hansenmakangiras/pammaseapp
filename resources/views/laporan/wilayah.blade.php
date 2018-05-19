@@ -81,20 +81,20 @@
 
         <div class="row">
             <div class="col-md-12">
-                {!! Form::open(['route' => 'laporan.wilayah','method'=>'POST']) !!}
-                @csrf
+                {!! Form::open(['route' => 'laporan.index','method'=>'GET','id'=>'form-kecamatan']) !!}
+                {{--@csrf--}}
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label>Kecamatan</label>
-                            {!! Form::select('kecamatan',[null => 'Semua Kecamatan'] + $listKec,old('kecamatan'),['class'=>'form-control','tabindex'=>'5','id'=>'kecamatan']) !!}
+                            {!! Form::select('kecamatan',[null => 'Semua Kecamatan'] + $listKec,null,['class'=>'form-control','tabindex'=>'5','id'=>'kecamatan']) !!}
                         </div>
                     </div>
                     <!-- /.col-lg-6 -->
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label>Kelurahan</label>
-                            {!! Form::select('kelurahan',[null => 'Semua Kelurahan'],old('kelurahan'),['class'=>'form-control','tabindex'=>'6','id'=>'kelurahan']) !!}
+                            {!! Form::select('kelurahan',[null => 'Semua Kelurahan'] + $listKel,null,['class'=>'form-control','tabindex'=>'6','id'=>'kelurahan']) !!}
                         </div>
                     </div>
                 </div>
@@ -127,26 +127,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{--@foreach($data as $value)--}}
-                                    {{--@dd($value->anggota->count())--}}
-                                    {{--<tr>--}}
-                                        {{--<td><a href="{{ route('data.show',['id'=>$value->id]) }}">{{ $value->nokk }}</a></td>--}}
-                                        {{--<td>{{ $value->namakk }}</td>--}}
-                                        {{--<td>{{ $value->alamat }}</td>--}}
-                                        {{--<td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>--}}
-                                        {{--<td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>--}}
-                                        {{--<td class="text-center">{{ $value->anggota->count() }}</td>--}}
-                                        {{--<td>--}}
-                                            {{--<a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>--}}
-                                            {{--<a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>--}}
+                                @foreach($data as $value)
+                                    <tr>
+                                        <td><a href="{{ route('data.show',['id'=>$value->id]) }}">{{ $value->nokk }}</a></td>
+                                        <td>{{ $value->namakk }}</td>
+                                        <td>{{ $value->alamat }}</td>
+                                        <td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
+                                        <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
+                                        <td class="text-center">{{ $value->anggota->count() }}</td>
+                                        <td>
+                                            <a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>
+                                            <a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
 
-                                            {{--{!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->anggotaid],'style'=>'display:inline']) !!}--}}
-                                            {{--<button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>--}}
-                                            {{--{!! Form::close() !!}--}}
-                                        {{--</td>--}}
+                                            {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->anggotaid],'style'=>'display:inline']) !!}
+                                            <button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
+                                            {!! Form::close() !!}
+                                        </td>
 
-                                    {{--</tr>--}}
-                                {{--@endforeach--}}
+                                    </tr>
+                                @endforeach
 
                                 </tbody>
                             </table>
@@ -202,7 +201,8 @@
             kecamatan.on('change', function () {
                 kelurahan.empty();
                 kelurahan.append('<option value="">Semua Kelurahan</option>');
-                let getKelurahan = $.ajax({
+                $('#form-kecamatan').submit();
+                $.ajax({
                     type: 'GET',
                     url: '/json/kelurahan/' + $(this).val(),
                     success: function (data) {
@@ -212,6 +212,10 @@
                         });
                     }
                 });
+            });
+
+            kelurahan.on('change', function () {
+                $('#form-kecamatan').submit();
             });
         })
     </script>
