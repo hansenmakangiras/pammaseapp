@@ -1,16 +1,17 @@
 @extends('layout.app')
 
-@section(config("app.name"),'Page Title')
+@section('title','Daftar Formulir')
 
 @section('content-header')
     <section class="content-header">
         <h1>
-            Input Data
+            Daftar Data
             <small>Formulir Pengambilan Kartu</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Input</li>
+            <li><a href="{{ route('formulir.index') }}"><i class="fa fa-dashboard"></i> Formulir</a></li>
+            <li class="active">Daftar</li>
         </ol>
     </section>
 @endsection

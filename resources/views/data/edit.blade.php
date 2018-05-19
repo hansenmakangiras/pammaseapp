@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('Data Edit', 'Edit DAta')
+@section('title', 'Edit Data Keluarga')
 
 @section('content-header')
     <!-- Content Header (Page header) -->

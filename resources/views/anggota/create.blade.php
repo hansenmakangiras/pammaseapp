@@ -1,16 +1,16 @@
 @extends('layout.app')
 
-@section(config("app.name"),'Page Title')
+@section('title','Data Anggota')
 
 @section('content-header')
     <section class="content-header">
         <h1>
-            Input Data
+            Daftar Anggota
             <small>Kartu Keluarga</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Input</li>
+            <li class="active">Daftar</li>
         </ol>
     </section>
 @endsection

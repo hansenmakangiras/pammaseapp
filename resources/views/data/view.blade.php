@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Page Title')
+@section('title', 'Lihat Data Keluarga')
 
 @section('content-header')
     <!-- Content Header (Page header) -->

@@ -40,7 +40,7 @@
               </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('data.index') }}"><i class="fa fa-circle-o"></i> <span>Data KK</span></a></li>
+                    <li><a href="{{ route('data.index') }}"><i class="fa fa-circle-o"></i> <span>Data Keluarga</span></a></li>
                     <li><a href="{{ route('anggota.index') }}"><i class="fa fa-circle-o"></i> <span>Data Anggota</span></a></li>
                     <li><a href="{{ route('formulir.index') }}"><i class="fa fa-circle-o"></i> <span>Data Formulir</span></a></li>
                 </ul>

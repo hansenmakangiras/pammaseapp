@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Page Title')
+@section('title', 'Data Kartu Keluarga')
 
 @section('content-header')
     <!-- Content Header (Page header) -->

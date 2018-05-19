@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Page Title')
+@section('title', 'Lihat Formulir')
 
 @section('content-header')
     <!-- Content Header (Page header) -->
@@ -12,7 +12,7 @@
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="{{ route('formulir.index') }}"><i class="fa fa-dashboard"></i> Formulir</a></li>
-            <li class="active">View</li>
+            <li class="active">Lihat Formulir</li>
         </ol>
     </section>
 @endsection

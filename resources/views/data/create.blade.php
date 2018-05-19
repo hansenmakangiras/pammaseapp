@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section(config("app.name"),'Page Title')
+@section('title','Create Kartu Keluarga')
 
 @section('content-header')
     <section class="content-header">

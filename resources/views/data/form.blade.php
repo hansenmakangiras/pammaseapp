@@ -1,6 +1,5 @@
 {!! Form::open(['route' => 'data.store','method'=>'POST']) !!}
 
-
 @csrf
 <div class="box-body">
     <div class="col-xs-6">

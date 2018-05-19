@@ -1,13 +1,13 @@
 @extends('layout.app')
 
-@section('title', 'Page Title')
+@section('title', 'Data Formulir')
 
 @section('content-header')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Formulir
-            <small>Kartu Keluarga</small>
+            Data Formulir
+            <small>Kartu Pammase</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>

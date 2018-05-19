@@ -1,16 +1,17 @@
 @extends('layout.app')
 
-@section(config("app.name"),'Page Title')
+@section('title','Ubah Formulir')
 
 @section('content-header')
     <section class="content-header">
         <h1>
-            Edit Data
+            Ubah Data
             <small>Formulir Pengambilan Kartu</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Input</li>
+            <li><a href="{{ route('formulir.index') }}"><i class="fa fa-id-card"></i> Formulir</a></li>
+            <li class="active">Ubah</li>
         </ol>
     </section>
 @endsection

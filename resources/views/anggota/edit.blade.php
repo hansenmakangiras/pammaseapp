@@ -1,17 +1,18 @@
 @extends('layout.app')
 
-@section('Data Edit', 'Edit DAta')
+@section('title', 'Edit Anggota Keluarga')
 
 @section('content-header')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Edit Data Anggota
+            Ubah Data Anggota
             <small>Kartu Keluarga</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Input</li>
+            <li><a href="{{ route('anggota.index') }}"><i class="fa fa-user"></i> Anggota</a></li>
+            <li class="active">Ubah</li>
         </ol>
     </section>
 @endsection

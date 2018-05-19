@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Page Title')
+@section('title', 'Lihat Data Anggota')
 
 @section('content-header')
     <!-- Content Header (Page header) -->
@@ -11,7 +11,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Data</li>
+            <li><a href="{{ route('anggota.index') }}"><i class="fa fa-user"></i> Anggota</a></li>
+            <li class="active">Lihat</li>
         </ol>
     </section>
 @endsection

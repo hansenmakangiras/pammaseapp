@@ -1,17 +1,17 @@
 @extends('layout.app')
 
-@section('title', 'Page Title')
+@section('title','Input Kartu Keluarga')
 
 @section('content-header')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Input Data
-            <small>Kartu Keluarga</small>
+            Data Keluarga
+            <small>Input data keluarga</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Input</li>
+            <li class="active">Create</li>
         </ol>
     </section>
 @endsection
