@@ -31,6 +31,7 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <a class="btn btn-primary" href="{{ route('anggota.create') }}"> Tambah Anggota</a>
+                        <a class="btn btn-danger" href="{{ route('data.create') }}"> Tambah KK</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

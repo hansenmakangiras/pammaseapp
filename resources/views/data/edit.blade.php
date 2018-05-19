@@ -53,11 +53,8 @@
                     </div>
                 <!-- /.box-header -->
                     <!-- form start -->
-
-                    {!! Form::model([$data,$kec,$anggota,$kel,$kecamatan,$kelurahan,$id], ['method' => 'PUT','route' => ['data.update', $id]]) !!}
-{{--                        @include('data.form-edit')--}}
-                        @include('data.form-tab')
-                    {!! Form::close() !!}
+                    {{--@include('data.form-edit')--}}
+                    @include('data.form-tab')
 
                 </div>
                 <!-- /.box -->
@@ -97,6 +94,8 @@
                 <div class="box with-border">
                     <div class="box-body">
                         <a href="{{ route('data.index') }}" class="btn btn-primary btn-block">Lihat Data</a>
+                        <a href="{{ route('anggota.create') }}" class="btn btn-primary btn-block">Tambah Anggota</a>
+                        <a href="{{ route('anggota.index') }}" class="btn btn-primary btn-block">Lihat Anggota</a>
                         {{--<button class="btn btn-primary btn-block">Tambah</button>--}}
                     </div>
                 </div>

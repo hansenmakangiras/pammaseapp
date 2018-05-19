@@ -7,22 +7,8 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#datakk" data-toggle="tab">Data Kartu Keluarga</a></li>
                     <li><a href="#dataanggota" data-toggle="tab">Data Anggota Keluarga</a></li>
-                    {{--<li><a href="#tab_3" data-toggle="tab">Tab 3</a></li>--}}
-                    {{--<li class="pull-right dropdown">--}}
-                        {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
-                            {{--Aksi <span class="caret"></span>--}}
-                        {{--</a>--}}
-                        {{--<ul class="dropdown-menu">--}}
-                            {{--<li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('data.index') }}">Lihat Data</a></li>--}}
-                            {{--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>--}}
-                            {{--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>--}}
-                            {{--<li role="presentation" class="divider"></li>--}}
-                            {{--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                    {{--<li class="pull-right"><a role="menuitem" href="#" class="btn btn-link"><i class="fa fa-save"></i></a></li>--}}
-                    <li class="pull-right"><a role="menuitem" tabindex="-1" href="{{ route('data.index') }}" class="text-primary"><i class="fa fa-eye"></i> Lihat Data</a></li>
                 </ul>
+                {!! Form::model([$data,$kec,$anggota,$kel,$kecamatan,$kelurahan,$id], ['method' => 'PUT','route' => ['data.update', $id]]) !!}
                 <div class="tab-content">
                     <div class="tab-pane active" id="datakk">
                         <div class="form-group">
@@ -89,11 +75,11 @@
                             <input value="{{ $data->notelp }}" type="text" name="notelp" class="form-control" id="notelp"
                                    placeholder="No. Telp/HP" tabindex="22">
                         </div>
-                        {{--<div class="box-footer">--}}
-                            {{--<button type="submit" class="btn btn-primary" tabindex="23">Submit</button>--}}
-                        {{--</div>--}}
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary" tabindex="23">Update</button>
+                        </div>
                     </div>
-
+                {!! Form::close() !!}
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="dataanggota">
                         <div class="row">
@@ -103,14 +89,14 @@
                                         <div class="col-xs-9">
                                             <div class="form-group">
                                                 <label for="namaanggota1">Anggota Keluarga</label>
-                                                <input value="{{$value->nama}}" type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
+                                                <input disabled value="{{$value->nama}}" type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
                                                        placeholder="Nama Anggota Keluarga" tabindex="3"/>
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="form-group">
                                                 <label for="umur1">Umur</label>
-                                                <input value="{{$value->umur}}"type="text" name="anggota[umur][]" class="form-control" id="umur1"
+                                                <input disabled value="{{$value->umur}}"type="text" name="anggota[umur][]" class="form-control" id="umur1"
                                                        placeholder="Umur" tabindex="4"/>
                                             </div>
                                         </div>
@@ -120,9 +106,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" tabindex="23">Update</button>
-                </div>
+                {{--<div class="box-footer">--}}
+                    {{--<button type="submit" class="btn btn-primary" tabindex="23">Update</button>--}}
+                {{--</div>--}}
                 <!-- /.tab-content -->
 
             </div>

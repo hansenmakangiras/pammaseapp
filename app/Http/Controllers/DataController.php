@@ -154,15 +154,12 @@ class DataController extends Controller
      */
     public function show($id)
     {
-        $data = Data::where('nokk', $id)->first();
+        $data = Data::find($id);
+        $anggota = $data->anggota()->get();
         $kec = Kecamatan::where('id', $data->kecamatan)->first();
         $kel = Kelurahan::where('id_kelurahan', $data->kelurahan)->first();
 
-        if ($data) {
-            $anggota = Anggota::where('anggotaid', $data->nokk)->get();
-        }
-
-        return view('data.view', compact('anggota', 'data', 'kec', 'kel'));
+        return view('data.view', compact('anggota', 'data', 'kec', 'kel','id'));
     }
 
     /**
@@ -173,10 +170,10 @@ class DataController extends Controller
      */
     public function edit($id)
     {
-        $data = Data::with(['anggota'])->where('anggotaid',$id)->first();
+        $data = Data::find($id);
         $kec = Kecamatan::where('id', $data->kecamatan)->where('status', 1)->first();
         $kel = Kelurahan::where('id_kelurahan', $data->kelurahan)->where('status', 1)->get();
-//        $anggota = Anggota::where('anggotaid', $data->anggotaid)->where('status', 1)->get();
+
         $anggota = $data->anggota()->get();
         $kecamatan = AppHelper::getListKecamatan();
         $kelurahan = AppHelper::getAllKelurahan();

@@ -76,7 +76,9 @@
             <div class="col-xs-2">
                 <div class="box box-solid">
                     <div class="box-body">
-                        <a href="{{ route('anggota.index') }}" class="btn btn-primary btn-block">Lihat Data</a>
+                        <a href="{{ route('anggota.index') }}" class="btn btn-default btn-block">Lihat Data</a>
+                        <a href="{{ route('data.index') }}" class="btn btn-default btn-block">Lihat KK</a>
+                        <a href="{{ route('data.create') }}" class="btn btn-default btn-block">Tambah KK</a>
                     </div>
                 </div>
             </div>
