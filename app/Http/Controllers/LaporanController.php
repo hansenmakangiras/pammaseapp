@@ -53,7 +53,7 @@ class LaporanController extends Controller
 
                 $kelurahan = Kelurahan::where('kecamatan_id',$request->kecamatan)->get();
 
-                $listkel = \DB::table('kelurahan')
+                $listkel = \DB::table('kp_kelurahan')
                     ->select('id_kelurahan','name')
                     ->where('kecamatan_id','=',$request->kecamatan)
                     ->get()->toArray();
@@ -83,7 +83,7 @@ class LaporanController extends Controller
 
                 $kelurahan = Kelurahan::where('kecamatan_id',$request->kecamatan)->get();
 
-                $listkel = \DB::table('kelurahan')
+                $listkel = \DB::table('kp_kelurahan')
                     ->select('id_kelurahan','name')
                     ->where('kecamatan_id','=',$request->kecamatan)
                     ->get()->toArray();

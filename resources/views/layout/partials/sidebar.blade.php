@@ -33,8 +33,17 @@
             <li class="header">Menu</li>
             <!-- Optionally, you can add icons to the links -->
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li><a href="{{ route('data.index') }}"><i class="fa fa-database"></i> <span>Data KK</span></a></li>
-            <li><a href="{{ route('formulir.index') }}"><i class="fa fa-paper-plane"></i> <span>Data Formulir</span></a></li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-id-card"></i> <span>Kartu Pammase</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('data.index') }}"><i class="fa fa-circle-o"></i> <span>Data KK</span></a></li>
+                    <li><a href="{{ route('formulir.index') }}"><i class="fa fa-circle-o"></i> <span>Data Formulir</span></a></li>
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="#"><i class="fa fa-pie-chart"></i> <span>Laporan</span>
                     <span class="pull-right-container">

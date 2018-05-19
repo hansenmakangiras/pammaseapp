@@ -186,6 +186,7 @@ class DataController extends Controller
             $dataanggota->anggotaid = $nokk;
             $dataanggota->nama = $item['nama'];
             $dataanggota->umur = $item['umur'];
+            $dataanggota->status = 1;
             $dataanggota->save();
         }
 
@@ -210,37 +211,41 @@ class DataController extends Controller
         $data = Data::find($id);
         if ($data) {
             $data->nokk = $nokk;
-            $data->namakk = $input['namakk'];
-            $data->alamat = $input['alamat'];
-            $data->anggotaid = $input['nokk'];
-            $data->notps = $input['notps'];
-            $data->kecamatan = $input['kecamatan'];
-            $data->kelurahan = $input['kelurahan'];
-            $data->pekerjaan = $input['pekerjaan'];
-            $data->notelp = $input['notelp'];
-            //$data->save();
+            $data->namakk = $request->namakk;
+            $data->alamat = $request->alamat;
+            $data->anggotaid = $request->anggotaid;
+            $data->notps = $request->notps;
+            $data->kecamatan = $request->kecamatan;
+            $data->kelurahan = $request->kelurahan;
+            $data->pekerjaan = $request->pekerjaan;
+            $data->notelp = $request->notelp;
 
             $out = $this->gabung($anggota, $umur);
-            $updateAnggota = $this->updateAnggota($nokk, $out);
-//            dd($updateAnggota);
-            if ($updateAnggota) {
-                $data->save();
-                $error = 0;
-                $pesan = "Data anggota telah diupdate";
-
-                return redirect()->route('data.edit', $id)->with(['err' => $error, 'pesan' => $pesan]);
-            } else {
-                $error = 1;
-                $pesan = "Data anggota Gagal diupdate";
-
-                return redirect()->route('data.edit', $id)->with(['err' => $error, 'pesan' => $pesan]);
+            $out = array_map('array_filter', $out);
+            $out = array_filter($out);
+//            dd($out);
+            foreach ($out as $item) {
+                //dd($nokk);
+//                $dataanggota = Anggota::where('anggotaid',$nokk)->where('status',1);
+//                $dataanggota->anggotaid = $input['nokk'];
+//                $dataanggota->nama = isset($item['nama']) ? $item['nama'] : null;
+//                $dataanggota->umur = isset($item['umur']) ? $item['umur'] : null;
+//                $dataanggota->status = 1;
+//                $dataanggota->save();
+                Anggota::where('anggotaid',$nokk)
+                    ->where('status',1)
+                    ->update([
+                    'anggotaid' =>$nokk,
+                    'nama' => isset($item['nama']) ? $item['nama'] : null,
+                    'umur' =>isset($item['umur']) ? $item['umur'] : null,
+                    'status' =>1
+                ]);
             }
-            //dd($updateAnggota);
+            $data->save();
+            return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
         }
-        $error = 2;
-        $pesan = "Data tidak ditemukan";
 
-        return redirect()->route('data.edit', $id)->with(['err' => $error, 'pesan' => $pesan]);
+        return redirect()->route('data.edit',$id);
     }
 
     /**

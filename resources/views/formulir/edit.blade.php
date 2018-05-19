@@ -43,7 +43,7 @@
                         <h4><i class="icon fa fa-ban"></i> Error!</h4>
                         {{ session('Error') }}
                     </div>
-            @endif
+                @endif
             <!-- general form elements -->
                 <div class="box box-solid">
                     <div class="box-header with-border">

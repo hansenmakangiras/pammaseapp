@@ -89,9 +89,9 @@
                             <input value="{{ $data->notelp }}" type="text" name="notelp" class="form-control" id="notelp"
                                    placeholder="No. Telp/HP" tabindex="22">
                         </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" tabindex="23">Submit</button>
-                        </div>
+                        {{--<div class="box-footer">--}}
+                            {{--<button type="submit" class="btn btn-primary" tabindex="23">Submit</button>--}}
+                        {{--</div>--}}
                     </div>
 
                     <!-- /.tab-pane -->
@@ -103,14 +103,14 @@
                                         <div class="col-xs-9">
                                             <div class="form-group">
                                                 <label for="namaanggota1">Anggota Keluarga 1</label>
-                                                <input value="{{$value->nama}}" type="text" name="anggota[]" class="form-control" id="namaanggota1"
+                                                <input value="{{$value->nama}}" type="text" name="anggota[nama][]" class="form-control" id="namaanggota1"
                                                        placeholder="Nama Anggota Keluarga" tabindex="3"/>
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="form-group">
                                                 <label for="umur1">Umur</label>
-                                                <input value="{{$value->umur}}"type="text" name="anggota[]" class="form-control" id="umur1"
+                                                <input value="{{$value->umur}}"type="text" name="anggota[umur][]" class="form-control" id="umur1"
                                                        placeholder="Umur" tabindex="4"/>
                                             </div>
                                         </div>
@@ -118,10 +118,10 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" tabindex="23">Update</button>
-                        </div>
                     </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary" tabindex="23">Update</button>
                 </div>
                 <!-- /.tab-content -->
 

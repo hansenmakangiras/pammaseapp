@@ -17,7 +17,7 @@ class Anggota extends Model
     protected $dates = ['deleted_at'];
 
     protected $table="anggota";
-    public $timestamps=false;
+//    public $timestamps=false;
     protected $fillable =[
         'anggotaid','nama','umur'
     ];
