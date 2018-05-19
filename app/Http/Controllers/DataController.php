@@ -252,15 +252,13 @@ class DataController extends Controller
      */
     public function destroy($id)
     {
-        Data::where('anggotaid', $id)
-            ->where('status', 1)
-            ->delete();
-//            ->update(['status' => 0]);
+        $data = Data::find($id);
 
-        Anggota::where('anggotaid',$id)
+        Anggota::where('anggotaid',$data->nokk)
             ->where('status',1)
             ->delete();
-//            ->update(['status' => 0]);
+
+        $data->delete();
 
         return redirect()->route('data.index')
             ->with('pesan', 'Data berhasil di hapus');

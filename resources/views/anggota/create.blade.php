@@ -44,27 +44,10 @@
                         {{ session('Error') }}
                     </div>
                 @endif
-                {{--@if(isset($ret['err']) && $ret['err'] == 0)--}}
-                    {{--<div class="alert alert-success alert-dismissible">--}}
-                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
-                        {{--<h4><i class="icon fa fa-check"></i> Sukses !!!</h4>--}}
-                        {{--{{ $ret['pesan'] }}--}}
-                    {{--</div>--}}
-                {{--@elseif(isset($ret['err']) && $ret['err'] == 1)--}}
-                    {{--<div class="alert alert-danger alert-dismissible">--}}
-                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
-                        {{--<h4><i class="icon fa fa-ban"></i> Gagal !!!</h4>--}}
-                        {{--{{ $ret['pesan'] }}--}}
-                    {{--</div>--}}
-                {{--@endif--}}
-                <!-- general form elements -->
                 <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Data Kartu Keluarga</h3>
-                    </div>
-                    <!-- /.box-header -->
-
-                    <!-- form start -->
+                    {{--<div class="box-header with-border">--}}
+                        {{--<h3 class="box-title">Data Anggota Keluarga</h3>--}}
+                    {{--</div>--}}
                     {!! Form::open(['route' => 'anggota.store','method'=>'POST']) !!}
                         @include('anggota.form-create')
                     {!! Form::close() !!}
@@ -93,21 +76,6 @@
             $(document).ajaxStart(function () {
                 Pace.restart()
             });
-            // let kelurahan = $("#kelurahan");
-            // $('#nokk').on('change', function () {
-            //     kelurahan.empty();
-            //     kelurahan.append('<option value="">Kelurahan</option>');
-            //     $.ajax({
-            //         type: 'GET',
-            //         url: '/data/kelurahan/' + $(this).val(),
-            //         success: function (data) {
-            //             msg = $.parseJSON(data);
-            //             $.each(msg, function (i, v) {
-            //                 $('#kelurahan').append('<option value="' + v.id_kelurahan + '">' + v.name + '</option>');
-            //             });
-            //         }
-            //     });
-            // });
         })
     </script>
 @endpush

@@ -30,7 +30,7 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-        $nokk = Data::where('status',1)->pluck('namakk','nokk')->toArray();
+        $nokk = Data::where('status',1)->pluck('nokk','nokk')->toArray();
         return view('anggota.create',compact('nokk'));
     }
 
