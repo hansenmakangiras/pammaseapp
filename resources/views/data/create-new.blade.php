@@ -47,19 +47,13 @@
                 @endif
                 <!-- general form elements -->
                 <div class="box box-primary">
-
                 {{--<div class="box-header with-border">--}}
                 {{--<h3 class="box-title">Quick Example</h3>--}}
                 {{--</div>--}}
                 <!-- /.box-header -->
-                    <!-- form start -->
                     @include('data.form')
-
-
                 </div>
-                <!-- /.box -->
             </div>
-            <!-- /.col -->
             <div class="col-xs-2">
                 <div class="box box-solid">
                     <div class="box-body">
@@ -70,7 +64,6 @@
                 </div>
             </div>
         </div>
-        <!-- /.row (main row) -->
 
     </section>
     <!-- /.content -->

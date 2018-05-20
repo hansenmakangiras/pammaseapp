@@ -1,5 +1,4 @@
 {!! Form::open(['route' => 'data.store','method'=>'POST']) !!}
-
 @csrf
 <div class="box-body">
     <div class="col-xs-6">
@@ -17,49 +16,38 @@
     <div class="col-xs-6">
         <div class="form-group">
             <label for="alamat">Alamat</label>
-            <input type="text" name="alamat" class="form-control" id="alamat" tabindex="17">
+            <input type="text" name="alamat" class="form-control" id="alamat" tabindex="3">
         </div>
     </div>
     <div class="col-xs-6">
         <div class="form-group">
             <label for="notps">No. TPS</label>
-            <input type="text" name="notps" class="form-control" id="notps" tabindex="18">
+            <input type="text" name="notps" class="form-control" id="notps" tabindex="4">
         </div>
     </div>
     <div class="col-xs-6">
         <div class="form-group">
             <label>Kecamatan</label>
-            {{--{{ Form::select('kecamatan',$kecamatan,null,['class'=>'form-control','tabindex'=>'21','id'=>'kecamatan']) }}--}}
-            <select id="kecamatan" name="kecamatan" class="form-control" tabindex="20">
-                <option value="">Semua Kecamatan</option>
-                @foreach($kecamatan as $kec)
-                    <option value="{{$kec->id}}" {{ ((empty($_GET['kec'])) ? '' : (($_GET['kec'] == $kec->id) ? 'selected' : '' )) }}>{{$kec->name}}</option>
-                @endforeach
-            </select>
+            {{ Form::select('kecamatan',[null => 'Semua Kecamatan'] + $kecamatan,old('kecamatan'),['class'=>'form-control','tabindex'=>'5','id'=>'kecamatan']) }}
         </div>
     </div>
     <div class="col-xs-6">
         <div class="form-group">
             <label>Kelurahan</label>
-            <select id="kelurahan" name="kelurahan" class="form-control" tabindex="20">
-                <option value="">Semua Kelurahan</option>
-                @foreach($kelurahan as $kel)
-                    <option value="{{$kel->id_kelurahan}}" {{ ((empty($_GET['kel'])) ? '' : (($_GET['kel'] == $kel->id_kelurahan) ? 'selected' : '' )) }}>{{$kel->name}}</option>
-                @endforeach
-            </select>
+            {{ Form::select('kelurahan',[null => 'Semua Kelurahan'],old('kelurahan'),['class'=>'form-control','tabindex'=>'6','id'=>'kelurahan']) }}
         </div>
     </div>
 
     <div class="col-xs-6">
         <div class="form-group">
             <label for="pekerjaan">Pekerjaan</label>
-            <input type="text" name="pekerjaan" class="form-control" id="pekerjaan" tabindex="21">
+            {{ Form::select('pekerjaan',[null => 'Semua Pekerjaan'] + $pekerjaan,old('pekerjaan'),['class'=>'form-control','tabindex'=>'7','id'=>'pekerjaan']) }}
         </div>
     </div>
     <div class="col-xs-6">
         <div class="form-group">
             <label for="notelp">No. Telp/HP</label>
-            <input type="text" name="notelp" class="form-control" id="notelp" tabindex="22">
+            <input type="text" name="notelp" class="form-control" id="notelp" tabindex="8">
         </div>
     </div>
 
@@ -67,7 +55,7 @@
 <!-- /.box-body -->
 
 <div class="box-footer">
-    <button type="submit" class="btn btn-primary" tabindex="23">Simpan KK</button>
+    <button type="submit" class="btn btn-primary" tabindex="9">Simpan KK</button>
 </div>
 
 {!! Form::close() !!}

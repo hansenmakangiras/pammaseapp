@@ -33,10 +33,12 @@ class DataController extends Controller
      */
     public function create()
     {
-        $kecamatan = AppHelper::getListKecamatan();
+//        $kecamatan = AppHelper::getListKecamatan();
+        $kecamatan = AppHelper::getSelectKecamatan();
         $kelurahan = AppHelper::getAllKelurahan();
+        $pekerjaan = AppHelper::getListPekerjaan();
 
-        return view('data.create-new', compact('kecamatan', 'kelurahan'));
+        return view('data.create-new', compact('kecamatan', 'kelurahan','pekerjaan'));
     }
 
     private function gabung($data1, $data2)

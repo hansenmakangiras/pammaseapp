@@ -20,12 +20,44 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
+            <div class="col-md-3">
+                <div class="box box-solid">
+                    <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" src="{{ asset('admin/dist/img/avatar5.png') }}" alt="User profile picture">
+
+                        <h3 class="profile-username text-center">{{ $data->namakk }}</h3>
+
+                        <p class="text-muted text-center">{{ \App\Common\AppHelper::getPekerjaanName($data->pekerjaan) }}</p>
+
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>Anggota Keluarga</b> <a class="pull-right">{{ $data->anggota()->count() }} Org</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Kecamatan</b> <a class="pull-right">{{ \App\Common\AppHelper::getKecamatanName($data->kecamatan) }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Kelurahan</b> <a class="pull-right">{{ \App\Common\AppHelper::getKelurahanName($data->kelurahan) }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>No TPS</b> <a class="pull-right">{{ $data->notps }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>No Telp</b> <a class="pull-right">{{ $data->notelp }}</a>
+                            </li>
+                        </ul>
+                        <a href="{{ route('data.create') }}" class="btn btn-primary btn-block"><b>Tambah Keluarga</b></a>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
             <div class="col-md-8">
                 <div class="box box-solid">
                     <div class="box-header with-border">
                         <i class="fa fa-user"></i>
                         <h3 class="box-title">Data Anggota Keluarga - {{ $data->namakk }}</h3>
                         <div class="box-tools">
+                            <a class="btn btn-sm btn-danger" href="{{ route('anggota.create') }}"> Tambah Anggota</a>
                             <a class="btn btn-sm btn-danger" href="{{ route('data.index') }}"> Kembali</a>
                         </div>
                     </div>

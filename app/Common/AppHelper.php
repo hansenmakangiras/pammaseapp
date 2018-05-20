@@ -10,6 +10,7 @@ namespace App\Common;
 use App\Models\Data;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
+use App\Models\Pekerjaan;
 
 class AppHelper
 {
@@ -17,6 +18,15 @@ class AppHelper
         $kecamatan = Kecamatan::where('id',$kode)->first();
         $name = $kecamatan->name;
         return $name;
+    }
+    static function getListPekerjaan(){
+        $pekerjaan = Pekerjaan::pluck('pekerjaan','id')->toArray();
+        return $pekerjaan;
+    }
+
+    static function getPekerjaanName($id){
+        $pekerjaan = Pekerjaan::find($id);
+        return $pekerjaan->pekerjaan;
     }
 
     static function getKelurahanName($kode){
@@ -38,9 +48,14 @@ class AppHelper
         return (isset($kode) && $kode == 1) ? "Aktif" : "Non Aktif";
     }
 
+    static function getSelectKecamatan(){
+        return Kecamatan::where('kota_id', '7313')->where('status', 1)->pluck('name','id')->toArray();
+    }
+
     static function getListKecamatan()
     {
         $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->get();
+//        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->pluck()->toArray();
 
         return $kecamatan;
     }
