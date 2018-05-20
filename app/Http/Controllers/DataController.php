@@ -202,9 +202,9 @@ class DataController extends Controller
         ]);
         if($validatedData){
             $data = Data::find($id);
-            Anggota::where('anggotaid',$data->nokk)->update(['anggotaid'=>$request->nokk]);
 
             if ($data) {
+                Anggota::where('anggotaid',$data->nokk)->update(['anggotaid'=>$request->nokk]);
                 $data->nokk = $request->nokk;
                 $data->namakk = $request->namakk;
                 $data->alamat = $request->alamat;
