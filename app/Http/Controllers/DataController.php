@@ -197,7 +197,7 @@ class DataController extends Controller
             $data->nokk = $request->nokk;
             $data->namakk = $request->namakk;
             $data->alamat = $request->alamat;
-            $data->anggotaid = $id;
+            $data->anggotaid = $request->nokk;
             $data->notps = $request->notps;
             $data->kecamatan = $request->kecamatan;
             $data->kelurahan = $request->kelurahan;

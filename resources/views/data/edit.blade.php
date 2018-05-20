@@ -113,16 +113,17 @@
             $(document).ajaxStart(function () {
                 Pace.restart()
             });
+            let kelurahan = $('#kelurahan');
             $('#kecamatan').on('change', function () {
-                // $('#kelurahan').empty();
-                // $('#kelurahan').append('<option value="">Kelurahan</option>');
+                kelurahan.empty();
+                kelurahan.append('<option value="">Semua Kelurahan</option>');
                 $.ajax({
                     type: 'GET',
                     url: '/data/kelurahan/' + $(this).val(),
                     success: function (data) {
                         msg = $.parseJSON(data);
                         $.each(msg, function (i, v) {
-                            $('#kelurahan').append('<option value="' + v.id_kelurahan + '">' + v.name + '</option>');
+                            kelurahan.append('<option value="' + v.id_kelurahan + '">' + v.name + '</option>');
                         });
                     }
                 });
