@@ -30,8 +30,8 @@
                 @endif
                 <div class="box">
                     <div class="box-header with-border">
-                        <a class="btn btn-primary" href="{{ route('data.create') }}"> Tambah KK</a>
-                        <a class="btn btn-primary" href="{{ route('anggota.create') }}"> Tambah Anggota</a>
+                        <a class="btn btn-primary" href="{{ route('data.create') }}"> Daftar Keluarga</a>
+                        <a class="btn btn-primary" href="{{ route('anggota.create') }}"> Daftar Anggota</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

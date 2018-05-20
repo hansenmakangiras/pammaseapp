@@ -55,7 +55,7 @@
 <!-- /.box-body -->
 
 <div class="box-footer">
-    <button type="submit" class="btn btn-primary" tabindex="9">Simpan KK</button>
+    <button type="submit" class="btn btn-primary" tabindex="9">Simpan</button>
 </div>
 
 {!! Form::close() !!}

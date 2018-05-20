@@ -161,10 +161,11 @@ class DataController extends Controller
 
         $kecamatan = Kecamatan::pluck('name','id')->toArray();
         $kelurahan = Kelurahan::pluck('name','id_kelurahan')->toArray();
+        $pekerjaan = AppHelper::getListPekerjaan();
 
         $anggota = $data->anggota()->get();
 
-        return view('data.edit',['id'=>$id,'data'=>$data,'kecamatan'=>$kecamatan,'kelurahan'=>$kelurahan,'anggota'=>$anggota,'kec'=>$kec,'kel'=>$kel]);
+        return view('data.edit',['id'=>$id,'data'=>$data,'kecamatan'=>$kecamatan,'kelurahan'=>$kelurahan,'anggota'=>$anggota,'kec'=>$kec,'kel'=>$kel,'pekerjaan'=>$pekerjaan]);
     }
 
     public function updateAnggota($nokk, $out)
@@ -193,22 +194,31 @@ class DataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Data::find($id);
+        $validatedData = $request->validate([
+            'nokk' => 'required|unique:data|max:20',
+            'namakk' => 'required|string|max:150',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
+        ]);
+        if($validatedData){
+            $data = Data::find($id);
 
-        if ($data) {
-            $data->nokk = $request->nokk;
-            $data->namakk = $request->namakk;
-            $data->alamat = $request->alamat;
-            $data->anggotaid = $request->nokk;
-            $data->notps = $request->notps;
-            $data->kecamatan = $request->kecamatan;
-            $data->kelurahan = $request->kelurahan;
-            $data->pekerjaan = $request->pekerjaan;
-            $data->notelp = $request->notelp;
-            $data->save();
-            return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
+            if ($data) {
+                $data->nokk = $request->nokk;
+                $data->namakk = $request->namakk;
+                $data->alamat = $request->alamat;
+                $data->anggotaid = $request->nokk;
+                $data->notps = $request->notps;
+                $data->kecamatan = $request->kecamatan;
+                $data->kelurahan = $request->kelurahan;
+                $data->pekerjaan = $request->pekerjaan;
+                $data->notelp = $request->notelp;
+                $data->save();
+                return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
+            }
+            return redirect()->route('data.edit',$id)->with('Error','Data Gagal disimpan');
         }
-        return redirect()->route('data.edit',$id)->with('Error','Data Gagal disimpan');
+        return redirect()->route('data.edit',$id)->with('Warning','Data tidak tervalidasi, periksa kembali isian anda');
     }
 
     /**

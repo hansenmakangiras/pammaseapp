@@ -53,15 +53,19 @@
                             </div>
                             <!-- /.col-lg-6 -->
                         </div>
-                        <div class="form-group">
-                            <label for="pekerjaan">Pekerjaan</label>
-                            <input value="{{ $data->pekerjaan }}" type="text" name="pekerjaan" class="form-control" id="pekerjaan"
-                                   placeholder="Pekerjaan" tabindex="7">
-                        </div>
-                        <div class="form-group">
-                            <label for="notelp">No. Telp/HP</label>
-                            <input value="{{ $data->notelp }}" type="text" name="notelp" class="form-control" id="notelp"
-                                   placeholder="No. Telp/HP" tabindex="8">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="pekerjaan">Pekerjaan</label>
+                                    {{ Form::select('pekerjaan',[null => 'Semua Pekerjaan'] + $pekerjaan,$data->pekerjaan,['class'=>'form-control','tabindex'=>'7','id'=>'pekerjaan']) }}
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="notelp">No. Telp/HP</label>
+                                    <input value="{{ $data->notelp }}" type="text" name="notelp" class="form-control" id="notelp" tabindex="8">
+                                </div>
+                            </div>
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary" tabindex="9">Update</button>

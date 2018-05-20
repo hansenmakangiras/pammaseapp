@@ -7,7 +7,7 @@
     <section class="content-header">
         <h1>
             Data Keluarga
-            <small>Input data keluarga</small>
+            <small>Daftar data keluarga</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -57,9 +57,9 @@
             <div class="col-xs-2">
                 <div class="box box-solid">
                     <div class="box-body">
-                        <a href="{{ route('data.index') }}" class="btn btn-default btn-block">Lihat Data</a>
+                        <a href="{{ route('data.index') }}" class="btn btn-default btn-block">Lihat Keluarga</a>
                         <a href="{{ route('anggota.index') }}" class="btn btn-default btn-block">Lihat Anggota</a>
-                        <a href="{{ route('anggota.create') }}" class="btn btn-default btn-block">Tambah Anggota</a>
+                        <a href="{{ route('anggota.create') }}" class="btn btn-default btn-block">Daftar Anggota</a>
                     </div>
                 </div>
             </div>
