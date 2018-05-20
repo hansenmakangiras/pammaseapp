@@ -202,6 +202,7 @@ class DataController extends Controller
         ]);
         if($validatedData){
             $data = Data::find($id);
+            Anggota::where('anggotaid',$data->nokk)->update(['anggotaid'=>$request->nokk]);
 
             if ($data) {
                 $data->nokk = $request->nokk;
@@ -213,7 +214,9 @@ class DataController extends Controller
                 $data->kelurahan = $request->kelurahan;
                 $data->pekerjaan = $request->pekerjaan;
                 $data->notelp = $request->notelp;
+                //dd($anggota);
                 $data->save();
+
                 return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
             }
             return redirect()->route('data.edit',$id)->with('Error','Data Gagal disimpan');
