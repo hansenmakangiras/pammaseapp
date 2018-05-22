@@ -49,7 +49,7 @@
                             @foreach($data as $value)
                                 {{--@dd($value->anggota->count())--}}
                                 <tr>
-                                    <td><a href="{{ route('data.show',['id'=>$value->anggotaid]) }}">{{ $value->anggotaid }}</a></td>
+                                    <td>{{ $value->anggotaid }}</td>
                                     <td>{{ $value->nama }}</td>
                                     <td>{{ $value->umur }}</td>
                                     <td class="text-center"><span class="label label-success">{{ \App\Common\AppHelper::getAktif($value->status) }}</span></td>
