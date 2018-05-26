@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Page Title')
+@section('title', 'Laporan')
 
 @section('content-header')
     <!-- Content Header (Page header) -->
@@ -112,7 +112,7 @@
                         <h3 class="box-title">Data Per Kecamatan Atau Kelurahan</h3>
 
                         <div id="btn-table" class="box-tools">
-                            {{--<a href="{{ route('laporan.exportpdf') }}" class="btn btn-default">Export PDF</a>--}}
+                            {{--<a href="{{ route('laporan.exportpdf') }}" class="btn btn-default"> Export PDF</a>--}}
                         </div>
                     </div>
                     <div class="box-body">
@@ -140,11 +140,11 @@
                                         <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
                                         <td class="text-center">{{ $value->anggota->count() }}</td>
                                         <td>
-                                            <a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>
-                                            <a class="btn btn-xs btn-warning" href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Data" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i></a>
+                                            <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data"  href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i></a>
 
                                             {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->anggotaid],'style'=>'display:inline']) !!}
-                                            <button type="submit" class="btn btn-xs btn-danger" href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
+                                            <button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus Data"  href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i></button>
                                             {!! Form::close() !!}
                                         </td>
 
@@ -154,6 +154,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{--<div id="refresh" class="overlay">--}}
+                            {{--<i class="fa fa-refresh fa-spin"></i>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
 
@@ -177,17 +180,18 @@
     <script src="{{ asset('admin/bower_components/datatables.net-bs/js/buttons.colVis.min.js') }}"></script>
     <script>
         $(function () {
+            // $('#refresh').hide();
             $(document).ajaxStart(function () {
-                Pace.restart()
+                Pace.restart();
             });
-
+            $('[data-toggle="tooltip"]').tooltip();
             let table = $('#datatable').DataTable({
                 // 'serverSide': true,
                 // 'ajax':{
                 //     url:'',
                 //     type:'post',
                 // },
-                dom: 'Bfrtip',
+                // dom: 'Bfrtip',
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
@@ -201,19 +205,42 @@
                 //     }
                 // ],
                 buttons: [
-                    // 'copyHtml5'
-                    {extend:'copy',className:'btn-sm'},
-                    {extend:'excel',className:'btn-sm',text:'Eksport Excel'},
-                    {extend:'pdf',className:'btn-sm',text:'Eksport PDF'},
-                    {extend:'print',className:'btn-sm',text:'Cetak'},
+                    // {extend:'copy',className:'btn-sm'},
+                    {extend:'excel',className:'btn-sm',text:'<i class="fa fa-file-excel-o"></i>',titleAttr:"Cetak Excel"},
+                    {extend:'pdf',className:'btn-sm',text:'<i class="fa fa-file-pdf-o"></i>',titleAttr:"Cetak PDF"},
+                    // {extend:'print',className:'btn-sm',text:'<i class="fa fa-print"></i>'},
+                    {
+                        extend: 'print',
+                        titleAttr:'Print',
+                        title:"",
+                        messageTop: 'Laporan Data Keluarga Per Kecamatan',
+                        exportOptions: {
+                            columns: ':visible'
+                        },
+                        customize: function ( win ) {
+                            $(win.document.body)
+                                .css( 'font-size', '10pt' )
+                                .prepend(
+                                    //'<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                );
+
+                            $(win.document.body).find( 'table' )
+                                .addClass( 'compact' )
+                                .css( 'font-size', 'inherit' );
+                        },
+                        className:'btn-sm',text:'<i class="fa fa-print"></i>'
+                    },
                     // {extend:'columnsToggle',className:'btn-sm'},
-                    {extend:'colvisGroup',text:'Hide Aksi',show:[1,2,3,4,5],hide:[6],className:'btn-sm'},
-                    {extend:'colvisGroup',text:'Show All',show:':hidden',className:'btn-sm'},
+                    {extend:'colvisGroup',text:'Sembunyi Kolom',show:[1,2,3,4],hide:[5,6],className:'btn-sm'},
+                    {extend:'colvisGroup',text:'Tampilkan Semua',show:':hidden',className:'btn-sm'},
                 ]
             });
 
+
             table.buttons().container()
                 .appendTo( $('#btn-table:eq(0)'));
+
+
 
             let kelurahan = $("#kelurahan");
             let kecamatan = $("#kecamatan");
