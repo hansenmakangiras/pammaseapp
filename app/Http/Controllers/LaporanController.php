@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Common\AppHelper;
 use App\Models\Anggota;
 use App\Models\Data;
@@ -62,6 +63,8 @@ class LaporanController extends Controller
                     $listKel[$item->id_kelurahan] = $item->name;
                 }
 
+//                $this->exportPDF($request);
+
                 return view('laporan.wilayah',compact('data',
                     'kelurahan',
                     'listKel',
@@ -92,6 +95,8 @@ class LaporanController extends Controller
                     $listKel[$item->id_kelurahan] = $item->name;
                 }
 
+//                $this->exportPDF($request);
+
                 return view('laporan.wilayah',compact('data',
                     'kelurahan',
                     'listKel',
@@ -105,6 +110,8 @@ class LaporanController extends Controller
             }
         }
 
+//        $this->exportPDF($request);
+
         return view('laporan.wilayah',[
             'data'=>$data,
             'listKel'=>$listKel,
@@ -115,15 +122,23 @@ class LaporanController extends Controller
         ]);
     }
 
-    public function wilayah(Request $request){
-        if ($request->ajax()){
-            if ($request->has('kecamatan')){
-                dd($request->all);
-                $data = Data::where('kecamatan', $request->kecamatan)->with(['anggota'])->get();
+    public function exportPDF(Request $request){
+        $data = Data::latest()->with(['anggota']);
+        if($request->hasAny('kecamatan','kelurahan')){
+            if($request->get('kecamatan') && empty($request->get('kelurahan'))){
+                //dd($request->all());
+                $data->where('kecamatan',$request->kecamatan);
 
+            }elseif($request->get('kecamatan') && $request->get('kelurahan')) {
+                $data->where('kecamatan', $request->kecamatan)
+                    ->where('kelurahan', $request->kelurahan);
             }
+
         }
-        return redirect('/laporan',403);
+        $data->where('status',1)->get();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('template.pdf', compact('data'));
+        return $pdf->stream('laporan.pdf');
 
     }
 }

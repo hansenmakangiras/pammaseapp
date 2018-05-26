@@ -109,7 +109,11 @@
             <section class="col-lg-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        {{--<h3 class="box-title">Grafik Data KK Per Kecamatan</h3>--}}
+                        <h3 class="box-title">Data Per Kecamatan Atau Kelurahan</h3>
+
+                        <div id="btn-table" class="box-tools">
+                            {{--<a href="{{ route('laporan.exportpdf') }}" class="btn btn-default">Export PDF</a>--}}
+                        </div>
                     </div>
                     <div class="box-body">
                         <div class="chart">
@@ -118,7 +122,7 @@
                                 <thead>
                                 <tr>
                                     <th>No KK</th>
-                                    <th>Nama Kepala Keluarga</th>
+                                    <th>Nama Keluarga</th>
                                     <th>Alamat</th>
                                     <th>Kecamatan</th>
                                     <th>Kelurahan</th>
@@ -163,37 +167,53 @@
     <!-- DataTables -->
     <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/buttons.colVis.min.js') }}"></script>
     <script>
         $(function () {
             $(document).ajaxStart(function () {
                 Pace.restart()
             });
 
-            $('#datatable').DataTable({
+            let table = $('#datatable').DataTable({
                 // 'serverSide': true,
                 // 'ajax':{
                 //     url:'',
                 //     type:'post',
                 // },
+                dom: 'Bfrtip',
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': true,
+                'info': false,
                 'autoWidth': true,
-                // "columns": [
+                // columnDefs: [
                 //     {
-                //         "class":          "details-control",
-                //         "orderable":      false,
-                //         "data":           null,
-                //         "defaultContent": ""
-                //     },
-                //     { "data": "first_name" },
-                //     { "data": "last_name" },
-                //     { "data": "position" },
-                //     { "data": "office" }
+                //         targets: -1,
+                //         visible:false
+                //     }
                 // ],
+                buttons: [
+                    // 'copyHtml5'
+                    {extend:'copy',className:'btn-sm'},
+                    {extend:'excel',className:'btn-sm',text:'Eksport Excel'},
+                    {extend:'pdf',className:'btn-sm',text:'Eksport PDF'},
+                    {extend:'print',className:'btn-sm',text:'Cetak'},
+                    // {extend:'columnsToggle',className:'btn-sm'},
+                    {extend:'colvisGroup',text:'Hide Aksi',show:[1,2,3,4,5],hide:[6],className:'btn-sm'},
+                    {extend:'colvisGroup',text:'Show All',show:':hidden',className:'btn-sm'},
+                ]
             });
+
+            table.buttons().container()
+                .appendTo( $('#btn-table:eq(0)'));
 
             let kelurahan = $("#kelurahan");
             let kecamatan = $("#kecamatan");
