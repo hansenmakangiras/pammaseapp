@@ -109,7 +109,7 @@
             <section class="col-lg-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Data Per Kecamatan Atau Kelurahan</h3>
+                        <h3 class="box-title">Data Keluarga</h3>
 
                         <div id="btn-table" class="box-tools">
                             {{--<a href="{{ route('laporan.exportpdf') }}" class="btn btn-default"> Export PDF</a>--}}
@@ -117,7 +117,6 @@
                     </div>
                     <div class="box-body">
                         <div class="chart">
-                            {{--<canvas id="barChart" style="height:250px"></canvas>--}}
                             <table id="datatable" class="table table-bordered table-striped table-responsive">
                                 <thead>
                                 <tr>
@@ -205,10 +204,8 @@
                 //     }
                 // ],
                 buttons: [
-                    // {extend:'copy',className:'btn-sm'},
                     {extend:'excel',className:'btn-sm',text:'<i class="fa fa-file-excel-o"></i>',titleAttr:"Cetak Excel"},
                     {extend:'pdf',className:'btn-sm',text:'<i class="fa fa-file-pdf-o"></i>',titleAttr:"Cetak PDF"},
-                    // {extend:'print',className:'btn-sm',text:'<i class="fa fa-print"></i>'},
                     {
                         extend: 'print',
                         titleAttr:'Print',
@@ -236,11 +233,8 @@
                 ]
             });
 
-
             table.buttons().container()
                 .appendTo( $('#btn-table:eq(0)'));
-
-
 
             let kelurahan = $("#kelurahan");
             let kecamatan = $("#kecamatan");
@@ -266,5 +260,4 @@
             });
         })
     </script>
-
 @endpush
