@@ -179,7 +179,6 @@
     <script src="{{ asset('admin/bower_components/datatables.net-bs/js/buttons.colVis.min.js') }}"></script>
     <script>
         $(function () {
-            // $('#refresh').hide();
             $(document).ajaxStart(function () {
                 Pace.restart();
             });
