@@ -6,7 +6,7 @@
         <div class="col-xs-6">
             <div class="form-group">
                 <label>No KK</label>
-                {{ Form::select('nokk',[null => 'Semua KK'] + $nokk,old('nokk'),['class'=>'form-control','tabindex'=>'1','id'=>'nokk','autofocus','required']) }}
+                {{ Form::select('nokk',[null => 'Semua KK'] + $nokk,old('nokk'),['style'=>'width: 100%;','class'=>'form-control select2','tabindex'=>'1','id'=>'nokk','autofocus','required']) }}
             </div>
         </div>
     </div>

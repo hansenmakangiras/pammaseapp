@@ -71,11 +71,15 @@
     <!-- /.content -->
 @endsection
 @push('scriptInput')
+    <!-- Select2 -->
+    <script src="{{ asset('admin/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     <script>
         $(function () {
             $(document).ajaxStart(function () {
                 Pace.restart()
             });
+            //Initialize Select2 Elements
+            $('.select2').select2();
         })
     </script>
 @endpush
