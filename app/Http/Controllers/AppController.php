@@ -62,13 +62,14 @@ class AppController extends Controller
 //            ->dataset('Formulir', 'bar', $countform);
         $chart->labels($kec)
             ->dataset('Data KK', 'bar', $datakec)
-            ->backgroundColor('#39CCCC');
+            ->backgroundColor('#00a65a')
+            ->color('#00a65a');
 
         $chart2->labels($kec)
             ->minimalist(false)
             ->displayLegend(false)
             ->dataset('Formulir', 'bar', $countform)
-            ->backgroundColor('#f56954');
+            ->backgroundColor('#f39c12');
 
         // tampilkan / render data chart pada view, serta mengeset variabel data
         return view('home',['chart'=>$chart,'chart2'=>$chart2,'countkk'=>$countkk,'countall'=>$countall,'countformulir'=>$total]);

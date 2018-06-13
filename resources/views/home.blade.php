@@ -100,7 +100,7 @@
                     </div>
                     <div class="box-body">
                         <div class="chart">
-                            {{--<canvas id="barChart" style="height:250px"></canvas>--}}
+                            {{--<canvas id="areaChart" style="height:250px"></canvas>--}}
                             {!! $chart2->container() !!}
                         </div>
                     </div>
@@ -142,8 +142,8 @@
 @endsection
 
 @push('scriptDashboard')
-    <script src="{{ asset('admin/plugins/chartjs/Chart.bundle.min.js') }}" charset=utf-8></script>
-{{--    <script src="{{ asset('admin/bower_components/chart.js/Chart.js') }}"></script>--}}
+    <script src="{{ asset('admin/bower_components/chart.js/Chart.bundle.min.js') }}" charset=utf-8></script>
+    {{--<script src="{{ asset('admin/bower_components/chart.js/Chart.js') }}"></script>--}}
 {{--    <script src="{{ asset('admin/dist/js/pages/custom-dashboard.js') }}"></script>--}}
     {!! $chart->script() !!}
     {!! $chart2->script() !!}
