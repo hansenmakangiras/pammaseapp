@@ -3,7 +3,7 @@
 <head>
     @include('layout.partials.meta')
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="fixed hold-transition {{ config('app.skin') }} sidebar-mini">
 <div class="wrapper">
 
     @include('layout.partials.header')

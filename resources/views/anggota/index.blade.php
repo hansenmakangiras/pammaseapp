@@ -52,13 +52,22 @@
                                     <td>{{ $value->anggotaid }}</td>
                                     <td>{{ $value->nama }}</td>
                                     <td>{{ $value->umur }}</td>
-                                    <td class="text-center"><span class="label label-success">{{ \App\Common\AppHelper::getAktif($value->status) }}</span></td>
+                                    <td class="text-center"><span
+                                            class="label label-success">{{ \App\Common\AppHelper::getAktif($value->status) }}</span>
+                                    </td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" href="{{ route('anggota.show',['id'=>$value->anggotaid]) }}"><i class="fa fa-eye"></i> View</a>
-                                        <a class="btn btn-xs btn-warning" href="{{ route('anggota.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i> Edit</a>
+                                        <a class="btn btn-xs btn-primary"
+                                           href="{{ route('anggota.show',['id'=>$value->anggotaid]) }}"><i
+                                                class="fa fa-eye"></i> View</a>
+                                        <a class="btn btn-xs btn-warning"
+                                           href="{{ route('anggota.edit',['id'=>$value->id]) }}"><i
+                                                class="fa fa-edit"></i> Edit</a>
 
                                         {!! Form::open(['method' => 'DELETE','route' => ['anggota.destroy', $value->id],'style'=>'display:inline']) !!}
-                                        <button type="submit" class="btn btn-xs btn-danger" href="{{ route('anggota.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i> Hapus</button>
+                                        <button type="submit" class="btn btn-xs btn-danger"
+                                                href="{{ route('anggota.destroy',['id'=>$value->id]) }}"><i
+                                                class="fa fa-trash-o"></i> Hapus
+                                        </button>
                                         {!! Form::close() !!}
                                     </td>
 
@@ -67,6 +76,18 @@
 
                             </tbody>
                         </table>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="pagination" aria-live="polite">
+                                    Menampilkan 1 sampai {{ $data->count() }} dari {{ $count }} data
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="pull-right" id="datatable_paginate">
+                                    {{ $data->links() }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -89,11 +110,11 @@
         $(function () {
             // let dt = $('#example1').DataTable();
             $('#datatable').DataTable({
-                'paging': true,
+                'paging': false,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': true,
+                'info': false,
                 'autoWidth': true,
             });
 

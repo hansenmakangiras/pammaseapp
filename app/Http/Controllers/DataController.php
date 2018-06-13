@@ -19,10 +19,11 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = Data::latest()->where('status', 1)->with(['anggota'])->get();
-        $trashed = AppHelper::getTrashedData();
+        $data = Data::latest()->where('status', 1);
+        $count = $data->count();
+        $data = $data->paginate(20);
 
-        return view('data.index', compact('data','trashed'))
+        return view('data.index', compact('data','count'))
             ->with('i', (\request()->input('page',1)-1)*10);
     }
 

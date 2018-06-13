@@ -16,6 +16,19 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
+   |--------------------------------------------------------------------------
+   | Application Skin Theme
+   |--------------------------------------------------------------------------
+   |
+   | You can choose what skin looking for your application.
+   | There is option : skin-blue,skin-blue-light,skin-yellow,skin-yellow-light,
+   | skin-green, skin-green-light, skin-purple, skin-purple-light, skin-red,
+   | skin-red-light, skin-black, skin-black-light
+   |
+   */
+    'skin' => 'skin-black',
+
+    /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------

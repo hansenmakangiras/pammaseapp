@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Common\AppHelper;
 use App\Models\Anggota;
 use App\Models\Data;
 use Illuminate\Http\Request;
@@ -16,11 +15,12 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        $data = Anggota::latest()->where('status', 1)->with(['data'])->get();
-        $trashed = AppHelper::getTrashedData();
+        $data = Anggota::latest()->where('status', 1);
+        $count = $data->count();
+        $data = $data->paginate(20);
 
-        return view('anggota.index', compact('data','trashed'))
-            ->with('i', (\request()->input('page',1)-1)*10);
+        return view('anggota.index', compact('data','count'))
+            ->with('page', (\request()->input('page',1)-1)*20);
     }
 
     /**
@@ -30,7 +30,7 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-        $nokk = Data::where('status',1)->pluck('nokk','nokk')->toArray();
+        $nokk = Data::where('status',1)->orderBy('created_at','desc')->pluck('nokk','nokk')->toArray();
         return view('anggota.create',compact('nokk'));
     }
 

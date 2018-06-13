@@ -68,9 +68,20 @@
 
                                 </tr>
                             @endforeach
-
                             </tbody>
                         </table>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="pagination" aria-live="polite">
+                                    Menampilkan 1 sampai {{ $data->count() }} dari {{ $count }} data
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="pull-right" id="datatable_paginate">
+                                    {{ $data->links() }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -93,24 +104,12 @@
         $(function () {
             // let dt = $('#example1').DataTable();
             $('#datatable').DataTable({
-                'paging': true,
+                'paging': false,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': true,
+                'info': false,
                 'autoWidth': true,
-                // "columns": [
-                //     {
-                //         "class":          "details-control",
-                //         "orderable":      false,
-                //         "data":           null,
-                //         "defaultContent": ""
-                //     },
-                //     { "data": "first_name" },
-                //     { "data": "last_name" },
-                //     { "data": "position" },
-                //     { "data": "office" }
-                // ],
             });
             // Array to track the ids of the details displayed rows
             // let detailRows = [];
