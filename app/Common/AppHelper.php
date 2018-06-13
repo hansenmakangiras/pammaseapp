@@ -19,6 +19,12 @@ class AppHelper
         $name = $kecamatan->name;
         return $name;
     }
+
+    static function changeSkin($skin){
+        $skin = (isset($skin) ? $skin : config('app.skin'));
+        return $skin;
+    }
+
     static function getListPekerjaan(){
         $pekerjaan = Pekerjaan::pluck('pekerjaan','id')->toArray();
         return $pekerjaan;
