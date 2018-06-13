@@ -165,7 +165,7 @@
 @endsection
 
 @push('scriptWilayah')
-    <script src="{{ asset('admin/plugins/chartjs/Chart.bundle.min.js') }}" charset=utf-8></script>
+    <script src="{{ asset('admin/bower_components/chart.js/Chart.bundle.min.js') }}" charset=utf-8></script>
     <!-- DataTables -->
     <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
