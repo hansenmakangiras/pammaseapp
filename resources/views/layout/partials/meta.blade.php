@@ -13,8 +13,8 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="{{ asset('admin/bower_components/select2/dist/css/select2.min.css') }}">
 <!-- DataTables -->
-{{--<link rel="stylesheet" href="{{ asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">--}}
-<link rel="stylesheet" href="{{ asset('admin/bower_components/DataTablesBS4/datatables.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+{{--<link rel="stylesheet" href="{{ asset('admin/bower_components/DataTablesBS4/datatables.css') }}">--}}
 <link rel="stylesheet" href="{{ asset('admin/bower_components/datatables.net-bs/css/buttons.dataTables.css') }}">
 <!-- Morris chart -->
 <link rel="stylesheet" href="{{ asset('admin/bower_components/morris.js/morris.css') }}">
@@ -37,9 +37,9 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('admin/dist/css/AdminLTE.min.css') }}">
 <!-- Material Design -->
-<link rel="stylesheet" href="{{ asset('admin/dist/css/bootstrap-material-design.min.css') }}">
-<link rel="stylesheet" href="{{ asset('admin/dist/css/ripples.min.css') }}">
-<link rel="stylesheet" href="{{ asset('admin/dist/css/MaterialAdminLTE.min.css') }}">
+{{--<link rel="stylesheet" href="{{ asset('admin/dist/css/bootstrap-material-design.min.css') }}">--}}
+{{--<link rel="stylesheet" href="{{ asset('admin/dist/css/ripples.min.css') }}">--}}
+{{--<link rel="stylesheet" href="{{ asset('admin/dist/css/MaterialAdminLTE.min.css') }}">--}}
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/_all-skins.min.css') }}">

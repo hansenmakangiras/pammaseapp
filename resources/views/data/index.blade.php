@@ -27,17 +27,18 @@
                     </div>
                 @endif
                 <div class = "box">
-                    <div class = "box-header with-border">
-                        <h3 class = "box-title">Kartu Keluarga</h3>
-                        <div class = "pull-right box-tools">
-                            <a class = "btn btn-flat bg-maroon" href = "{{ route('data.create') }}"> Daftar Keluarga</a>
-                            <a class = "btn btn-flat bg-orange" href = "{{ route('anggota.create') }}"> Daftar
+                    <div class = "box-header">
+                        <h2 class = "box-title">Kartu Keluarga</h2>
+                        <div class = "box-tools">
+                            <a class = "btn btn-flat bg-blue" href = "{{ route('data.create') }}"> Daftar Keluarga</a>
+                            <a class = "btn btn-flat bg-maroon" href = "{{ route('anggota.create') }}"> Daftar
                                                                                                         Anggota</a>
                         </div>
                     </div>
+                    <br />
                     <!-- /.box-header -->
                     <div class = "box-body">
-                        <table id = "datatable" class = "table table-bordered table-hover">
+                        <table id = "datatable" valign="middle" class = "table table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th>No KK</th>
@@ -51,30 +52,26 @@
                             </thead>
                             <tbody>
                             @foreach($data as $value)
-                                {{--@dd($value->anggota->count())--}}
                                 <tr>
-                                    <td width = "15%">{{ $value->nokk }}</td>
-                                    <td width = "20%">{{ $value->namakk }}</td>
-                                    <td width = "20%">{{ $value->alamat }}</td>
-                                    <td width = "13%">{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
-                                    <td width = "13%">{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
-                                    {{--                                    <td class="text-center">{{ $value->anggota->count() }}</td>--}}
-                                    <td width = "18%">
-                                        <div class = "btn-group-xs btn-group">
-                                            {{--<a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>--}}
-                                            <a class = "btn btn-xs btn-success"
-                                               href = "{{ route('data.edit',['id'=>$value->id]) }}"><i
-                                                    class = "fa fa-edit"></i> Edit</a>
+                                    <td>{{ $value->nokk }}</td>
+                                    <td>{{ $value->namakk }}</td>
+                                    <td>{{ $value->alamat }}</td>
+                                    <td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
+                                    <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
+                                    {{--<td class="text-center">{{ $value->anggota->count() }}</td>--}}
+                                    <td>
+                                        {{--<a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>--}}
+                                        <a class = "btn btn-xs bg-blue"
+                                           href = "{{ route('data.edit',['id'=>$value->id]) }}"><i
+                                                class = "fa fa-edit"></i> Edit</a>
 
-                                            {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->id],'style'=>'display:inline']) !!}
-                                            <button type = "submit" class = "btn btn-xs btn-info"
-                                                    href = "{{ route('data.destroy',['id'=>$value->id]) }}"><i
-                                                    class = "fa fa-trash-o"></i> Hapus
-                                            </button>
-                                            {!! Form::close() !!}
-                                        </div>
+                                        {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->id],'style'=>'display:inline']) !!}
+                                        <button type = "submit" class = "btn btn-xs bg-red"
+                                                href = "{{ route('data.destroy',['id'=>$value->id]) }}"><i
+                                                class = "fa fa-trash-o"></i> Hapus
+                                        </button>
+                                        {!! Form::close() !!}
                                     </td>
-
                                 </tr>
                             @endforeach
                             </tbody>
@@ -109,50 +106,17 @@
     <script src = "{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src = "{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     {{--    <script src="{{ asset('admin/bower_components/DataTablesBS4/datatables.js') }}"></script>--}}
-    <!-- page script -->
+
     <script>
         $(function () {
-            // let dt = $('#example1').DataTable();
             $('#datatable').DataTable({
                 'paging': false,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
                 'info': false,
-                'autoWidth': false,
+                'autoWidth': true,
             });
-            // Array to track the ids of the details displayed rows
-            // let detailRows = [];
-            //
-            // $('#datatable tbody').on( 'click', 'tr td.details-control', function () {
-            //     let tr = $(this).closest('tr');
-            //     let row = dt.row( tr );
-            //     let idx = $.inArray( tr.attr('id'), detailRows );
-            //
-            //     if ( row.child.isShown() ) {
-            //         tr.removeClass( 'details' );
-            //         row.child.hide();
-            //
-            //         // Remove from the 'open' array
-            //         detailRows.splice( idx, 1 );
-            //     }
-            //     else {
-            //         tr.addClass( 'details' );
-            //         row.child( format( row.data() ) ).show();
-            //
-            //         // Add to the 'open' array
-            //         if ( idx === -1 ) {
-            //             detailRows.push( tr.attr('id') );
-            //         }
-            //     }
-            // } );
-
-            // On each draw, loop over the `detailRows` array and show any child rows
-            // dt.on( 'draw', function () {
-            //     $.each( detailRows, function ( i, id ) {
-            //         $('#'+id+' td.details-control').trigger( 'click' );
-            //     } );
-            // } );
         });
     </script>
 @endpush

@@ -9,10 +9,7 @@
             Edit Data
             <small>Kartu Keluarga</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Input</li>
-        </ol>
+        @include('widget.breadcrumb')
     </section>
 @endsection
 
@@ -20,7 +17,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-10">
+            <div class="col-lg-12">
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -47,58 +44,26 @@
                 @endif
             <!-- general form elements -->
                 <div class="box box-solid">
-
                     <div class="box-header with-border">
-                        <h3 class="box-title">Data Kartu Keluarga</h3>
-                    </div>
-                <!-- /.box-header -->
-                    <!-- form start -->
-                    {{--@include('data.form-edit')--}}
-                    @include('data.form-tab')
+                        <a href="{{ route('data.index') }}" class="btn btn-flat btn-sm bg-maroon">Lihat Keluarga</a>
+                        <a href="{{ route('anggota.create') }}" class="btn btn-flat btn-sm bg-orange">Daftar Anggota</a>
+                        <a href="{{ route('anggota.index') }}" class="btn btn-flat btn-sm bg-light-blue">Lihat Anggota</a>
+                        {{--<h3 class="box-title">Data Kartu Keluarga</h3>--}}
+                        {{--<div class="box-tools">--}}
 
+                        {{--</div>--}}
+                    </div>
+                    {{--<br />--}}
+                <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @include('data.form')
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.box -->
-            </div>
-            {{--<div class="col-xs-5">--}}
-                {{--@if(Session::get('err') && Session::get('err') == 0)--}}
-                    {{--<div class="alert alert-success alert-dismissible">--}}
-                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
-                        {{--<h4><i class="icon fa fa-check"></i> Success!</h4>--}}
-                        {{--{{ Session::get('pesan') }}--}}
-                    {{--</div>--}}
-                {{--@elseif(Session::get('err') && Session::get('err') == 1)--}}
-                    {{--<div class="alert alert-danger alert-dismissible">--}}
-                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
-                        {{--<h4><i class="icon fa fa-ban"></i> Error!</h4>--}}
-                        {{--{{ Session::get('pesan') }}--}}
-                    {{--</div>--}}
-                {{--@elseif(Session::get('err') && Session::get('err')==2)--}}
-                    {{--<div class="alert alert-info alert-dismissible">--}}
-                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
-                        {{--<h4><i class="icon fa fa-info"></i> Info!</h4>--}}
-                        {{--{{ Session::get('pesan') }}--}}
-                    {{--</div>--}}
-                {{--@endif--}}
-                {{--<div class="box box-solid">--}}
-                    {{--<div class="box-header with-border">--}}
-                        {{--<h3 class="box-title">Data Anggota Keluarga</h3>--}}
-                    {{--</div>--}}
-                    {{--{!! Form::model([$data,$kec,$anggota,$kel,$kecamatan,$kelurahan,$id], ['method' => 'PATCH','route' => ['data.update', $data->id]]) !!}--}}
-                    {{--@include('data.form-anggota')--}}
-                    {{--{!! Form::close() !!}--}}
-                {{--</div>--}}
-
-            {{--</div>--}}
-            <!-- /.col -->
-            <div class="col-xs-2">
-                <div class="box with-border">
-                    <div class="box-body">
-                        <a href="{{ route('data.index') }}" class="btn btn-flat btn-block bg-maroon">Lihat Keluarga</a>
-                        <a href="{{ route('anggota.create') }}" class="btn btn-flat btn-block bg-orange">Daftar Anggota</a>
-                        <a href="{{ route('anggota.index') }}" class="btn btn-flat btn-block bg-light-blue">Lihat Anggota</a>
-                        {{--<button class="btn btn-primary btn-block">Tambah</button>--}}
-                    </div>
-                </div>
             </div>
         </div>
         <!-- /.row (main row) -->

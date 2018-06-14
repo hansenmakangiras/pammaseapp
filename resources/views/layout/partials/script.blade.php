@@ -16,8 +16,8 @@
 <!-- FastClick -->
 <script src="{{ asset('admin/bower_components/fastclick/lib/fastclick.js') }}"></script>
 <!-- Material Design -->
-<script src="{{ asset('admin/dist/js/material.min.js') }}"></script>
-<script src="{{ asset('admin/dist/js/ripples.min.js') }}"></script>
+{{--<script src="{{ asset('admin/dist/js/material.min.js') }}"></script>--}}
+{{--<script src="{{ asset('admin/dist/js/ripples.min.js') }}"></script>--}}
 
 <script>
     let AdminLTEOptions = {
