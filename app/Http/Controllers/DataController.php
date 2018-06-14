@@ -8,7 +8,6 @@ use App\Models\Data;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
 class DataController extends Controller
 {
@@ -40,51 +39,6 @@ class DataController extends Controller
         $pekerjaan = AppHelper::getListPekerjaan();
 
         return view('data.create', compact('kecamatan', 'kelurahan','pekerjaan'));
-    }
-
-    private function gabung($data1, $data2)
-    {
-        $out = [];
-        foreach ($data1 as $key => $item) {
-            $item = isset($item) ? $item : null;
-            foreach ($data2 as $ik => $val) {
-                $val = isset($val) ? $val : null;
-                if ($key === $ik) {
-                    $out[] = ['nama' => $item, 'umur' => $val];
-                }
-
-            }
-        }
-
-        return $out;
-
-    }
-
-    public function simpanAnggota($data, $input)
-    {
-        $pesan = "";
-        $error = 0;
-        $simpan = false;
-        $check = Anggota::where('anggotaid', '=', Input::get('nokk'))->exists();
-        if (is_array($data)) {
-            foreach ($data as $item) {
-                if (!$check) {
-                    $dataanggota = new Anggota();
-                    $dataanggota->anggotaid = $input['nokk'];
-                    $dataanggota->nama = $item['nama'];
-                    $dataanggota->umur = $item['umur'];
-                    $dataanggota->save();
-                }
-                $simpan = true;
-            }
-
-            if ($simpan !== true) {
-                $error = 1;
-            };
-
-        }
-
-        return $error;
     }
 
     /**
@@ -129,11 +83,6 @@ class DataController extends Controller
         return view('data.create', compact('kecamatan', 'kelurahan'));
     }
 
-    public function storeAnggota(Request $request){
-
-        return view('data.create', compact('kecamatan', 'kelurahan'));
-    }
-
     /**
      * Display the specified resource.
      *
@@ -171,23 +120,6 @@ class DataController extends Controller
         return view('data.edit',['id'=>$id,'data'=>$data,'kecamatan'=>$kecamatan,'kelurahan'=>$kelurahan,'anggota'=>$anggota,'kec'=>$kec,'kel'=>$kel,'pekerjaan'=>$pekerjaan]);
     }
 
-    public function updateAnggota($nokk, $out)
-    {
-
-        if(is_array($out)){
-            foreach ($out as $item) {
-                $dataanggota = new Anggota();
-                $dataanggota->anggotaid = $nokk;
-                $dataanggota->nama = $item['nama'];
-                $dataanggota->umur = $item['umur'];
-                $dataanggota->status = 1;
-                $dataanggota->save();
-            }
-            return true;
-        }
-        return false;
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -197,34 +129,25 @@ class DataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'nokk' => 'required|unique:data|max:20',
-            'namakk' => 'required|string|max:150',
-            'kecamatan' => 'required',
-            'kelurahan' => 'required',
-        ]);
-        if($validatedData){
-            $data = Data::find($id);
+        $data = Data::find($id);
 
-            if ($data) {
-                Anggota::where('anggotaid',$data->nokk)->update(['anggotaid'=>$request->nokk]);
-                $data->nokk = $request->nokk;
-                $data->namakk = $request->namakk;
-                $data->alamat = $request->alamat;
-                $data->anggotaid = $request->nokk;
-                $data->notps = $request->notps;
-                $data->kecamatan = $request->kecamatan;
-                $data->kelurahan = $request->kelurahan;
-                $data->pekerjaan = $request->pekerjaan;
-                $data->notelp = $request->notelp;
-                //dd($anggota);
-                $data->save();
+        if ($data) {
+            Anggota::where('anggotaid',$data->nokk)->update(['anggotaid'=>$request->nokk]);
+            $data->nokk = $request->nokk;
+            $data->namakk = $request->namakk;
+            $data->alamat = $request->alamat;
+            $data->anggotaid = $request->nokk;
+            $data->notps = $request->notps;
+            $data->kecamatan = $request->kecamatan;
+            $data->kelurahan = $request->kelurahan;
+            $data->pekerjaan = $request->pekerjaan;
+            $data->notelp = $request->notelp;
+            //dd($anggota);
+            $data->save();
 
-                return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
-            }
-            return redirect()->route('data.edit',$id)->with('Error','Data Gagal disimpan');
+            return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
         }
-        return redirect()->route('data.edit',$id)->with('Warning','Data tidak tervalidasi, periksa kembali isian anda');
+        return redirect()->route('data.edit',$id)->with('Error','Data Gagal disimpan');
     }
 
     /**
@@ -245,16 +168,6 @@ class DataController extends Controller
 
         return redirect()->route('data.index')
             ->with('pesan', 'Data berhasil di hapus');
-    }
-
-    /**
-     * Menampilkan hasil.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function hasil()
-    {
-        return view('data.hasil');
     }
 
     public function getJsonKelurahan($idkec)
@@ -288,8 +201,4 @@ class DataController extends Controller
         return view('data.create', ['kecamatan' => $kecamatan, 'kelurahan' => $kelurahan]);
     }
 
-    public function formulir()
-    {
-        return view('data.formulir');
-    }
 }

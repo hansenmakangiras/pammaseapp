@@ -28,14 +28,10 @@
                 @endif
                 <div class = "box">
                     <div class = "box-header">
-                        <h2 class = "box-title">Kartu Keluarga</h2>
-                        <div class = "box-tools">
-                            <a class = "btn btn-flat bg-blue" href = "{{ route('data.create') }}"> Daftar Keluarga</a>
-                            <a class = "btn btn-flat bg-maroon" href = "{{ route('anggota.create') }}"> Daftar
-                                                                                                        Anggota</a>
-                        </div>
+                        <a class = "btn btn-flat bg-blue" href = "{{ route('data.create') }}"> Daftar Keluarga</a>
+                        <a class = "btn btn-flat bg-maroon" href = "{{ route('anggota.create') }}"> Daftar
+                                                                                                    Anggota</a>
                     </div>
-                    <br />
                     <!-- /.box-header -->
                     <div class = "box-body">
                         <table id = "datatable" valign="middle" class = "table table-bordered table-hover">
@@ -46,7 +42,7 @@
                                 <th>Alamat</th>
                                 <th>Kecamatan</th>
                                 <th>Kelurahan</th>
-                                {{--<th width="5%">Anggota</th>--}}
+                                <th width="5%">Anggota</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
@@ -58,9 +54,8 @@
                                     <td>{{ $value->alamat }}</td>
                                     <td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
                                     <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
-                                    {{--<td class="text-center">{{ $value->anggota->count() }}</td>--}}
+                                    <td class="text-center">{{ $value->anggota->count() }}</td>
                                     <td>
-                                        {{--<a class="btn btn-xs btn-primary" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i> View</a>--}}
                                         <a class = "btn btn-xs bg-blue"
                                            href = "{{ route('data.edit',['id'=>$value->id]) }}"><i
                                                 class = "fa fa-edit"></i> Edit</a>

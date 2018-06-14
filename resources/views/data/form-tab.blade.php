@@ -5,6 +5,7 @@
         <li class="active"><a href="#datakk" data-toggle="tab">Data Kartu Keluarga</a></li>
         <li><a href="#dataanggota" data-toggle="tab">Data Anggota Keluarga</a></li>
     </ul>
+    {{--                {!! Form::model([$data,$kec,$anggota,$kel,$kecamatan,$kelurahan,$id], ['method' => 'PUT','route' => ['data.update', $id]]) !!}--}}
     {!! Form::open(['route' => 'data.store','method'=>'PUT','role'=>'form']) !!}
     <div class="tab-content">
         <div class="tab-pane active" id="datakk"><br />
