@@ -4,25 +4,25 @@
     <div class="col-xs-6">
         <div class="form-group">
             <label for="nokk">No. Kartu Keluarga</label>
-            <input type="text" name="nokk" class="form-control" id="nokk" tabindex="1" autofocus required/>
+            <input type="text" name="nokk" class="form-control" id="nokk" tabindex="1" autofocus autocomplete="off" required/>
         </div>
     </div>
     <div class="col-xs-6">
         <div class="form-group">
             <label for="namakk">Nama Kartu Keluarga</label>
-            <input type="text" class="form-control" id="namakk" name="namakk" tabindex="2"/>
+            <input type="text" class="form-control" id="namakk" name="namakk" tabindex="2" autocomplete="off" required/>
         </div>
     </div>
     <div class="col-xs-6">
         <div class="form-group">
             <label for="alamat">Alamat</label>
-            <input type="text" name="alamat" class="form-control" id="alamat" tabindex="3">
+            <input type="text" name="alamat" class="form-control" id="alamat" tabindex="3" autocomplete="off" />
         </div>
     </div>
     <div class="col-xs-6">
         <div class="form-group">
             <label for="notps">No. TPS</label>
-            <input type="text" name="notps" class="form-control" id="notps" tabindex="4">
+            <input type="text" name="notps" class="form-control" id="notps" tabindex="4" autocomplete="off" />
         </div>
     </div>
     <div class="col-xs-6">
@@ -47,7 +47,7 @@
     <div class="col-xs-6">
         <div class="form-group">
             <label for="notelp">No. Telp/HP</label>
-            <input type="text" name="notelp" class="form-control" id="notelp" tabindex="8">
+            <input type="text" name="notelp" class="form-control" id="notelp" tabindex="8" autocomplete="off" />
         </div>
     </div>
 
@@ -55,7 +55,7 @@
 <!-- /.box-body -->
 
 <div class="box-footer">
-    <button type="submit" class="btn btn-primary" tabindex="9">Simpan</button>
+    <button type="submit" class="btn btn-flat bg-aqua" tabindex="9">Simpan</button>
 </div>
 
 {!! Form::close() !!}

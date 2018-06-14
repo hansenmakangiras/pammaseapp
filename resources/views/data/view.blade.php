@@ -73,9 +73,15 @@
                                 <th >Kelurahan</th>
                                 <th style="width: 60px">No TPS</th>
                             </tr>
+                            @php ($i = 1)
+                            @if($anggota->isEmpty())
+                                <tr>
+                                    <td colspan='6' style="text-align: center">Tidak ditemukan anggota keluarga</td>
+                                </tr>
+                            @else
                             @foreach($anggota as $value)
                             <tr>
-                                <td>{{ $value->id }}</td>
+                                <td>{{ $i++ }}</td>
                                 <td>{{ $value->nama }}</td>
                                 <td>{{ $data->alamat }}</td>
                                 <td>{{ $value->umur }}</td>
@@ -84,6 +90,7 @@
                                 <td class="text-center"><span class="badge bg-yellow">{{ $data->notps }}</span></td>
                             </tr>
                             @endforeach
+                            @endif
                         </table>
                     </div>
                     <!-- /.box-body -->

@@ -93,9 +93,9 @@
             <div class="col-xs-2">
                 <div class="box with-border">
                     <div class="box-body">
-                        <a href="{{ route('data.index') }}" class="btn btn-primary btn-block">Lihat Keluarga</a>
-                        <a href="{{ route('anggota.create') }}" class="btn btn-primary btn-block">Daftar Anggota</a>
-                        <a href="{{ route('anggota.index') }}" class="btn btn-primary btn-block">Lihat Anggota</a>
+                        <a href="{{ route('data.index') }}" class="btn btn-flat btn-block bg-maroon">Lihat Keluarga</a>
+                        <a href="{{ route('anggota.create') }}" class="btn btn-flat btn-block bg-orange">Daftar Anggota</a>
+                        <a href="{{ route('anggota.index') }}" class="btn btn-flat btn-block bg-light-blue">Lihat Anggota</a>
                         {{--<button class="btn btn-primary btn-block">Tambah</button>--}}
                     </div>
                 </div>

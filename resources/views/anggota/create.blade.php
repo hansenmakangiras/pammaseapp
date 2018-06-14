@@ -8,10 +8,7 @@
             Daftar Anggota
             <small>Kartu Keluarga</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Daftar</li>
-        </ol>
+        @include('widget.breadcrumb')
     </section>
 @endsection
 

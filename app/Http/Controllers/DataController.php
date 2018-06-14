@@ -119,9 +119,11 @@ class DataController extends Controller
             $datakk->pekerjaan = $input['pekerjaan'];
             $datakk->notelp = $input['notelp'];
             $datakk->status = 1;
-            $datakk->save();
 
-            return redirect()->route('data.create')->with('Success','Data berhasil disimpan');
+            if($datakk->save())
+                return redirect()->route('data.create')->with('Success','Data berhasil disimpan');
+            else
+                return redirect()->route('data.create')->with('Error','Data Gagal Tersimpan');
         }
 
         return view('data.create', compact('kecamatan', 'kelurahan'));
