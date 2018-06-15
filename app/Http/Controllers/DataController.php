@@ -195,10 +195,6 @@ class DataController extends Controller
 
 //        $data = Data::query();
         return Datatables::of($data)
-            ->addColumn('edit', function ($data) {
-                return '<a href="'.route('data.edit',
-                        $data->id).'" class="btn btn-xs bg-blue"><i class="fa fa-edit"></i> Edit</a>';
-            })
             ->addColumn('action', function ($data) {
                 return '
                 <div class="btn-group">
@@ -207,21 +203,11 @@ class DataController extends Controller
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="'.route('data.edit', $data->id).'" ><i class="fa fa-edit"></i> Edit</a></li>
-                        <li><a data-toggle="modal" data-url="'.route('data.destroy',['id'=>$data->id]).'" data-target="#modal-hapus" href="" onclick="pushUrlDelete()" ><i class="fa fa-trash"></i> Hapus</a></li>
+                        <li><a data-toggle="modal" data-url="'.route('data.destroy', ['id' => $data->id]).'" data-target="#modal-hapus" href="" onclick="pushUrlDelete()" ><i class="fa fa-trash"></i> Hapus</a></li>
                     </ul>
                 </div> 
                 ';
             })
-            ->editColumn('delete', function ($data) {
-                return '
-                <form method="post" action="'.route("data.destroy", $data->id).'" style="display:inline">
-                    '.csrf_field().'     
-                    <input type="hidden" name="_method" value="DELETE">                                                            
-                    <button type="submit" href="'.route('data.destroy', $data->id).'" class="btn btn-xs bg-red"><i class="fa fa-trash"></i> Hapus</button>
-                </form>
-                ';
-            })
-            ->rawColumns(['delete' => 'delete', 'edit' => 'edit','action'=>'action'])
             ->editColumn('kecamatan', function ($data) {
                 return AppHelper::getKecamatanName($data->kecamatan);
             })
@@ -231,6 +217,7 @@ class DataController extends Controller
             ->editColumn('pekerjaan', function ($data) {
                 return AppHelper::getPekerjaanName($data->pekerjaan);
             })
+            ->rawColumns(['action' => 'action'])
             ->make(true);
 
     }
