@@ -53,31 +53,16 @@
                     </div>
             @endif
             <!-- general form elements -->
-                <div class = "box box-primary">
+                <div class = "box box-solid">
                     <div class = "box-header with-border">
-                        <h3 class = "box-title">Daftar Keluarga</h3>
-                        <div class = "pull-right box-tools">
-                            <a href = "{{ route('data.index') }}" class = "btn btn-flat btn-sm bg-blue" tabindex = "10">Lihat Keluarga</a>
-                            <a href = "{{ route('anggota.index') }}" class = "btn btn-flat btn-sm bg-green" tabindex = "11">Lihat Anggota</a>
-                            <a href = "{{ route('anggota.create') }}" class = "btn btn-flat btn-sm bg-red" tabindex = "12">Daftar Anggota</a>
-                        </div>
+                        <a href = "{{ route('data.index') }}" class = "btn btn-flat btn-sm bg-blue" tabindex = "10">Lihat Keluarga</a>
+                        <a href = "{{ route('anggota.index') }}" class = "btn btn-flat btn-sm bg-green" tabindex = "11">Lihat Anggota</a>
+                        <a href = "{{ route('anggota.create') }}" class = "btn btn-flat btn-sm bg-red" tabindex = "12">Daftar Anggota</a>
                     </div>
                     <!-- /.box-header -->
                     @include('data.form')
                 </div>
             </div>
-            {{--<div class = "col-xs-2">--}}
-            {{--<div class = "box box-solid">--}}
-            {{--<div class = "box-body">--}}
-            {{--<a href = "{{ route('data.index') }}" class = "btn btn-flat btn-block bg-maroon btn-xs"--}}
-            {{--tabindex = "10">Lihat Keluarga</a>--}}
-            {{--<a href = "{{ route('anggota.index') }}" class = "btn btn-flat btn-block bg-orange btn-xs"--}}
-            {{--tabindex = "11">Lihat Anggota</a>--}}
-            {{--<a href = "{{ route('anggota.create') }}" class = "btn btn-flat btn-block bg-light-blue btn-xs"--}}
-            {{--tabindex = "12">Daftar Anggota</a>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
         </div>
 
     </section>

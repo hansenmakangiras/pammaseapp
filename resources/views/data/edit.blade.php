@@ -56,7 +56,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-12">
-                                @include('data.form')
+                                @include('data.form-edit')
                             </div>
                         </div>
                     </div>

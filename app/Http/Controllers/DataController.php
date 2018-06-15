@@ -7,6 +7,7 @@ use App\Models\Anggota;
 use App\Models\Data;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
+use DataTables;
 use Illuminate\Http\Request;
 
 class DataController extends Controller
@@ -21,7 +22,6 @@ class DataController extends Controller
         $data = Data::latest()->where('status', 1);
         $count = $data->count();
         $data = $data->paginate(20);
-
         return view('data.index', compact('data','count'))
             ->with('i', (\request()->input('page',1)-1)*10);
     }
@@ -33,7 +33,6 @@ class DataController extends Controller
      */
     public function create()
     {
-//        $kecamatan = AppHelper::getListKecamatan();
         $kecamatan = AppHelper::getSelectKecamatan();
         $kelurahan = AppHelper::getAllKelurahan();
         $pekerjaan = AppHelper::getListPekerjaan();
@@ -50,37 +49,30 @@ class DataController extends Controller
     public function store(Request $request)
     {
         $datakk = new Data();
-        $kecamatan = AppHelper::getListKecamatan();
-        $kelurahan = AppHelper::getAllKelurahan();
 
-        $validatedData = $request->validate([
+        $request->validate([
             'nokk' => 'required|unique:data|max:20',
             'namakk' => 'required|string|max:150',
             'kecamatan' => 'required',
             'kelurahan' => 'required',
         ]);
 
-        if($validatedData){
-            $input = $request->all();
+        $input = $request->all();
+        $datakk->nokk = $input['nokk'];
+        $datakk->namakk = $input['namakk'];
+        $datakk->alamat = $input['alamat'];
+        $datakk->anggotaid = $input['nokk'];
+        $datakk->notps = $input['notps'];
+        $datakk->kecamatan = $input['kecamatan'];
+        $datakk->kelurahan = $input['kelurahan'];
+        $datakk->pekerjaan = !empty($input['pekerjaan']) ? $input['pekerjaan'] : 1;
+        $datakk->notelp = $input['notelp'];
+        $datakk->status = 1;
 
-            $datakk->nokk = $input['nokk'];
-            $datakk->namakk = $input['namakk'];
-            $datakk->alamat = $input['alamat'];
-            $datakk->anggotaid = $input['nokk'];
-            $datakk->notps = $input['notps'];
-            $datakk->kecamatan = $input['kecamatan'];
-            $datakk->kelurahan = $input['kelurahan'];
-            $datakk->pekerjaan = $input['pekerjaan'];
-            $datakk->notelp = $input['notelp'];
-            $datakk->status = 1;
-
-            if($datakk->save())
-                return redirect()->route('data.create')->with('Success','Data berhasil disimpan');
-            else
-                return redirect()->route('data.create')->with('Error','Data Gagal Tersimpan');
-        }
-
-        return view('data.create', compact('kecamatan', 'kelurahan'));
+        if($datakk->save())
+            return redirect()->route('data.create')->with('Success','Data berhasil disimpan');
+        else
+            return redirect()->route('data.create')->with('Error','Data Gagal Tersimpan');
     }
 
     /**
@@ -178,6 +170,36 @@ class DataController extends Controller
     public function getJsonKecamatan()
     {
         return AppHelper::getJsonKecamatan();
+    }
+
+    public function getDatatable(){
+        $data = Data::select('*')->latest()->where('status',1);
+//        $data = Data::query();
+        return Datatables::of($data)
+            ->addColumn('edit', function ($data) {
+                return '<a href="'.route('data.edit',$data->id).'" class="btn btn-xs bg-blue"><i class="fa fa-edit"></i> Edit</a>';
+            })
+            ->editColumn('delete', function ($data) {
+                return '
+                <form method="post" action="'.route("data.destroy", $data->id).'" style="display:inline">
+                    '.csrf_field().'     
+                    <input type="hidden" name="_method" value="DELETE">                                         
+                    <button type="submit" href="'.route('data.destroy',$data->id).'" class="btn btn-xs bg-red"><i class="fa fa-trash"></i> Hapus</button>
+                </form>
+                ';
+            })
+            ->rawColumns(['delete' => 'delete','edit' => 'edit'])
+            ->editColumn('kecamatan',function ($data){
+                return AppHelper::getKecamatanName($data->kecamatan);
+            })
+            ->editColumn('kelurahan',function($data){
+                return AppHelper::getKelurahanName($data->kelurahan);
+            })
+            ->editColumn('pekerjaan',function($data){
+                return AppHelper::getPekerjaanName($data->pekerjaan);
+            })
+            ->make(true);
+
     }
 
     public function wilayah()

@@ -24,3 +24,4 @@ Route::get('/data/kelurahan/{idkec}','DataController@getJsonKelurahan');
 Route::get('/json/kelurahan/{idkec}','FormulirController@getKelurahan');
 Route::post('/laporan/wilayah','LaporanController@wilayah')->name('laporan.wilayah');
 Route::get('/laporan/exportpdf','LaporanController@exportPDF')->name('laporan.exportpdf');
+Route::get('/datatable','DataController@getDatatable')->name('data.datatable');
