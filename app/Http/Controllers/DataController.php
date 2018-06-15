@@ -176,7 +176,7 @@ class DataController extends Controller
         $data->delete();
 
         return redirect()->route('data.index')
-            ->with('pesan', 'Data berhasil di hapus');
+            ->with('Success', 'Data berhasil di hapus');
     }
 
     public function getJsonKelurahan($idkec)

@@ -18,14 +18,7 @@
     <section class = "content">
         <div class = "row">
             <div class = "col-xs-12">
-                @if (session('pesan'))
-                    <div class = "alert alert-success alert-dismissible">
-                        <button type = "button" class = "close" data-dismiss = "alert" aria-hidden = "true">&times;
-                        </button>
-                        <h4><i class = "icon fa fa-check"></i> Sukses!</h4>
-                        {{ session('pesan') }}
-                    </div>
-                @endif
+                @include('widget.alert')
                 <div class = "box">
                     <div class = "box-header">
                         <a class = "btn btn-flat bg-blue" href = "{{ route('data.create') }}"> Daftar Keluarga</a>
@@ -44,52 +37,10 @@
                                 <th>Kecamatan</th>
                                 <th>Kelurahan</th>
                                 <th>Pekerjaan</th>
-                                {{--<th width="5%">Anggota</th>--}}
                                 <th>Aksi</th>
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
                             </tr>
                             </thead>
-                            {{--<tbody>--}}
-                            {{--@php ($i = !empty($_GET['page']) ? (($_GET['page'] - 1) * $data->perPage()) + 1 : 1)--}}
-                            {{--@foreach($data as $value)--}}
-                                {{--<tr>--}}
-                                    {{--<td>{{$i++}}</td>--}}
-                                    {{--<td>{{ $value->nokk }}</td>--}}
-                                    {{--<td>{{ $value->namakk }}</td>--}}
-                                    {{--<td>{{ $value->alamat }}</td>--}}
-                                    {{--<td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }} / {{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>--}}
-                                    {{--<td class="text-center"><span--}}
-                                            {{--class="label label-warning">{{ $value->anggota->count() }} Org</span>--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--<a class = "btn btn-xs bg-blue"--}}
-                                           {{--href = "{{ route('data.edit',['id'=>$value->id]) }}"><i--}}
-                                                {{--class = "fa fa-edit"></i> Ubah</a>--}}
-
-                                        {{--{!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->id],'style'=>'display:inline']) !!}--}}
-                                        {{--<button type = "submit" class = "btn btn-xs bg-red"--}}
-                                                {{--href = "{{ route('data.destroy',['id'=>$value->id]) }}"><i--}}
-                                                {{--class = "fa fa-trash-o"></i> Hapus--}}
-                                        {{--</button>--}}
-                                        {{--{!! Form::close() !!}--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
-                            {{--</tbody>--}}
                         </table>
-                        {{--<div class = "row">--}}
-                            {{--<div class = "col-sm-4">--}}
-                                {{--<div class = "pagination" aria-live = "polite">--}}
-                                    {{--Menampilkan 1 sampai {{ $data->count() }} dari {{ $count }} data--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class = "col-sm-8">--}}
-                                {{--<div class = "pull-right" id = "datatable_paginate">--}}
-                                    {{--{{ $data->links() }}--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -98,7 +49,6 @@
             <!-- /.col -->
         </div>
         <!-- /.row (main row) -->
-
     </section>
     <!-- /.content -->
 @endsection
@@ -106,9 +56,8 @@
 @push('scriptInput')
     <!-- DataTables -->
     <script src = "{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src = "{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-    {{--<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jq-3.3.1/dt-1.10.17/datatables.js"></script>--}}
-{{--    <script src="{{ asset('admin/bower_components/DataTablesBS4/datatables.js') }}"></script>--}}
+    <script src="{{ asset('admin/bower_components/DataTablesBS4/datatables.js') }}"></script>
+    {{--<script src = "{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>--}}
 
     <script>
         $(function () {
