@@ -169,14 +169,21 @@ class DataController extends Controller
     {
         $data = Data::find($id);
 
-        Anggota::where('anggotaid', $data->nokk)
-            ->where('status', 1)
-            ->delete();
+        if($data){
+            $anggota = Anggota::where('anggotaid', $data->nokk)
+                ->where('status', 1)
+                ->delete();
 
-        $data->delete();
+            if($anggota && $data->delete()){
+                return redirect()->route('data.index')
+                    ->with('Success', 'Data berhasil di hapus');
+            }
+            return redirect()->route('data.index')
+                ->with('Error', 'Data Gagal di hapus');
+        }
 
-        return redirect()->route('data.index')
-            ->with('Success', 'Data berhasil di hapus');
+        return redirect()->route('data.index')->with('Info','Data tidak ditemukan');
+
     }
 
     public function getJsonKelurahan($idkec)

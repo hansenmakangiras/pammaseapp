@@ -12,7 +12,6 @@
         @include('widget.breadcrumb')
     </section>
 @endsection
-
 @section('content')
     <!-- Main content -->
     <section class = "content">
