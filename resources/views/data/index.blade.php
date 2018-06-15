@@ -46,7 +46,8 @@
                                 <th>Pekerjaan</th>
                                 {{--<th width="5%">Anggota</th>--}}
                                 <th>Aksi</th>
-                                <th></th>
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
                             </tr>
                             </thead>
                             {{--<tbody>--}}
@@ -129,10 +130,21 @@
                     {data: 'kecamatan', name: 'kecamatan'},
                     {data: 'kelurahan', name: 'kelurahan'},
                     {data: 'pekerjaan', name: 'pekerjaan'},
-                    {data: 'edit', name: 'action', orderable: false, searchable: false},
-                    {data: 'delete', name: 'action', orderable: false, searchable: false}
+                    // {data: 'edit', name: 'action', orderable: false, searchable: false},
+                    // {data: 'delete', name: 'action', orderable: false, searchable: false},
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
                 ],
             });
         });
+        function pushUrlDelete() {
+            $('#modal-hapus').on('show.bs.modal',function (event) {
+                let button = $(event.relatedTarget);
+                let url = button.data('url');
+                let modal = $(this);
+
+                // let a = modal.find('#form-hapus').attr('action');
+               modal.find('#form-hapus').attr('action',url);
+            })
+        }
     </script>
 @endpush

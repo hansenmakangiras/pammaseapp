@@ -144,3 +144,4 @@
 @stack('scriptEdit')
 @stack('scriptInputFormulir')
 @stack('scriptWilayah')
+@stack('scriptModal')

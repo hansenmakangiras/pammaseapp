@@ -22,8 +22,9 @@ class DataController extends Controller
         $data = Data::latest()->where('status', 1);
         $count = $data->count();
         $data = $data->paginate(20);
-        return view('data.index', compact('data','count'))
-            ->with('i', (\request()->input('page',1)-1)*10);
+
+        return view('data.index', compact('data', 'count'))
+            ->with('i', (\request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -37,13 +38,14 @@ class DataController extends Controller
         $kelurahan = AppHelper::getAllKelurahan();
         $pekerjaan = AppHelper::getListPekerjaan();
 
-        return view('data.create', compact('kecamatan', 'kelurahan','pekerjaan'));
+        return view('data.create', compact('kecamatan', 'kelurahan', 'pekerjaan'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     *
      * @return []
      */
     public function store(Request $request)
@@ -69,16 +71,18 @@ class DataController extends Controller
         $datakk->notelp = $input['notelp'];
         $datakk->status = 1;
 
-        if($datakk->save())
-            return redirect()->route('data.create')->with('Success','Data berhasil disimpan');
-        else
-            return redirect()->route('data.create')->with('Error','Data Gagal Tersimpan');
+        if ($datakk->save()) {
+            return redirect()->route('data.create')->with('Success', 'Data berhasil disimpan');
+        } else {
+            return redirect()->route('data.create')->with('Error', 'Data Gagal Tersimpan');
+        }
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -88,13 +92,14 @@ class DataController extends Controller
         $kec = Kecamatan::where('id', $data->kecamatan)->first();
         $kel = Kelurahan::where('id_kelurahan', $data->kelurahan)->first();
 
-        return view('data.view', compact('anggota', 'data', 'kec', 'kel','id'));
+        return view('data.view', compact('anggota', 'data', 'kec', 'kel', 'id'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -103,13 +108,22 @@ class DataController extends Controller
         $kec = Kecamatan::where('id', $data->kecamatan)->where('status', 1)->first();
         $kel = Kelurahan::where('id_kelurahan', $data->kelurahan)->where('status', 1)->get();
 
-        $kecamatan = Kecamatan::pluck('name','id')->toArray();
-        $kelurahan = Kelurahan::pluck('name','id_kelurahan')->toArray();
+        $kecamatan = Kecamatan::pluck('name', 'id')->toArray();
+        $kelurahan = Kelurahan::pluck('name', 'id_kelurahan')->toArray();
         $pekerjaan = AppHelper::getListPekerjaan();
 
         $anggota = $data->anggota()->get();
 
-        return view('data.edit',['id'=>$id,'data'=>$data,'kecamatan'=>$kecamatan,'kelurahan'=>$kelurahan,'anggota'=>$anggota,'kec'=>$kec,'kel'=>$kel,'pekerjaan'=>$pekerjaan]);
+        return view('data.edit', [
+            'id' => $id,
+            'data' => $data,
+            'kecamatan' => $kecamatan,
+            'kelurahan' => $kelurahan,
+            'anggota' => $anggota,
+            'kec' => $kec,
+            'kel' => $kel,
+            'pekerjaan' => $pekerjaan,
+        ]);
     }
 
     /**
@@ -117,6 +131,7 @@ class DataController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  string $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -124,7 +139,7 @@ class DataController extends Controller
         $data = Data::find($id);
 
         if ($data) {
-            Anggota::where('anggotaid',$data->nokk)->update(['anggotaid'=>$request->nokk]);
+            Anggota::where('anggotaid', $data->nokk)->update(['anggotaid' => $request->nokk]);
             $data->nokk = $request->nokk;
             $data->namakk = $request->namakk;
             $data->alamat = $request->alamat;
@@ -137,23 +152,25 @@ class DataController extends Controller
             //dd($anggota);
             $data->save();
 
-            return redirect()->route('data.edit',$id)->with('Success','Data berhasil disimpan');
+            return redirect()->route('data.edit', $id)->with('Success', 'Data berhasil disimpan');
         }
-        return redirect()->route('data.edit',$id)->with('Error','Data Gagal disimpan');
+
+        return redirect()->route('data.edit', $id)->with('Error', 'Data Gagal disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $data = Data::find($id);
 
-        Anggota::where('anggotaid',$data->nokk)
-            ->where('status',1)
+        Anggota::where('anggotaid', $data->nokk)
+            ->where('status', 1)
             ->delete();
 
         $data->delete();
@@ -172,30 +189,46 @@ class DataController extends Controller
         return AppHelper::getJsonKecamatan();
     }
 
-    public function getDatatable(){
-        $data = Data::select('*')->latest()->where('status',1);
+    public function getDatatable()
+    {
+        $data = Data::select('*')->latest()->where('status', 1);
+
 //        $data = Data::query();
         return Datatables::of($data)
             ->addColumn('edit', function ($data) {
-                return '<a href="'.route('data.edit',$data->id).'" class="btn btn-xs bg-blue"><i class="fa fa-edit"></i> Edit</a>';
+                return '<a href="'.route('data.edit',
+                        $data->id).'" class="btn btn-xs bg-blue"><i class="fa fa-edit"></i> Edit</a>';
+            })
+            ->addColumn('action', function ($data) {
+                return '
+                <div class="btn-group">
+                    <button type="button" class="btn btn-flat btn-xs bg-green dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <span>Pilih Aksi</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="'.route('data.edit', $data->id).'" ><i class="fa fa-edit"></i> Edit</a></li>
+                        <li><a data-toggle="modal" data-url="'.route('data.destroy',['id'=>$data->id]).'" data-target="#modal-hapus" href="" onclick="pushUrlDelete()" ><i class="fa fa-trash"></i> Hapus</a></li>
+                    </ul>
+                </div> 
+                ';
             })
             ->editColumn('delete', function ($data) {
                 return '
                 <form method="post" action="'.route("data.destroy", $data->id).'" style="display:inline">
                     '.csrf_field().'     
-                    <input type="hidden" name="_method" value="DELETE">                                         
-                    <button type="submit" href="'.route('data.destroy',$data->id).'" class="btn btn-xs bg-red"><i class="fa fa-trash"></i> Hapus</button>
+                    <input type="hidden" name="_method" value="DELETE">                                                            
+                    <button type="submit" href="'.route('data.destroy', $data->id).'" class="btn btn-xs bg-red"><i class="fa fa-trash"></i> Hapus</button>
                 </form>
                 ';
             })
-            ->rawColumns(['delete' => 'delete','edit' => 'edit'])
-            ->editColumn('kecamatan',function ($data){
+            ->rawColumns(['delete' => 'delete', 'edit' => 'edit','action'=>'action'])
+            ->editColumn('kecamatan', function ($data) {
                 return AppHelper::getKecamatanName($data->kecamatan);
             })
-            ->editColumn('kelurahan',function($data){
+            ->editColumn('kelurahan', function ($data) {
                 return AppHelper::getKelurahanName($data->kelurahan);
             })
-            ->editColumn('pekerjaan',function($data){
+            ->editColumn('pekerjaan', function ($data) {
                 return AppHelper::getPekerjaanName($data->pekerjaan);
             })
             ->make(true);
