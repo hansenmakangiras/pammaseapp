@@ -20,10 +20,6 @@ class DataController extends Controller
      */
     public function index()
     {
-        // $data = Data::latest()->where('status', 1);
-        // $count = $data->count();
-        // $data = $data->paginate(20);
-        // dd($data);
         return view('data.index')
             ->with('i', (\request()->input('page', 1) - 1) * 10);
     }
