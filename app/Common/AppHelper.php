@@ -11,6 +11,7 @@ use App\Models\Data;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Pekerjaan;
+use DB;
 
 class AppHelper
 {
@@ -55,20 +56,67 @@ class AppHelper
     }
 
     static function getSelectKecamatan(){
-        return Kecamatan::where('kota_id', '7313')->where('status', 1)->pluck('name','id')->toArray();
+        return Kecamatan::where('kota_id', '7313')
+            ->where('status', 1)
+            ->pluck('name','id')
+            ->toArray();
+    }
+    static function getCountKecamatan($param){
+        if(empty($param)){
+            return 0;
+        }
+        return Data::where('status',1)
+            ->where('kecamatan',$param)
+            ->count();
+    }
+    static function getCountKelurahan($kec,$kel){
+        return Data::where('status',1)
+            ->where('kecamatan', $kec)
+            ->where('kelurahan',$kel)
+            ->count();
+
+    }
+
+    static function getSelectKelurahan($kec){
+        $kec = !empty($kec) ? $kec : '';
+        return Kelurahan::where('kecamatan_id', $kec)
+            ->where('status', 1)
+            ->pluck('name','id_kelurahan')
+            ->toArray();
     }
 
     static function getListKecamatan()
     {
-        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->get();
+        $kecamatan = Kecamatan::where('kota_id', '7313')
+            ->with(['data','kelurahan'])
+            ->where('status', 1)
+            ->get();
 //        $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->pluck()->toArray();
 
         return $kecamatan;
     }
 
+    static function getKecamatanArray($select)
+    {
+        if(is_array($select)){
+            $kecamatan = Kecamatan::select(['name','id'])
+                ->with('data','kelurahan')
+                ->where('kota_id', '7313')
+                ->where('status', 1)
+                ->get()->toArray();
+            return $kecamatan;
+            //dd($kecamatan);
+        }
+       return [];
+
+    }
+
     static function getListKelurahan($kode)
     {
-        $data = Kelurahan::where('kecamatan_id', $kode)->where('status', 1)->get();
+        $data = Kelurahan::where('kecamatan_id', $kode)
+            ->with(['data','kecamatan'])
+            ->where('status', 1)
+            ->get();
 
         return $data;
     }
@@ -104,13 +152,10 @@ class AppHelper
     }
     static function getKelurahan($kode)
     {
-        if(isset($kode)){
-            $kelurahan = Kelurahan::where('kecamatan_id', $kode)->where('status', 1)->get()->toArray();
-//            $kelurahan = DB::table('kelurahan')
-//                ->where('kecamatan_id','=',$kode)
-//                ->first()->toArray();
-        }
-
+        $kode = !empty($kode) ? $kode : '';
+        $kelurahan = Kelurahan::where('kecamatan_id', $kode)
+            ->where('status', 1)
+            ->get()->toArray();
         return $kelurahan;
     }
 }

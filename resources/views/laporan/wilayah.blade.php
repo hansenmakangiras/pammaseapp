@@ -53,9 +53,10 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>30.000<sup style="font-size: 20px">Lbr</sup></h3>
+                        <h3>{{ $countKec }}<sup style="font-size:
+                        20px">KK</sup></h3>
 
-                        <p>Total Formulir</p>
+                        <p>Jumlah KK Per Kecamatan</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -67,9 +68,8 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>{{ $countformulir }}<sup style="font-size: 20px">Lbr</sup></h3>
-
-                        <p>Formulir Keluar</p>
+                        <h3>{{ $countKel }}<sup style="font-size: 20px"> KK </sup></h3>
+                        <p>Jumlah Data KK Per Kelurahan </p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -125,8 +125,7 @@
                                     <th>Alamat</th>
                                     <th>Kecamatan</th>
                                     <th>Kelurahan</th>
-                                    <th width="5%">Anggota</th>
-                                    <th>Aksi</th>
+                                    <th>Jumlah Data Anggota</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -138,14 +137,14 @@
                                         <td>{{ \App\Common\AppHelper::getKecamatanName($value->kecamatan) }}</td>
                                         <td>{{ \App\Common\AppHelper::getKelurahanName($value->kelurahan) }}</td>
                                         <td class="text-center">{{ $value->anggota->count() }}</td>
-                                        <td>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Data" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data"  href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i></a>
+                                        {{--<td>--}}
+                                            {{--<a class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Data" href="{{ route('data.show',['id'=>$value->id]) }}"><i class="fa fa-eye"></i></a>--}}
+                                            {{--<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data"  href="{{ route('data.edit',['id'=>$value->id]) }}"><i class="fa fa-edit"></i></a>--}}
 
-                                            {!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->anggotaid],'style'=>'display:inline']) !!}
-                                            <button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus Data"  href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i></button>
-                                            {!! Form::close() !!}
-                                        </td>
+                                            {{--{!! Form::open(['method' => 'DELETE','route' => ['data.destroy', $value->anggotaid],'style'=>'display:inline']) !!}--}}
+                                            {{--<button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus Data"  href="{{ route('data.destroy',['id'=>$value->id]) }}"><i class="fa fa-trash-o"></i></button>--}}
+                                            {{--{!! Form::close() !!}--}}
+                                        {{--</td>--}}
 
                                     </tr>
                                 @endforeach
@@ -194,7 +193,7 @@
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': false,
+                'info': true,
                 'autoWidth': true,
                 // columnDefs: [
                 //     {
@@ -203,13 +202,16 @@
                 //     }
                 // ],
                 buttons: [
-                    {extend:'excel',className:'btn-sm',text:'<i class="fa fa-file-excel-o"></i>',titleAttr:"Cetak Excel"},
-                    {extend:'pdf',className:'btn-sm',text:'<i class="fa fa-file-pdf-o"></i>',titleAttr:"Cetak PDF"},
+                    {extend:'excel',className:'btn btn-sm btn-flat bg-blue',text:'<i class="fa fa-file-excel-o"></i>',
+                        titleAttr:"Cetak Excel"},
+                    {extend:'pdf',className:'btn btn-sm btn-flat bg-red',text:'<i class="fa fa-file-pdf-o"></i>',
+                        titleAttr:"Cetak " +
+                        "PDF"},
                     {
                         extend: 'print',
                         titleAttr:'Print',
                         title:"",
-                        messageTop: 'Laporan Data Keluarga Per Kecamatan',
+                        messageTop: '<h4><span class="text-center">Laporan Data Keluarga Per Kecamatan</span></h4>',
                         exportOptions: {
                             columns: ':visible'
                         },
@@ -217,18 +219,18 @@
                             $(win.document.body)
                                 .css( 'font-size', '10pt' )
                                 .prepend(
-                                    //'<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                    // '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
                                 );
-
+                            $(win.document.body).attr('onload','window.print();');
                             $(win.document.body).find( 'table' )
-                                .addClass( 'compact' )
+                                .addClass( 'table-condensed' )
                                 .css( 'font-size', 'inherit' );
                         },
-                        className:'btn-sm',text:'<i class="fa fa-print"></i>'
+                        className:'btn btn-sm btn-flat bg-green',text:'<i class="fa fa-print"></i>'
                     },
                     // {extend:'columnsToggle',className:'btn-sm'},
-                    {extend:'colvisGroup',text:'Sembunyi Kolom',show:[1,2,3,4],hide:[5,6],className:'btn-sm'},
-                    {extend:'colvisGroup',text:'Tampilkan Semua',show:':hidden',className:'btn-sm'},
+                    // {extend:'colvisGroup',text:'Sembunyi Kolom',show:[1,2,3,4],hide:[5,6],className:'btn-sm'},
+                    // {extend:'colvisGroup',text:'Tampilkan Semua',show:':hidden',className:'btn-sm'},
                 ]
             });
 

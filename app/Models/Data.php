@@ -15,7 +15,7 @@ class Data extends Model
      */
     protected $dates = ['deleted_at'];
 
-    protected $table="data";
+    protected $table="data_real";
 //    public $timestamps=false;
     protected $fillable =[
         'nokk','namakk','alamat','notps','kelurahan','kecamatan','pekerjaan','notelp'
@@ -24,12 +24,12 @@ class Data extends Model
     public function anggota(){
         return $this->hasMany(Anggota::class,'anggotaid','anggotaid');
     }
-    
+
     public function kecamatan(){
-        return $this->hasOne(Kecamatan::class,'id');
+        return $this->hasOne(Kecamatan::class,'id','id');
     }
 
     public function kelurahan(){
-        return $this->hasOne(Kelurahan::class,'id_kelurahan');
+        return $this->hasOne(Kelurahan::class,'id_kelurahan','id_kelurahan');
     }
 }

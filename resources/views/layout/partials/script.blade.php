@@ -126,7 +126,7 @@
     $(function () {
         /** add active class and stay opened when selected */
         let url = window.location;
-
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
         // for sidebar menu entirely but not cover treeview
         $('ul.sidebar-menu a').filter(function() {
             return this.href == url;
@@ -141,7 +141,9 @@
 <!-- Load Script From Dashboard File -->
 @stack('scriptDashboard')
 @stack('scriptInput')
+@stack('scriptInputAnggota')
 @stack('scriptEdit')
 @stack('scriptInputFormulir')
 @stack('scriptWilayah')
 @stack('scriptModal')
+

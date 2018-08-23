@@ -1,11 +1,10 @@
-{!! Form::open(['route' => 'anggota.create','method'=>'POST']) !!}
+{{--{!! Form::open(['route' => 'anggota.create','method'=>'POST']) !!}--}}
 
-@csrf
 <div class="box-body">
     <div class="row">
         <div class="col-xs-6">
             <div class="form-group">
-                <label>No KK</label>
+                <label>Pilih No. Kartu Keluarga Yang akan digunakan</label>
                 {{ Form::select('nokk',[null => 'Semua KK'] + $nokk,old('nokk'),['style'=>'width: 100%;','class'=>'form-control select2','tabindex'=>'1','id'=>'nokk','autofocus','required']) }}
             </div>
         </div>
@@ -27,7 +26,7 @@
 </div>
 <!-- /.box-body -->
 <div class="box-footer">
-    <button type="submit" class="btn btn-primary" tabindex="4">Simpan Anggota</button>
+    <button type="submit" class="btn btn-flat bg-aqua" tabindex="4">Simpan</button>
 </div>
 
-{!! Form::close() !!}
+{{--{!! Form::close() !!}--}}

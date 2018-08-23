@@ -1,0 +1,14 @@
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313010', '7313', 'SABBANG PARU', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313020', '7313', 'TEMPE', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313030', '7313', 'PAMMANA', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313040', '7313', 'BOLA', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313050', '7313', 'TAKKALALLA', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313060', '7313', 'SAJOANGING', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313061', '7313', 'PENRANG', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313070', '7313', 'MAJAULENG', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313080', '7313', 'TANA SITOLO', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313090', '7313', 'BELAWA', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313100', '7313', 'MANIANG PAJO', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313101', '7313', 'GILIRENG', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313110', '7313', 'KEERA', 1);
+INSERT INTO `km_kecamatan`(`id`, `kota_id`, `name`, `status`) VALUES ('7313120', '7313', 'PITUMPANUA', 1);

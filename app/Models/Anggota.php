@@ -1,9 +1,16 @@
-<?php
+<?php /** @noinspection PhpCSValidationInspection */
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ * @property mixed anggotaid
+ * @property mixed nama
+ * @property mixed umur
+ * @property int status
+ */
 
 class Anggota extends Model
 {

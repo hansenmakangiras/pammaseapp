@@ -1,4 +1,7 @@
-<?php
+<?php /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+/** @noinspection ALL */
+
+/** @noinspection ALL */
 
 namespace App\Http;
 

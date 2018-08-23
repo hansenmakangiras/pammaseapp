@@ -17,34 +17,17 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-10">
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-ban"></i> Kesalahan !!!</h4>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if (session('Success'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-check"></i> Sukses!</h4>
-                        {{ session('Success') }}
-                    </div>
-                @elseif(session('Error'))
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
-                        {{ session('Error') }}
-                    </div>
-                @endif
+                @include('widget.alert')
                 <div class="box box-solid">
-                    {{--<div class="box-header with-border">--}}
-                        {{--<h3 class="box-title">Data Anggota Keluarga</h3>--}}
-                    {{--</div>--}}
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Data Anggota Keluarga</h3>
+                        <div class="box-tools">
+                            <a href="{{ route('anggota.index') }}" class="btn btn-sm btn-flat bg-blue">Kembali</a>
+                            <a href="{{ route('data.index') }}" class="btn btn-sm btn-flat bg-red">Lihat Keluarga</a>
+                            <a href="{{ route('data.create') }}" class="btn btn-sm btn-flat bg-green">Daftar
+                                                                                                      Keluarga</a>
+                        </div>
+                    </div>
                     {!! Form::open(['route' => 'anggota.store','method'=>'POST']) !!}
                         @include('anggota.form-create')
                     {!! Form::close() !!}
@@ -53,22 +36,12 @@
                 <!-- /.box -->
             </div>
             <!-- /.col -->
-            <div class="col-xs-2">
-                <div class="box box-solid">
-                    <div class="box-body">
-                        <a href="{{ route('anggota.index') }}" class="btn btn-default btn-block">Lihat Data</a>
-                        <a href="{{ route('data.index') }}" class="btn btn-default btn-block">Lihat KK</a>
-                        <a href="{{ route('data.create') }}" class="btn btn-default btn-block">Tambah KK</a>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- /.row (main row) -->
     </section>
     <!-- /.content -->
 @endsection
-@push('scriptInput')
-    <!-- Select2 -->
+@push('scriptInputAnggota')
     <script src="{{ asset('admin/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     <script>
         $(function () {
@@ -77,6 +50,6 @@
             });
             //Initialize Select2 Elements
             $('.select2').select2();
-        })
+        });
     </script>
 @endpush

@@ -10,8 +10,10 @@ class Kecamatan extends Model
     public $timestamps=false;
 
     public function data(){
-        return $this->belongsTo(Data::class,'kecamatan');
+//        return $this->belongsToMany(Data::class,'kp_kecamatan','id','id');
+        return $this->hasMany(Data::class,'kecamatan','id');
     }
+
     public function kelurahan(){
         return $this->hasMany(Kelurahan::class,'kecamatan_id');
     }

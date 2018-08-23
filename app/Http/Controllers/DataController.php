@@ -9,6 +9,7 @@ use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class DataController extends Controller
 {
@@ -19,11 +20,11 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = Data::latest()->where('status', 1);
-        $count = $data->count();
-        $data = $data->paginate(20);
-
-        return view('data.index', compact('data', 'count'))
+        // $data = Data::latest()->where('status', 1);
+        // $count = $data->count();
+        // $data = $data->paginate(20);
+        // dd($data);
+        return view('data.index')
             ->with('i', (\request()->input('page', 1) - 1) * 10);
     }
 
@@ -46,7 +47,7 @@ class DataController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return []
+     * @return \Illuminate\Http\RedirectResponse []
      */
     public function store(Request $request)
     {
@@ -164,25 +165,27 @@ class DataController extends Controller
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy($id)
     {
         $data = Data::find($id);
 
-        if($data){
+        if ($data) {
             $anggota = Anggota::where('anggotaid', $data->nokk)
                 ->where('status', 1)
                 ->delete();
 
-            if($anggota && $data->delete()){
+            if ($anggota && $data->delete()) {
                 return redirect()->route('data.index')
                     ->with('Success', 'Data berhasil di hapus');
             }
+
             return redirect()->route('data.index')
                 ->with('Error', 'Data Gagal di hapus');
         }
 
-        return redirect()->route('data.index')->with('Info','Data tidak ditemukan');
+        return redirect()->route('data.index')->with('Info', 'Data tidak ditemukan');
 
     }
 
@@ -195,7 +198,9 @@ class DataController extends Controller
     {
         return AppHelper::getJsonKecamatan();
     }
-
+    /**
+     * @throws \Exception
+     **/
     public function getDatatable()
     {
         $data = Data::select('*')->latest()->where('status', 1);
@@ -205,14 +210,17 @@ class DataController extends Controller
             ->addColumn('action', function ($data) {
                 return '
                 <div class="btn-group">
-                    <button type="button" class="btn btn-flat btn-xs bg-green dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn btn-flat btn-xs bg-green dropdown-toggle"
+                    data-toggle="dropdown" aria-expanded="false">
                       <span>Pilih Aksi</span>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="'.route('data.edit', $data->id).'" ><i class="fa fa-edit"></i> Edit</a></li>
-                        <li><a data-toggle="modal" data-url="'.route('data.destroy', ['id' => $data->id]).'" data-target="#modal-hapus" href="" onclick="pushUrlDelete()" ><i class="fa fa-trash"></i> Hapus</a></li>
+                        <li><a data-toggle="modal" data-url="'.route('data.destroy', ['id' => $data->id])
+                    .'" data-target="#modal-hapus" href="" onclick="pushUrlDelete()" >
+                        <i class="fa fa-trash"></i> Hapus</a></li>
                     </ul>
-                </div> 
+                </div>
                 ';
             })
             ->editColumn('kecamatan', function ($data) {
@@ -229,21 +237,22 @@ class DataController extends Controller
 
     }
 
-    public function wilayah()
+    public function wilayah(request $request)
     {
         $kecamatan = Kecamatan::where('kota_id', '7313')->where('status', 1)->get();
-        if (empty($_GET['kec'])) {
+        if (empty($request->input('kec'))) {
             if (empty($_GET['kel'])) {
                 $kelurahan = Kelurahan::where('kecamatan_id', 'xdx')->get();
             } else {
-                $getkel = Kelurahan::where('id_kelurahan', $_GET['kel'])->where('status', 1)->first();
+                $getkel = Kelurahan::where('id_kelurahan', $request->input('kec'))
+                    ->where('status', 1)->first();
                 $kelurahan = Kelurahan::where('kecamatan_id', $getkel['kecamatan_id'])->where('status', 1)->get();
             }
         } else {
-            if (empty($_GET['kel'])) {
-                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
+            if (empty($request->input('kel'))) {
+                $kelurahan = Kelurahan::where('kecamatan_id', $request->input('kec'))->where('status', 1)->get();
             } else {
-                $kelurahan = Kelurahan::where('kecamatan_id', $_GET['kec'])->where('status', 1)->get();
+                $kelurahan = Kelurahan::where('kecamatan_id', $request->input('kec'))->where('status', 1)->get();
             }
         }
 

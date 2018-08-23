@@ -53,9 +53,9 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>30.000<sup style="font-size: 20px">Lbr</sup></h3>
+                        <h3>{{ $countKartu }}<sup style="font-size: 20px"> Kartu</sup></h3>
 
-                        <p>Total Formulir</p>
+                        <p>Total Formulir Masuk</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -67,9 +67,9 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>{{ $countformulir }}<sup style="font-size: 20px">Lbr</sup></h3>
+                        <h3>{{ $countDpt }}<sup style="font-size: 20px"> Org</sup></h3>
 
-                        <p>Formulir Keluar</p>
+                        <p>Jumlah Total DPT</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -85,7 +85,7 @@
             <section class="col-lg-12">
                 <div class="box box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Grafik Data KK Per Kecamatan</h3>
+                        <h3 class="box-title">Grafik Jumlah Kartu Tercetak Per Kecamatan</h3>
                     </div>
                     <div class="box-body">
                         <div class="chart">
@@ -96,7 +96,7 @@
                 </div>
                 <div class="box box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Grafik Formulir Keluar Per Kecamatan</h3>
+                        <h3 class="box-title">Grafik Jumlah DPT Semua Kecamatan</h3>
                     </div>
                     <div class="box-body">
                         <div class="chart">
@@ -143,8 +143,7 @@
 
 @push('scriptDashboard')
     <script src="{{ asset('admin/bower_components/chart.js/Chart.bundle.min.js') }}" charset=utf-8></script>
-    {{--<script src="{{ asset('admin/bower_components/chart.js/Chart.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/dist/js/pages/custom-dashboard.js') }}"></script>--}}
+{{--    <script src="{{ asset('admin/bower_components/chart.js/Chart.js') }}"></script>--}}
     {!! $chart->script() !!}
     {!! $chart2->script() !!}
     {{--<script>--}}

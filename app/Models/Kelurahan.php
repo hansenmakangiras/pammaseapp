@@ -10,7 +10,7 @@ class Kelurahan extends Model
     public $timestamps = false;
 
     public function data(){
-        return $this->belongsTo(Data::class,'kecamatan_id','id_kelurahan');
+        return $this->hasMany(Data::class,'kelurahan','id_kelurahan');
     }
 
     public function kecamatan(){

@@ -26,7 +26,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class = "box-body">
-                        <table id = "datatable" valign="middle" class = "table table-bordered table-hover">
+                        <table id = "datatable" valign = "middle" class = "table table-bordered table-hover">
                             <thead>
                             <tr>
                                 {{--<th>No.</th>--}}
@@ -55,7 +55,7 @@
 @push('scriptInput')
     <!-- DataTables -->
     <script src = "{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/bower_components/DataTablesBS4/datatables.js') }}"></script>
+    <script src = "{{ asset('admin/bower_components/DataTablesBS4/datatables.js') }}"></script>
     {{--<script src = "{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>--}}
 
     <script>
@@ -63,9 +63,9 @@
             $('#datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax : '{!! url('/datatable') !!}',
-                deferRender:true,
-                paging : true,
+                ajax: '{!! url('/datatable') !!}',
+                deferRender: true,
+                paging: true,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -82,12 +82,13 @@
                 ],
             });
         });
+
         function pushUrlDelete() {
-            $('#modal-hapus').on('show.bs.modal',function (event) {
+            $('#modal-hapus').on('show.bs.modal', function (event) {
                 let button = $(event.relatedTarget);
                 let url = button.data('url');
                 let modal = $(this);
-                modal.find('#form-hapus').attr('action',url);
+                modal.find('#form-hapus').attr('action', url);
             })
         }
     </script>
