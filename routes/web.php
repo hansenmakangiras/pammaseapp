@@ -14,6 +14,8 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+
+Auth::routes();
 Route::get('/', 'AppController@index')->name('home');
 Route::get('/getJsonKecamatan', 'AppController@getJsonKecamatan')->name('getJson');
 Route::resource('data', 'DataController');
@@ -27,3 +29,6 @@ Route::get('/laporan/exportpdf', 'LaporanController@exportPDF')->name('laporan.e
 Route::get('/datatable', 'DataController@getDatatable')->name('data.datatable');
 Route::get('/getDataAnggota', 'AnggotaController@getDataAnggota')->name('anggota.getDatatable');
 Route::get('/getListNokk', 'AnggotaController@getListNoKK')->name('anggota.getListNoKK');
+
+
+

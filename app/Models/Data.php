@@ -16,7 +16,7 @@ class Data extends Model
     protected $dates = ['deleted_at'];
 
     protected $table="data_real";
-//    public $timestamps=false;
+
     protected $fillable =[
         'nokk','namakk','alamat','notps','kelurahan','kecamatan','pekerjaan','notelp'
     ];

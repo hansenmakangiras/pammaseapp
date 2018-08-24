@@ -10,9 +10,20 @@ use App\Models\Data;
 use App\Models\Formulir;
 use App\Models\Kecamatan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *

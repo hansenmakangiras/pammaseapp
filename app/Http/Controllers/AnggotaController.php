@@ -17,11 +17,7 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        $data = Anggota::latest()->where('status', 1);
-        $count = $data->count();
-        $data = $data->paginate(20);
-
-        return view('anggota.index', compact('data', 'count'))
+        return view('anggota.index')
             ->with('page', (\request()->input('page', 1) - 1) * 20);
     }
 
@@ -153,7 +149,7 @@ class AnggotaController extends Controller
             ->addColumn('action', function ($data) {
                 return '
                 <div class="btn-group">
-                    <button type="button" class="btn btn-flat btn-xs bg-green dropdown-toggle" 
+                    <button type="button" class="btn btn-flat btn-xs bg-green dropdown-toggle"
                     data-toggle="dropdown" aria-expanded="false">
                       <span>Pilih Aksi</span>
                     </button>
@@ -168,7 +164,7 @@ class AnggotaController extends Controller
                             </a>
                         </li>
                     </ul>
-                </div> 
+                </div>
                 ';
             })
             ->editColumn('status', function ($data) {
@@ -180,11 +176,6 @@ class AnggotaController extends Controller
 
     public function getListNoKK(Request $request)
     {
-//        $nokk = Data::select(['nokk','namakk'])->where('status', 1);
-//        if($request->hasAny('term','q')){
-//            $nokk->where('anggotaid','=', $request->input('term'));
-//            $nokk->orWhere('namakk','=', $request->input('term'));
-//        }
         $nokk = Data::select(['nokk','namakk'])->where('status', 1)
             ->orderBy('created_at', 'desc')
             ->get()->toArray();
