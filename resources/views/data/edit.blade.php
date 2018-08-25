@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('title', 'Edit Data Keluarga')
 
@@ -18,7 +18,7 @@
     <section class="content">
         <div class="row">
             <div class="col-lg-12">
-                @include('widget.alert')
+                @include('flash::message')
             <!-- general form elements -->
                 <div class="box box-solid">
                     <div class="box-header with-border">

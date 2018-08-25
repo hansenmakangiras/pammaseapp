@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-08-23 00:29:53.
+    * Generated on 2018-08-24 15:37:59.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -41,6 +41,8 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'dompdf' => \Dompdf\Dompdf::class,
         'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
+        'Laracasts\Flash\SessionStore' => \Laracasts\Flash\LaravelSessionStore::class,
+        'flash' => \Laracasts\Flash\FlashNotifier::class,
         'excel' => \Maatwebsite\Excel\Excel::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
@@ -186,6 +188,8 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'dompdf' => \Dompdf\Dompdf::class,
         'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
+        'Laracasts\Flash\SessionStore' => \Laracasts\Flash\LaravelSessionStore::class,
+        'flash' => \Laracasts\Flash\FlashNotifier::class,
         'excel' => \Maatwebsite\Excel\Excel::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
@@ -331,6 +335,8 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'dompdf' => \Dompdf\Dompdf::class,
         'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
+        'Laracasts\Flash\SessionStore' => \Laracasts\Flash\LaravelSessionStore::class,
+        'flash' => \Laracasts\Flash\FlashNotifier::class,
         'excel' => \Maatwebsite\Excel\Excel::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
@@ -476,6 +482,8 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'dompdf' => \Dompdf\Dompdf::class,
         'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
+        'Laracasts\Flash\SessionStore' => \Laracasts\Flash\LaravelSessionStore::class,
+        'flash' => \Laracasts\Flash\FlashNotifier::class,
         'excel' => \Maatwebsite\Excel\Excel::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
@@ -621,6 +629,8 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'dompdf' => \Dompdf\Dompdf::class,
         'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
+        'Laracasts\Flash\SessionStore' => \Laracasts\Flash\LaravelSessionStore::class,
+        'flash' => \Laracasts\Flash\FlashNotifier::class,
         'excel' => \Maatwebsite\Excel\Excel::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
@@ -766,6 +776,8 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'dompdf' => \Dompdf\Dompdf::class,
         'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
+        'Laracasts\Flash\SessionStore' => \Laracasts\Flash\LaravelSessionStore::class,
+        'flash' => \Laracasts\Flash\FlashNotifier::class,
         'excel' => \Maatwebsite\Excel\Excel::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
@@ -911,6 +923,8 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'dompdf' => \Dompdf\Dompdf::class,
         'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
+        'Laracasts\Flash\SessionStore' => \Laracasts\Flash\LaravelSessionStore::class,
+        'flash' => \Laracasts\Flash\FlashNotifier::class,
         'excel' => \Maatwebsite\Excel\Excel::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,

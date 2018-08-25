@@ -69,9 +69,11 @@ class DataController extends Controller
         $datakk->status = 1;
 
         if ($datakk->save()) {
-            return redirect()->route('data.create')->with('Success', 'Data berhasil disimpan');
+            flash('Data berhasil disimpan')->success();
+            return redirect()->route('data.create');
         } else {
-            return redirect()->route('data.create')->with('Error', 'Data Gagal Tersimpan');
+            flash('Data Gagal disimpan')->error();
+            return redirect()->route('data.create');
         }
     }
 
@@ -148,11 +150,11 @@ class DataController extends Controller
             $data->notelp = $request->notelp;
             //dd($anggota);
             $data->save();
-
-            return redirect()->route('data.edit', $id)->with('Success', 'Data berhasil disimpan');
+            flash('Data berhasil disimpan')->success();
+            return redirect()->route('data.edit', $id);
         }
-
-        return redirect()->route('data.edit', $id)->with('Error', 'Data Gagal disimpan');
+        flash('Data gagal disimpan')->error();
+        return redirect()->route('data.edit', $id);
     }
 
     /**
@@ -173,6 +175,9 @@ class DataController extends Controller
                 ->delete();
 
             if ($anggota && $data->delete()) {
+                return redirect()->route('data.index')
+                    ->with('Success', 'Data berhasil di hapus');
+            }elseif(!$anggota && $data->delete()){
                 return redirect()->route('data.index')
                     ->with('Success', 'Data berhasil di hapus');
             }

@@ -5,6 +5,8 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button);
+    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    $('#flash-overlay-modal').modal();
 </script>
 
 <!-- Bootstrap 3.3.7 -->

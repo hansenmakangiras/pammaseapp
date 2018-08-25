@@ -12,6 +12,7 @@
         "consoletvs/charts": "6.2.0",
         "doctrine/dbal": "v2.7.1",
         "fideloper/proxy": "^4.0",
+        "laracasts/flash": "^3.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "5.6.x-dev",

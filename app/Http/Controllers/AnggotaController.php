@@ -57,10 +57,11 @@ class AnggotaController extends Controller
             $anggota->status = 1;
             $anggota->save();
 
-            return redirect()->route('anggota.create')->with('Success', 'Anggota berhasil ditambahkan');
+            flash('Anggota berhasil ditambahkan')->success();
+            return redirect()->route('anggota.create');
         }
-
-        return redirect()->route('anggota.create')->with('Error', 'Anggota Keluarga Gagal ditambahkan');
+        flash('Anggota Keluarga gagal ditambahkan')->success();
+        return redirect()->route('anggota.create');
     }
 
     /**
@@ -109,13 +110,14 @@ class AnggotaController extends Controller
             $data->nama = $request->nama;
             $data->umur = $request->umur;
             if ($data->save()) {
-                return redirect()->route('anggota.edit', $id)->with('Success', 'Data anggota berhasil diupdate');
+                flash('Data anggota '.$request->nama.' berhasil diperbaharui')->success();
+                return redirect()->route('anggota.edit', $id);
             }
-
-            return redirect()->route('anggota.edit', $id)->with('Error', 'Data anggota gagal diupdate');
+            flash('Data anggota '.$request->nama.' gagal diperbaharui')->error();
+            return redirect()->route('anggota.edit', $id);
         }
-
-        return redirect()->route('anggota.edit', $id)->with('Error', 'Data anggota tidak ditemukan');
+        flash('Data anggota '.$request->nama.' tidak ditemukan')->info();
+        return redirect()->route('anggota.edit', $id);
 
 
     }

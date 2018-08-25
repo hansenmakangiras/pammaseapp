@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('title', 'Data Anggota')
 
@@ -18,7 +18,7 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-               @include('widget.alert')
+               @include('flash::message')
                 <div class="box">
                     <div class="box-header with-border">
                         <a class="btn btn-flat bg-blue" href="{{ route('anggota.create') }}"> Daftar Anggota</a>
